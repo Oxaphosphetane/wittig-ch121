@@ -1,5 +1,5 @@
 from rdkit import Chem
-from rdkit.Chem import rdMolDescriptors, Draw, AllChem
+from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
 import os
 import os_navigation as nav
 
@@ -65,7 +65,7 @@ class Molecule:
         else:
             raise Exception("Failed to embed molecule, cannot proceed with optimization.")
 
-    def visualize_3d(self):
+    def visualize_3d(self, label=''):
         mb = Chem.MolToMolBlock(self.molecule_with_hydrogens)
         mb_escaped = mb.replace('\n', '\\n').replace('\'', '\\\'').replace('\"', '\\"')
         html = """
@@ -88,7 +88,7 @@ class Molecule:
         </body>
         </html>
         """.format(mb_escaped)
-        with open('molecule_visualization_test2.html', 'w') as f:
+        with open(f'molecule_visualization_test_{label}.html', 'w') as f:
             f.write(html)
         print("3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
         return html
@@ -103,8 +103,8 @@ class OxaphosEmbedParams:
 
     def __init__(self, r1='C', r2='C'):
         self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'OP_templates.sdf'), removeHs=False)
-        self.cis_template_mol = self.sdf_reader[0]  # assuming the template is the first molecule in the file
-        self.trans_template_mol = self.sdf_reader[1]
+        self.cis_template_mols = (self.sdf_reader[0], self.sdf_reader[1])
+        self.trans_template_mols = (self.sdf_reader[2], self.sdf_reader[3])
 
 
 class Oxaphosphetane(Molecule):
@@ -134,12 +134,13 @@ class Oxaphosphetane(Molecule):
             neighbors = ring_atom.GetNeighbors()
             for neighbor in neighbors:
                 if neighbor.GetIdx() not in self.ring_indices and neighbor.GetSymbol() != 'H':
-                    return neighbor.GetSymbol()
+                    return neighbor
 
         return tuple(map(find_chain, (c1_atom, c2_atom)))
 
     def make_cis_templates(self):
-        R1, R2 = self.find_chain_leads()
+        nb1, nb2 = self.find_chain_leads()
+        R1, R2 = nb1.GetSymbol(), nb2.GetSymbol()
 
         return f"{R1}[C@H]1[C@@H]({R2})OP1", f"{R1}[C@@H]1[C@H]({R2})OP1"
 
@@ -166,7 +167,14 @@ class Oxaphosphetane(Molecule):
         return False
 
     def embed_3d(self, max_attempts=10):
-        template_molecule = ''
+        params = OxaphosEmbedParams()
+
+        if self.is_cis():
+            template_molecule = params.cis_template_mols
+        elif self.is_trans():
+            template_molecule = params.trans_template_mols
+        else:
+            raise ValueError("Molecule is not cis or trans-disubstituted.")
 
         # Perform the constrained embedding
         try:
@@ -179,29 +187,58 @@ class Oxaphosphetane(Molecule):
             return False
 
     def optimize_3d(self, force_field=ForceFieldMethod.UFF):
-        pass
+        # Assume that the molecule_with_hydrogens has a valid 3D conformation at this point
+        if force_field == ForceFieldMethod.UFF:
+            ff = AllChem.UFFGetMoleculeForceField(self.molecule_with_hydrogens)
+        elif force_field == ForceFieldMethod.MMFF:
+            props = AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens)
+            ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens, props)
+        else:
+            raise ValueError("Unsupported force field. Choose 'uff' or 'mmff'.")
 
+        # Apply constraints to the core atoms
+        ring_indices = self.get_ring_indices()  # Assuming this method returns indices of the core atoms
+        for idx in ring_indices:
+            ff.AddFixedPoint(idx)
 
-    def specialized_optimization(self):
-        # Overriding the general optimization to include template-based constraints
-        self.apply_template()
-        super().generate_3d_coordinates(optimize=True)
-        # Additional Oxaphosphetane-specific optimization steps can go here
+        if ff is not None:
+            ff.Minimize(500)  # Perform the optimization
+            print("Optimization successful")
+        else:
+            raise Exception("Failed to create force field for optimization.")
 
     def visualize_with_template(self):
-        # Optional: Special method to visualize with template highlighted
-        print("Visualization with template highlighted goes here.")
+        pass
 
 
 # Example usage:
 try:
-    oxaphos = Molecule("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+    oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
     print("Molecular Formula:", oxaphos.get_formula())
     print("Number of Atoms:", oxaphos.num_atoms())
     print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+    params = OxaphosEmbedParams()
+
+    print('cis matches')
+    for i, temp_mol in enumerate(params.cis_template_mols):
+        match = oxaphos.molecule_with_hydrogens.HasSubstructMatch(Chem.RemoveAllHs(temp_mol), useChirality=True)
+        print(match)
+        if match:
+            OP = Oxaphosphetane.from_rdkit_mol(temp_mol)
+            OP.visualize_3d(label='CISMATCH')
+
+    print('trans matches')
+    for temp_mol in params.trans_template_mols:
+        match = oxaphos.molecule_with_hydrogens.HasSubstructMatch(Chem.RemoveAllHs(temp_mol), useChirality=True)
+        print(match)
+        if match:
+            OP = Oxaphosphetane.from_rdkit_mol(temp_mol)
+            OP.visualize_3d(label='TRANSMATCH')
+    # oxaphos.embed_3d()
+    # oxaphos.visualize_3d()
     # oxaphos.generate_3d_coordinates(optimize=True)
-    OP = Oxaphosphetane.from_rdkit_mol(OxaphosEmbedParams.template_molecule)
-    OP.visualize_3d()
+    # OP = Oxaphosphetane.from_rdkit_mol(OxaphosEmbedParams.template_molecule)
+    # OP.visualize_3d()
 except ValueError as e:
     print(e)
 
