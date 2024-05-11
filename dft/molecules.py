@@ -87,6 +87,12 @@ class Molecule:
         return self.canonical_smiles
 
 
+class OxaphosphetaneEmbedParams:
+    base_ring_smiles = 'C1COP1'
+
+    pass
+
+
 class Oxaphosphetane(Molecule):
     def __init__(self, smiles: str):
         super().__init__(smiles)
@@ -96,7 +102,7 @@ class Oxaphosphetane(Molecule):
 
     def get_ring_indices(self):
         """Return ring indices in format (c1_idx, c2_idx, o_idx, p_idx)."""
-        ring_template = Chem.MolFromSmiles('C1COP1')
+        ring_template = Chem.MolFromSmiles(OxaphosphetaneEmbedParams.base_ring_smiles)
         matches = self.molecule_with_hydrogens.GetSubstructMatches(ring_template)
 
         try:
@@ -129,6 +135,7 @@ class Oxaphosphetane(Molecule):
         return f"{R1}[C@H]1[C@H]({R2})OP1", f"{R1}[C@@H]1[C@@H]({R2})OP1"
 
     def is_cis(self):
+        """Checks if a molecule is cis-disubstituted."""
         # Perform the substructure search with stereochemistry consideration
         for template in self.make_cis_templates():
             if self.molecule_with_hydrogens.HasSubstructMatch(Chem.MolFromSmiles(template), useChirality=True):
@@ -137,11 +144,20 @@ class Oxaphosphetane(Molecule):
         return False
 
     def is_trans(self):
+        """Checks if a molecule is trans-disubstituted."""
         for template in self.make_trans_templates():
             if self.molecule_with_hydrogens.HasSubstructMatch(Chem.MolFromSmiles(template), useChirality=True):
                 return True
 
         return False
+
+
+    def embed_3d(self, max_attempts=10):
+        pass
+
+    def optimize_3d(self, force_field=ForceFieldMethod.UFF):
+        pass
+
 
     def specialized_optimization(self):
         # Overriding the general optimization to include template-based constraints
@@ -172,5 +188,6 @@ print("Canonical SMILES:", oxaphos.get_canonical_smiles())
 print(oxaphos.make_cis_templates())
 print(oxaphos.is_cis())
 print(oxaphos.is_trans())
+print(Chem.MolToMolBlock(oxaphos.molecule_with_hydrogens))
 
 
