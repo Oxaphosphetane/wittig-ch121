@@ -1,5 +1,7 @@
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors, Draw, AllChem
+import os
+import os_navigation as nav
 
 
 class ForceFieldMethod:
@@ -14,6 +16,15 @@ class Molecule:
             raise ValueError("Invalid SMILES string provided")
         self.molecule_with_hydrogens = Chem.AddHs(self.molecule)
         self.canonical_smiles = Chem.MolToSmiles(self.molecule, isomericSmiles=True)
+
+    @classmethod
+    def from_rdkit_mol(cls, mol):
+        smi = Chem.MolToSmiles(mol, isomericSmiles=True)
+        m = cls(smi)
+        m.molecule = mol
+        m.molecule_with_hydrogens = Chem.AddHs(mol)
+        return m
+
 
     def get_formula(self):
         return rdMolDescriptors.CalcMolFormula(self.molecule_with_hydrogens)
@@ -78,7 +89,7 @@ class Molecule:
         </body>
         </html>
         """.format(mb_escaped)
-        with open('molecule_visualization_test.html', 'w') as f:
+        with open('molecule_visualization_test2.html', 'w') as f:
             f.write(html)
         print("3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
         return html
@@ -87,11 +98,13 @@ class Molecule:
         return self.canonical_smiles
 
 
-class OxaphosphetaneEmbedParams:
-    base_ring_smiles = 'C1COP1'
+class OxaphosEmbedParams:
+    core_ring_smiles = 'C1COP1'
+    path_to_templates = os.path.join(nav.find_root(), 'saved_files')
 
-    pass
-
+    def __init__(self):
+        self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'cis_OP_template.sdf'), removeHs=False)
+        self.template_molecule = self.sdf_reader[0]  # assuming the template is the first molecule in the file
 
 class Oxaphosphetane(Molecule):
     def __init__(self, smiles: str):
@@ -102,7 +115,7 @@ class Oxaphosphetane(Molecule):
 
     def get_ring_indices(self):
         """Return ring indices in format (c1_idx, c2_idx, o_idx, p_idx)."""
-        ring_template = Chem.MolFromSmiles(OxaphosphetaneEmbedParams.base_ring_smiles)
+        ring_template = Chem.MolFromSmiles(OxaphosEmbedParams.core_ring_smiles)
         matches = self.molecule_with_hydrogens.GetSubstructMatches(ring_template)
 
         try:
@@ -151,9 +164,18 @@ class Oxaphosphetane(Molecule):
 
         return False
 
-
     def embed_3d(self, max_attempts=10):
-        pass
+        template_molecule = ''
+
+        # Perform the constrained embedding
+        try:
+            # Attempt to match the core structure and constrain the embedding
+            cid = AllChem.ConstrainedEmbed(self.molecule_with_hydrogens, template_molecule)
+            print("Constrained embedding successful, conformation ID:", cid)
+            return True
+        except ValueError as e:
+            print("Constrained embedding failed:", e)
+            return False
 
     def optimize_3d(self, force_field=ForceFieldMethod.UFF):
         pass
@@ -169,25 +191,27 @@ class Oxaphosphetane(Molecule):
         # Optional: Special method to visualize with template highlighted
         print("Visualization with template highlighted goes here.")
 
+
 # Example usage:
-# try:
-#     oxaphos = Molecule("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-#     print("Molecular Formula:", oxaphos.get_formula())
-#     print("Number of Atoms:", oxaphos.num_atoms())
-#     print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-#     oxaphos.generate_3d_coordinates(optimize=True)
-#     oxaphos.visualize_3d()
-# except ValueError as e:
-#     print(e)
+try:
+    oxaphos = Molecule("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+    print("Molecular Formula:", oxaphos.get_formula())
+    print("Number of Atoms:", oxaphos.num_atoms())
+    print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+    # oxaphos.generate_3d_coordinates(optimize=True)
+    OP = Oxaphosphetane.from_rdkit_mol(OxaphosEmbedParams.template_molecule)
+    OP.visualize_3d()
+except ValueError as e:
+    print(e)
 
 
-oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-print("Molecular Formula:", oxaphos.get_formula())
-print("Number of Atoms:", oxaphos.num_atoms())
-print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-print(oxaphos.make_cis_templates())
-print(oxaphos.is_cis())
-print(oxaphos.is_trans())
-print(Chem.MolToMolBlock(oxaphos.molecule_with_hydrogens))
+# oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+# print("Molecular Formula:", oxaphos.get_formula())
+# print("Number of Atoms:", oxaphos.num_atoms())
+# print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+# print(oxaphos.make_cis_templates())
+# print(oxaphos.is_cis())
+# print(oxaphos.is_trans())
+# print(Chem.MolToMolBlock(oxaphos.molecule_with_hydrogens))
 
 
