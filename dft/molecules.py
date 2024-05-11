@@ -25,7 +25,6 @@ class Molecule:
         m.molecule_with_hydrogens = Chem.AddHs(mol)
         return m
 
-
     def get_formula(self):
         return rdMolDescriptors.CalcMolFormula(self.molecule_with_hydrogens)
 
@@ -102,9 +101,11 @@ class OxaphosEmbedParams:
     core_ring_smiles = 'C1COP1'
     path_to_templates = os.path.join(nav.find_root(), 'saved_files')
 
-    def __init__(self):
-        self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'cis_OP_template.sdf'), removeHs=False)
-        self.template_molecule = self.sdf_reader[0]  # assuming the template is the first molecule in the file
+    def __init__(self, r1='C', r2='C'):
+        self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'OP_templates.sdf'), removeHs=False)
+        self.cis_template_mol = self.sdf_reader[0]  # assuming the template is the first molecule in the file
+        self.trans_template_mol = self.sdf_reader[1]
+
 
 class Oxaphosphetane(Molecule):
     def __init__(self, smiles: str):
