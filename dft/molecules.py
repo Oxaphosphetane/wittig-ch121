@@ -78,9 +78,9 @@ class Molecule:
         </body>
         </html>
         """.format(mb_escaped)
-        with open('molecule_visualization.html', 'w') as f:
+        with open('molecule_visualization_test.html', 'w') as f:
             f.write(html)
-        print("3D visualization written to 'molecule_visualization.html'. Open this file in a web browser to view the molecule.")
+        print("3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
         return html
 
     def get_canonical_smiles(self):
@@ -88,24 +88,60 @@ class Molecule:
 
 
 class Oxaphosphetane(Molecule):
-    BASE_RING_TEMPLATE = Chem.MolFromSmiles('C1C')
     def __init__(self, smiles: str):
         super().__init__(smiles)
         # Initialize any Oxaphosphetane-specific properties if needed
-        self.template = None  # This could be a template molecule or coordinates
-        self.cis_templates = (
-            Chem.MolFromSmiles("[C@H]1[C@@H]([!#1])OP(*)(*)(*)1", sanitize=True),
-            Chem.MolFromSmiles()# the enantiotopic cis template is: *[C@@H]1[C@H](*)OP1
+        self.ring_indices = self.get_ring_indices()
+        self.cis_templates = self.make_cis_templates()
+
+    def get_ring_indices(self):
+        """Return ring indices in format (c1_idx, c2_idx, o_idx, p_idx)."""
+        ring_template = Chem.MolFromSmiles('C1COP1')
+        matches = self.molecule_with_hydrogens.GetSubstructMatches(ring_template)
+
+        try:
+            return matches[0]
+        except IndexError:
+            raise Exception("Molecule is not an oxaphosphetane.")
+
+    def find_chain_leads(self):
+        c1_idx, c2_idx = self.ring_indices[0], self.ring_indices[1]
+
+        c1_atom = self.molecule_with_hydrogens.GetAtomWithIdx(c1_idx)
+        c2_atom = self.molecule_with_hydrogens.GetAtomWithIdx(c2_idx)
+
+        def find_chain(ring_atom):
+            neighbors = ring_atom.GetNeighbors()
+            for neighbor in neighbors:
+                if neighbor.GetIdx() not in self.ring_indices and neighbor.GetSymbol() != 'H':
+                    return neighbor.GetSymbol()
+
+        return tuple(map(find_chain, (c1_atom, c2_atom)))
+
+    def make_cis_templates(self):
+        R1, R2 = self.find_chain_leads()
+
+        return f"{R1}[C@H]1[C@@H]({R2})OP1", f"{R1}[C@@H]1[C@H]({R2})OP1"
+
+    def make_trans_templates(self):
+        R1, R2 = self.find_chain_leads()
+
+        return f"{R1}[C@H]1[C@H]({R2})OP1", f"{R1}[C@@H]1[C@@H]({R2})OP1"
 
     def is_cis(self):
         # Perform the substructure search with stereochemistry consideration
-        match = self.molecule_with_hydrogens.HasSubstructMatch(self.cis_template, useChirality=True)
-        return match
+        for template in self.make_cis_templates():
+            if self.molecule_with_hydrogens.HasSubstructMatch(Chem.MolFromSmiles(template), useChirality=True):
+                return True
 
-    def apply_template(self):
-        # Apply a structural template to the molecule before embedding
-        # Placeholder: Implement template application logic here
-        print("Template application logic goes here.")
+        return False
+
+    def is_trans(self):
+        for template in self.make_trans_templates():
+            if self.molecule_with_hydrogens.HasSubstructMatch(Chem.MolFromSmiles(template), useChirality=True):
+                return True
+
+        return False
 
     def specialized_optimization(self):
         # Overriding the general optimization to include template-based constraints
@@ -118,12 +154,23 @@ class Oxaphosphetane(Molecule):
         print("Visualization with template highlighted goes here.")
 
 # Example usage:
-try:
-    oxaphos = Molecule("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-    print("Molecular Formula:", oxaphos.get_formula())
-    print("Number of Atoms:", oxaphos.num_atoms())
-    print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-    oxaphos.generate_3d_coordinates(optimize=True)
-    oxaphos.visualize_3d()
-except ValueError as e:
-    print(e)
+# try:
+#     oxaphos = Molecule("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+#     print("Molecular Formula:", oxaphos.get_formula())
+#     print("Number of Atoms:", oxaphos.num_atoms())
+#     print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+#     oxaphos.generate_3d_coordinates(optimize=True)
+#     oxaphos.visualize_3d()
+# except ValueError as e:
+#     print(e)
+
+
+oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+print("Molecular Formula:", oxaphos.get_formula())
+print("Number of Atoms:", oxaphos.num_atoms())
+print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+print(oxaphos.make_cis_templates())
+print(oxaphos.is_cis())
+print(oxaphos.is_trans())
+
+
