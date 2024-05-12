@@ -37,7 +37,7 @@ class Molecule:
         img = Draw.MolToImage(self.molecule_with_hydrogens)
         img.save("molecule.png")
 
-    def embed_3d(self, max_attempts=5, constraints: Chem.Mol = None) -> bool:
+    def embed_3d(self, max_attempts=5) -> bool:
         params = AllChem.ETKDGv3()
         params.numThreads = 0
         for attempt in range(max_attempts):
@@ -47,7 +47,7 @@ class Molecule:
                 return True
         return False
 
-    def optimize_3d(self, force_field=ForceFieldMethod.UFF, constraints: Chem.Mol = None):
+    def optimize_3d(self, force_field=ForceFieldMethod.UFF):
         if force_field == ForceFieldMethod.UFF:
             ff = AllChem.UFFGetMoleculeForceField(self.molecule_with_hydrogens)
         elif force_field == ForceFieldMethod.MMFF:
@@ -144,7 +144,7 @@ class OxaphosEmbedParams:
         def find_chain(ring_atom):
             neighbors = ring_atom.GetNeighbors()
             for neighbor in neighbors:
-                if neighbor.GetIdx() not in mol.ring_indices and neighbor.GetSymbol() != 'H':
+                if neighbor.GetIdx() not in ring_indices and neighbor.GetSymbol() != 'H':
                     return neighbor
 
         return tuple(map(find_chain, (c1_atom, c2_atom)))
@@ -152,7 +152,7 @@ class OxaphosEmbedParams:
     @staticmethod
     def find_ligand_leads(mol) -> tuple:
         ring_indices = OxaphosEmbedParams.get_ring_indices(mol)
-        p_idx = ring_indices
+        p_idx = ring_indices[3]
         p_atom = mol.GetAtomWithIdx(p_idx)
 
         neighbors = [nb for nb in p_atom.GetNeighbors() if nb.GetIdx() not in ring_indices]
@@ -169,13 +169,25 @@ class OxaphosEmbedParams:
 
         return new_mol
 
-    def update_chain_atoms(self, chain_atoms: tuple):
+    @staticmethod
+    def update_chain_atoms(mol, chain_atoms: tuple):
+        chain_atoms = OxaphosEmbedParams.find_chain_leads(mol)
+
         non_carbon_atoms = [atom for atom in chain_atoms if atom.GetSymbol() != 'C']
         for (i, atom) in enumerate(non_carbon_atoms):
-            pass
+            mol = OxaphosEmbedParams.replace_atom(mol, chain_atoms[i], atom.GetAtomicNum())
 
-    def update_ligand_atoms(self, ligand_atoms: tuple):
-        pass
+        return mol
+
+    @staticmethod
+    def update_ligand_atoms(mol, ligand_atoms: tuple):
+        ligand_atoms = OxaphosEmbedParams.find_ligand_leads(mol)
+
+        non_carbon_atoms = [atom for atom in ligand_atoms if atom.GetSymbol() != 'C']
+        for (i, atom) in enumerate(non_carbon_atoms):
+            mol = OxaphosEmbedParams.replace_atom(mol, ligand_atoms[i].GetIdx(), atom.GetAtomicNum())
+
+        return mol
 
     def get_template_mol(self, target_mol, is_triphenyl, is_cis, ligand_atoms, chain_atoms):
         if is_triphenyl and is_cis:
@@ -189,17 +201,18 @@ class OxaphosEmbedParams:
 
         template_mol = None  # initialize
         for i in idxs:  # find proper enantiomers
-            if target_mol.HasSubstructMatch(Chem.RemoveAllHs(self.sdf_reader[i]), useChirality=True):
-                template_mol = self.sdf_reader[i]
+            prelim_template_mol = self.sdf_reader[i]
+
+            if chain_atoms is not None:
+                prelim_template_mol = OxaphosEmbedParams.update_chain_atoms(prelim_template_mol, chain_atoms)
+            if ligand_atoms is not None:
+                prelim_template_mol = OxaphosEmbedParams.update_ligand_atoms(prelim_template_mol, ligand_atoms)
+
+            if target_mol.HasSubstructMatch(Chem.RemoveAllHs(prelim_template_mol), useChirality=True):
+                template_mol = prelim_template_mol
 
         if template_mol is None:
             raise Exception("Something doesn't add up: Check is_triphenyl and is_cis and try again.")
-
-        if chain_atoms is not None:
-            template_mol = self.update_chain_atoms(template_mol, chain_atoms)
-
-        if ligand_atoms is not None:
-            template_mol = self.update_ligand_atoms(template_mol, ligand_atoms)
 
         return template_mol
 
@@ -208,18 +221,15 @@ class Oxaphosphetane(Molecule):
     def __init__(self, smiles: str):
         super().__init__(smiles)
         # Initialize any Oxaphosphetane-specific properties if needed
-        self.ring_indices = self.get_ring_indices()
+        self.ring_indices = OxaphosEmbedParams.get_ring_indices(self.molecule_with_hydrogens)
         self.cis_templates = self.make_cis_templates()
-
-    def get_ring_indices(self):
-        """Return ring indices in format (c1_idx, c2_idx, o_idx, p_idx)."""
-        ring_template = Chem.MolFromSmiles(OxaphosEmbedParams.core_ring_smiles)
-        matches = self.molecule_with_hydrogens.GetSubstructMatches(ring_template)
-
-        try:
-            return matches[0]
-        except IndexError:
-            raise Exception("Molecule is not an oxaphosphetane.")
+        self.constraint_core_mol = OxaphosEmbedParams(
+            oxaphos_mol=self.molecule_with_hydrogens,
+            is_triphenyl=self.is_triphenyl(),
+            is_cis=self.is_cis(),
+            ligand_atoms=OxaphosEmbedParams.find_ligand_leads(self.molecule_with_hydrogens),
+            chain_atoms=OxaphosEmbedParams.find_chain_leads(self.molecule_with_hydrogens)
+        ).template_mol
 
     def find_chain_leads(self) -> tuple:
         c1_idx, c2_idx = self.ring_indices[0], self.ring_indices[1]
@@ -280,49 +290,42 @@ class Oxaphosphetane(Molecule):
 
         return False
 
-    def embed_3d(self, max_attempts=10, constraints: Chem.Mol = None) -> bool:
-        # params = OxaphosEmbedParams()
-
-        # if self.is_cis():
-        #     template_molecule = params.cis_template_mols_pph3
-        # elif self.is_trans():
-        #     template_molecule = params.trans_template_mols_pph3
-        # else:
-        #     raise ValueError("Molecule is not cis or trans-disubstituted.")
-
+    def embed_3d(self, max_attempts=10) -> bool:
         # Perform the constrained embedding
         try:
             # Attempt to match the core structure and constrain the embedding
-            cid = AllChem.ConstrainedEmbed(self.molecule_with_hydrogens, constraints)
+            cid = AllChem.ConstrainedEmbed(self.molecule_with_hydrogens, Chem.RemoveAllHs(self.constraint_core_mol))
             print("Constrained embedding successful, conformation ID:", cid)
             return True
         except ValueError as e:
             print("Constrained embedding failed:", e)
             return False
 
-    def optimize_3d(self, force_field=ForceFieldMethod.UFF, constraints: Chem.Mol = None):
-        # Assume that the molecule_with_hydrogens has a valid 3D conformation at this point
+    def optimize_3d(self, force_field=ForceFieldMethod.UFF):
+        # First, find the matching substructure to apply constraints
+        match = self.molecule_with_hydrogens.GetSubstructMatch(Chem.RemoveAllHs(self.constraint_core_mol))
+        if not match:
+            raise Exception("Core structure not found in the molecule.")
+
+        # Set up the force field
         if force_field == ForceFieldMethod.UFF:
             ff = AllChem.UFFGetMoleculeForceField(self.molecule_with_hydrogens)
         elif force_field == ForceFieldMethod.MMFF:
-            props = AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens)
-            ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens, props)
+            ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens,
+                                                   AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens))
         else:
             raise ValueError("Unsupported force field. Choose 'uff' or 'mmff'.")
 
-        # Apply constraints to the core atoms
-        ring_indices = self.get_ring_indices()  # Assuming this method returns indices of the core atoms
-        for idx in ring_indices:
-            ff.AddFixedPoint(idx)
-
-        if ff is not None:
-            ff.Minimize(500)  # Perform the optimization
-            print("Optimization successful")
-        else:
+        if ff is None:
             raise Exception("Failed to create force field for optimization.")
 
-    def visualize_with_template(self):
-        pass
+        # Apply constraints to the matched core atoms
+        for idx in match:
+            ff.AddFixedPoint(idx)
+
+        # Perform the optimization
+        ff.Minimize(500)
+        print("Optimization with constrained core successful.")
 
 
 # Example usage:
@@ -331,44 +334,8 @@ try:
     print("Molecular Formula:", oxaphos.get_formula())
     print("Number of Atoms:", oxaphos.num_atoms())
     print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-    params = OxaphosEmbedParams()
-
-    print('cis matches')
-    for i, temp_mol in enumerate(params.cis_template_mols_pph3):
-        match = oxaphos.molecule_with_hydrogens.HasSubstructMatch(Chem.RemoveAllHs(temp_mol), useChirality=True)
-        print(match)
-        if match:
-            OP = Oxaphosphetane.from_rdkit_mol(temp_mol)
-            OP.visualize_3d(label='CISMATCH')
-
-    print('trans matches')
-    for temp_mol in params.trans_template_mols_pph3:
-        match = oxaphos.molecule_with_hydrogens.HasSubstructMatch(Chem.RemoveAllHs(temp_mol), useChirality=True)
-        print(match)
-        if match:
-            OP = Oxaphosphetane.from_rdkit_mol(temp_mol)
-            OP.visualize_3d(label='TRANSMATCH')
-    oxaphos.embed_3d(constraints=Chem.RemoveAllHs(OP.molecule))
-    oxaphos.visualize_3d(label='SUCCESS')
-    # oxaphos.visualize_3d()
-    # oxaphos.generate_3d_coordinates(optimize=True)
-    # OP = Oxaphosphetane.from_rdkit_mol(OxaphosEmbedParams.template_molecule)
-    # OP.visualize_3d()
+    print("Constraint:", Chem.MolToSmiles(Chem.RemoveAllHs(oxaphos.constraint_core_mol)))
+    oxaphos.generate_3d_coordinates(optimize=True)
+    oxaphos.visualize_3d(label='ALPHATEST')
 except ValueError as e:
     print(e)
-
-oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-oxaphos.visualize_3d(label='PANCAKE')
-
-
-
-# oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-# print("Molecular Formula:", oxaphos.get_formula())
-# print("Number of Atoms:", oxaphos.num_atoms())
-# print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-# print(oxaphos.make_cis_templates())
-# print(oxaphos.is_cis())
-# print(oxaphos.is_trans())
-# print(Chem.MolToMolBlock(oxaphos.molecule_with_hydrogens))
-
-
