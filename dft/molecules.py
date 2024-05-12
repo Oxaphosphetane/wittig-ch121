@@ -101,7 +101,10 @@ class Molecule:
 
 class OxaphosEmbedParams:
     """Create 3D embedding parameters for an Oxaphosphetane."""
-    TRIPHENYL = 'TRIPHENYL'
+    cis_pph3_sdf_idxs = [0, 1]
+    trans_pph3_sdf_idxs = [2, 3]
+    cis_chop_sdf_idxs = [4, 5]
+    trans_chop_sdf_idxs = [6, 7]
 
     path_to_templates = os.path.join(nav.find_root(), 'saved_files')
 
@@ -109,29 +112,96 @@ class OxaphosEmbedParams:
     core_ring_pph3_smiles = 'C1COP1(c1ccccc1)(c1ccccc1)c1ccccc1'
 
     def __init__(
-            self,
-            oxaphos_mol: Chem.Mol,
-            is_triphenyl=True,
-            ligand_atoms: tuple = None,
-            chain_atoms: tuple = None,
+        self,
+        oxaphos_mol: Chem.Mol,
+        is_triphenyl=True,
+        is_cis=True,
+        ligand_atoms: tuple = None,
+        chain_atoms: tuple = None,
     ):
         self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'OP_templates.sdf'), removeHs=False)
-        self.cis_template_mols_pph3 = (self.sdf_reader[0], self.sdf_reader[1])
-        self.trans_template_mols_pph3 = (self.sdf_reader[2], self.sdf_reader[3])
-        self.cis_template_mols = (self.sdf_reader[4], self.sdf_reader[5])
-        self.trans_template_mols = (self.sdf_reader[6], self.sdf_reader[7])
+        self.template_mol = self.get_template_mol(oxaphos_mol, is_triphenyl, is_cis, ligand_atoms, chain_atoms)
 
-        if is_triphenyl:
+    @staticmethod
+    def get_ring_indices(mol) -> tuple:
+        """Return oxaphosphetane ring indices in format (c1_idx, c2_idx, o_idx, p_idx)."""
+        ring_template = Chem.MolFromSmiles(OxaphosEmbedParams.core_ring_smiles)
+        matches = mol.GetSubstructMatches(ring_template)
 
+        try:
+            return matches[0]
+        except IndexError:
+            raise Exception("Molecule is not an oxaphosphetane.")
 
-        if chain_atoms is not None:
-            self.update_chain_atoms(chain_atoms)
+    @staticmethod
+    def find_chain_leads(mol) -> tuple:
+        ring_indices = OxaphosEmbedParams.get_ring_indices(mol)
+        c1_idx, c2_idx = ring_indices[0], ring_indices[1]
+
+        c1_atom = mol.GetAtomWithIdx(c1_idx)
+        c2_atom = mol.GetAtomWithIdx(c2_idx)
+
+        def find_chain(ring_atom):
+            neighbors = ring_atom.GetNeighbors()
+            for neighbor in neighbors:
+                if neighbor.GetIdx() not in mol.ring_indices and neighbor.GetSymbol() != 'H':
+                    return neighbor
+
+        return tuple(map(find_chain, (c1_atom, c2_atom)))
+
+    @staticmethod
+    def find_ligand_leads(mol) -> tuple:
+        ring_indices = OxaphosEmbedParams.get_ring_indices(mol)
+        p_idx = ring_indices
+        p_atom = mol.GetAtomWithIdx(p_idx)
+
+        neighbors = [nb for nb in p_atom.GetNeighbors() if nb.GetIdx() not in ring_indices]
+
+        return tuple(neighbors)
+
+    @staticmethod
+    def replace_atom(mol, atom_index, new_atomic_num):
+        """Replace an atom in a molecule with another atom of a different type."""
+        rw_mol = Chem.RWMol(mol)   # Create an editable molecule from the original molecule
+        rw_mol.ReplaceAtom(atom_index, Chem.Atom(new_atomic_num))  # Replace the specified atom with a new atom of the specified type
+        new_mol = rw_mol.GetMol()  # Get a new molecule from the editable molecule
+        Chem.SanitizeMol(new_mol)  # Important to update the molecule's properties
+
+        return new_mol
 
     def update_chain_atoms(self, chain_atoms: tuple):
-        for (i, atom) in enumerate(chain_atoms):
+        non_carbon_atoms = [atom for atom in chain_atoms if atom.GetSymbol() != 'C']
+        for (i, atom) in enumerate(non_carbon_atoms):
             pass
 
+    def update_ligand_atoms(self, ligand_atoms: tuple):
+        pass
 
+    def get_template_mol(self, target_mol, is_triphenyl, is_cis, ligand_atoms, chain_atoms):
+        if is_triphenyl and is_cis:
+            idxs = OxaphosEmbedParams.cis_pph3_sdf_idxs
+        elif is_triphenyl and not is_cis:
+            idxs = OxaphosEmbedParams.trans_pph3_sdf_idxs
+        elif not is_triphenyl and is_cis:
+            idxs = OxaphosEmbedParams.cis_chop_sdf_idxs
+        else:
+            idxs = OxaphosEmbedParams.trans_chop_sdf_idxs
+
+        template_mol = None  # initialize
+        for i in idxs:  # find proper enantiomers
+            if target_mol.HasSubstructMatch(Chem.RemoveAllHs(self.sdf_reader[i]), useChirality=True):
+                template_mol = self.sdf_reader[i]
+
+        if template_mol is None:
+            raise Exception("Something doesn't add up: Check is_triphenyl and is_cis and try again.")
+
+        if chain_atoms is not None:
+            template_mol = self.update_chain_atoms(template_mol, chain_atoms)
+
+        if ligand_atoms is not None:
+            template_mol = self.update_ligand_atoms(template_mol, ligand_atoms)
+
+        return template_mol
 
 
 class Oxaphosphetane(Molecule):
