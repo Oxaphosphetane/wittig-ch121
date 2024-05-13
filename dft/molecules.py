@@ -5,6 +5,14 @@ from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
 import os
 import os_navigation as nav
 
+from html_templates import Visualize3DHtml
+
+# Disable all RDKit warnings
+from rdkit import RDLogger
+logger = RDLogger.logger()
+logger.setLevel(RDLogger.ERROR)  # Show only errors, no warnings
+# Alternatively, to completely turn off logging including errors, use:
+# logger.setLevel(RDLogger.CRITICAL)
 
 class ForceFieldMethod:
     UFF = 'uff'
@@ -70,26 +78,7 @@ class Molecule:
     def visualize_3d(self, label='') -> str:
         mb = Chem.MolToMolBlock(self.molecule_with_hydrogens)
         mb_escaped = mb.replace('\n', '\\n').replace('\'', '\\\'').replace('\"', '\\"')
-        html = """
-        <html>
-        <head>
-            <title>Molecule Visualization</title>
-            <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
-        </head>
-        <body>
-            <div id="molDiv" style="height: 400px; width: 800px; position: relative;"></div>
-            <script>
-                var config = {{ backgroundColor: 'white' }};
-                var viewer = $3Dmol.createViewer(document.getElementById('molDiv'), config);
-                var molData = `{0}`;
-                viewer.addModel(molData, 'sdf');
-                viewer.setStyle({{}}, {{stick: {{radius: 0.15}}, sphere: {{radius: 0.3}}}});
-                viewer.zoomTo();
-                viewer.render();
-            </script>
-        </body>
-        </html>
-        """.format(mb_escaped)
+        html = Visualize3DHtml(mb_escaped).raw_html
         with open(f'molecule_visualization_test_{label}.html', 'w') as f:
             f.write(html)
         print("3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
@@ -330,7 +319,19 @@ class Oxaphosphetane(Molecule):
 
 # Example usage:
 try:
-    oxaphos = Oxaphosphetane("CC[C@H]1[C@H](CC)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+    # oxaphos = Oxaphosphetane("CC[C@@H]1[C@@H](C2=CC=C3C(=C2)N=C4C=CC=CC4=N3)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+    # oxaphos = Oxaphosphetane("C[C@@H]1OP2(c3ccccc3)(c3ccccc3-c3ccccc32)[C@H]1C(=O)c1ccccc1")  # FAILED
+    # oxaphos = Oxaphosphetane("C=CCCCCCCCC[C@]1(C(=O)OC)[C@@H](C(C)c2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@@H](CCl)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+    # oxaphos = Oxaphosphetane("COC(=O)[C@@H]1[C@H](C2=C[C@H](O)[C@H]3OC(C)(C)O[C@H]3O2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2COCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2CO[Si](C)(C)C(C)(C)C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@H]([C@H]2O[C@@H]3OC(C)(C)O[C@@H]3[C@H]2OCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H](CS)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H]([C@@H]2O[C@@H]2[C@H]2O[C@@H](c3ccccc3)OC[C@@H]2O)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+    # oxaphos = Oxaphosphetane("CCC[C@@H]1[C@@]2(CCC3C4CCc5cc(OC)ccc5C4CC[C@@]32C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+    # oxaphos = Oxaphosphetane("CCCCC[C@H]1OP(c2ccccc2)(c2ccccc2)(c2ccccc2)[C@@H]1/C=C/CO")  # SUCCESS
+    oxaphos = Oxaphosphetane("C[Si](C)(C)C#C[C@@H]1[C@@H](C2CCCCO2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
     print("Molecular Formula:", oxaphos.get_formula())
     print("Number of Atoms:", oxaphos.num_atoms())
     print("Canonical SMILES:", oxaphos.get_canonical_smiles())
