@@ -1,20 +1,27 @@
-from typing import Tuple, Any
-
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
+import sys
 import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+sys.path.append(parent_dir)
 import os_navigation as nav
 
 from html_templates import Visualize3DHtml
 
 # Disable all RDKit warnings
 from rdkit import RDLogger
+
 logger = RDLogger.logger()
 logger.setLevel(RDLogger.ERROR)  # Show only errors, no warnings
+
+
 # Alternatively, to completely turn off logging including errors, use:
 # logger.setLevel(RDLogger.CRITICAL)
 
-class ForceFieldMethod:
+
+class _ForceFieldMethod:
     UFF = 'uff'
     MMFF = 'mmff'
 
@@ -55,11 +62,12 @@ class Molecule:
                 return True
         return False
 
-    def optimize_3d(self, force_field=ForceFieldMethod.UFF):
-        if force_field == ForceFieldMethod.UFF:
+    def optimize_3d(self, force_field=_ForceFieldMethod.UFF, constrain=False):
+        if force_field == _ForceFieldMethod.UFF:
             ff = AllChem.UFFGetMoleculeForceField(self.molecule_with_hydrogens)
-        elif force_field == ForceFieldMethod.MMFF:
-            ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens, AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens))
+        elif force_field == _ForceFieldMethod.MMFF:
+            ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens,
+                                                   AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens))
         else:
             raise ValueError("Unsupported force field. Choose 'uff' or 'mmff'.")
 
@@ -68,12 +76,14 @@ class Molecule:
         else:
             raise Exception("Failed to create force field for optimization.")
 
-    def generate_3d_coordinates(self, optimize=True, force_field=ForceFieldMethod.UFF):
+    def generate_3d_coordinates(self, optimize=True, force_field=_ForceFieldMethod.UFF, constrain_opt=False):
         if self.embed_3d():  # modifies Molecule in place and returns bool True if success
             if optimize:
-                self.optimize_3d(force_field)
+                self.optimize_3d(force_field, constrain=constrain_opt)
         else:
             raise Exception("Failed to embed molecule, cannot proceed with optimization.")
+
+        return Chem.MolToMolBlock(self.molecule_with_hydrogens)
 
     def visualize_3d(self, label='') -> str:
         mb = Chem.MolToMolBlock(self.molecule_with_hydrogens)
@@ -81,7 +91,8 @@ class Molecule:
         html = Visualize3DHtml(mb_escaped).raw_html
         with open(f'molecule_visualization_test_{label}.html', 'w') as f:
             f.write(html)
-        print("3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
+        print(
+            "3D visualization written to 'molecule_visualization_test.html'. Open this file in a web browser to view the molecule.")
         return html
 
     def get_canonical_smiles(self):
@@ -95,20 +106,23 @@ class OxaphosEmbedParams:
     cis_chop_sdf_idxs = [4, 5]
     trans_chop_sdf_idxs = [6, 7]
 
-    path_to_templates = os.path.join(nav.find_root(), 'saved_files')
+    path_to_templates = os.path.join(nav.find_project_root(), 'data')
 
     core_ring_smiles = 'C1COP1'
     core_ring_pph3_smiles = 'C1COP1(c1ccccc1)(c1ccccc1)c1ccccc1'
 
+    extract_phosphine_smirks = "C1COP1([*:1])([*:2])[*:3]>>P([*:1])([*:2])[*:3]"
+
     def __init__(
-        self,
-        oxaphos_mol: Chem.Mol,
-        is_triphenyl=True,
-        is_cis=True,
-        ligand_atoms: tuple = None,
-        chain_atoms: tuple = None,
+            self,
+            oxaphos_mol: Chem.Mol,
+            is_triphenyl=True,
+            is_cis=True,
+            ligand_atoms: tuple = None,
+            chain_atoms: tuple = None,
     ):
-        self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'OP_templates.sdf'), removeHs=False)
+        self.sdf_reader = Chem.SDMolSupplier(os.path.join(OxaphosEmbedParams.path_to_templates, 'OP_templates.sdf'),
+                                             removeHs=False)
         self.template_mol = self.get_template_mol(oxaphos_mol, is_triphenyl, is_cis, ligand_atoms, chain_atoms)
 
     @staticmethod
@@ -151,8 +165,9 @@ class OxaphosEmbedParams:
     @staticmethod
     def replace_atom(mol, atom_index, new_atomic_num):
         """Replace an atom in a molecule with another atom of a different type."""
-        rw_mol = Chem.RWMol(mol)   # Create an editable molecule from the original molecule
-        rw_mol.ReplaceAtom(atom_index, Chem.Atom(new_atomic_num))  # Replace the specified atom with a new atom of the specified type
+        rw_mol = Chem.RWMol(mol)  # Create an editable molecule from the original molecule
+        rw_mol.ReplaceAtom(atom_index, Chem.Atom(
+            new_atomic_num))  # Replace the specified atom with a new atom of the specified type
         new_mol = rw_mol.GetMol()  # Get a new molecule from the editable molecule
         Chem.SanitizeMol(new_mol)  # Important to update the molecule's properties
 
@@ -274,7 +289,14 @@ class Oxaphosphetane(Molecule):
         """Checks if the Oxaphosphetane is derived from a triphenyl phosphine."""
         triphenyl_ring_template = Chem.MolFromSmiles(OxaphosEmbedParams.core_ring_pph3_smiles)
 
-        if self.molecule_with_hydrogens.HasSubstructMatch(triphenyl_ring_template):
+        transform = AllChem.ReactionFromSmarts(OxaphosEmbedParams.extract_phosphine_smirks)
+
+        products = transform.RunReactants((AllChem.RemoveAllHs(self.molecule),))
+
+        phosphine = products[0][0]
+
+        if phosphine.HasSubstructMatch(triphenyl_ring_template) and triphenyl_ring_template.hasSubstructMatch(
+                phosphine):
             return True
 
         return False
@@ -290,16 +312,11 @@ class Oxaphosphetane(Molecule):
             print("Constrained embedding failed:", e)
             return False
 
-    def optimize_3d(self, force_field=ForceFieldMethod.UFF):
-        # First, find the matching substructure to apply constraints
-        match = self.molecule_with_hydrogens.GetSubstructMatch(Chem.RemoveAllHs(self.constraint_core_mol))
-        if not match:
-            raise Exception("Core structure not found in the molecule.")
-
+    def optimize_3d(self, force_field=_ForceFieldMethod.MMFF, constrain=False):
         # Set up the force field
-        if force_field == ForceFieldMethod.UFF:
+        if force_field == _ForceFieldMethod.UFF:
             ff = AllChem.UFFGetMoleculeForceField(self.molecule_with_hydrogens)
-        elif force_field == ForceFieldMethod.MMFF:
+        elif force_field == _ForceFieldMethod.MMFF:
             ff = AllChem.MMFFGetMoleculeForceField(self.molecule_with_hydrogens,
                                                    AllChem.MMFFGetMoleculeProperties(self.molecule_with_hydrogens))
         else:
@@ -308,35 +325,43 @@ class Oxaphosphetane(Molecule):
         if ff is None:
             raise Exception("Failed to create force field for optimization.")
 
-        # Apply constraints to the matched core atoms
-        for idx in match:
-            ff.AddFixedPoint(idx)
+        if constrain:
+            # Find the matching substructure to apply constraints
+            match = self.molecule_with_hydrogens.GetSubstructMatch(Chem.RemoveAllHs(self.constraint_core_mol))
+            if not match:
+                raise Exception("Core structure not found in the molecule.")
+            # Apply constraints to the matched core atoms
+            for idx in match:
+                ff.AddFixedPoint(idx)
 
         # Perform the optimization
         ff.Minimize(500)
         print("Optimization with constrained core successful.")
 
 
-# Example usage:
-try:
-    # oxaphos = Oxaphosphetane("CC[C@@H]1[C@@H](C2=CC=C3C(=C2)N=C4C=CC=CC4=N3)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-    # oxaphos = Oxaphosphetane("C[C@@H]1OP2(c3ccccc3)(c3ccccc3-c3ccccc32)[C@H]1C(=O)c1ccccc1")  # FAILED
-    # oxaphos = Oxaphosphetane("C=CCCCCCCCC[C@]1(C(=O)OC)[C@@H](C(C)c2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@@H](CCl)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-    # oxaphos = Oxaphosphetane("COC(=O)[C@@H]1[C@H](C2=C[C@H](O)[C@H]3OC(C)(C)O[C@H]3O2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2COCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2CO[Si](C)(C)C(C)(C)C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@H]([C@H]2O[C@@H]3OC(C)(C)O[C@@H]3[C@H]2OCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H](CS)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H]([C@@H]2O[C@@H]2[C@H]2O[C@@H](c3ccccc3)OC[C@@H]2O)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-    # oxaphos = Oxaphosphetane("CCC[C@@H]1[C@@]2(CCC3C4CCc5cc(OC)ccc5C4CC[C@@]32C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-    # oxaphos = Oxaphosphetane("CCCCC[C@H]1OP(c2ccccc2)(c2ccccc2)(c2ccccc2)[C@@H]1/C=C/CO")  # SUCCESS
-    oxaphos = Oxaphosphetane("C[Si](C)(C)C#C[C@@H]1[C@@H](C2CCCCO2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-    print("Molecular Formula:", oxaphos.get_formula())
-    print("Number of Atoms:", oxaphos.num_atoms())
-    print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-    print("Constraint:", Chem.MolToSmiles(Chem.RemoveAllHs(oxaphos.constraint_core_mol)))
-    oxaphos.generate_3d_coordinates(optimize=True)
-    oxaphos.visualize_3d(label='ALPHATEST')
-except ValueError as e:
-    print(e)
+test_file = False
+if test_file:
+    # Example usage:
+    try:
+        # oxaphos = Oxaphosphetane("CC[C@@H]1[C@@H](C2=CC=C3C(=C2)N=C4C=CC=CC4=N3)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("C[C@@H]1OP2(c3ccccc3)(c3ccccc3-c3ccccc32)[C@H]1C(=O)c1ccccc1")  # FAILED
+        # oxaphos = Oxaphosphetane("C=CCCCCCCCC[C@]1(C(=O)OC)[C@@H](C(C)c2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+        oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@@H](CCl)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+        # oxaphos = Oxaphosphetane("COC(=O)[C@@H]1[C@H](C2=C[C@H](O)[C@H]3OC(C)(C)O[C@H]3O2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2COCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2CO[Si](C)(C)C(C)(C)C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@H]([C@H]2O[C@@H]3OC(C)(C)O[C@@H]3[C@H]2OCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H](CS)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H]([C@@H]2O[C@@H]2[C@H]2O[C@@H](c3ccccc3)OC[C@@H]2O)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+        # oxaphos = Oxaphosphetane("CCC[C@@H]1[C@@]2(CCC3C4CCc5cc(OC)ccc5C4CC[C@@]32C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+        # oxaphos = Oxaphosphetane("CCCCC[C@H]1OP(c2ccccc2)(c2ccccc2)(c2ccccc2)[C@@H]1/C=C/CO")  # SUCCESS
+        # oxaphos = Oxaphosphetane("C[Si](C)(C)C#C[C@@H]1[C@@H](C2CCCCO2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+        print("Molecular Formula:", oxaphos.get_formula())
+        print("Number of Atoms:", oxaphos.num_atoms())
+        print("Canonical SMILES:", oxaphos.get_canonical_smiles())
+        print("Constraint:", Chem.MolToSmiles(Chem.RemoveAllHs(oxaphos.constraint_core_mol)))
+        print()
+        print(oxaphos.generate_3d_coordinates(optimize=True, constrain_opt=False))
+        oxaphos.visualize_3d(label='ALPHATEST')
+    except ValueError as e:
+        print(e)

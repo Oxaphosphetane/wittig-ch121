@@ -2,7 +2,7 @@
 class Visualize3DHtml:
     def __init__(self, mol_block: str):
         self.raw_html = """<html>
-<head>
+<HEADER>
     <title>Molecule Visualization</title>
     <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
     <style>
@@ -21,7 +21,7 @@ class Visualize3DHtml:
             background-color: white;
         }}
     </style>
-</head>
+</HEADER>
 <body>
     <div id="molDiv"></div>
     <script>
