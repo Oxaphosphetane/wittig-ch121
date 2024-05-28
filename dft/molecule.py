@@ -1,3 +1,4 @@
+import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
 import sys
@@ -6,7 +7,7 @@ import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 sys.path.append(parent_dir)
-import os_navigation as nav
+import os_navigation as os_nav
 
 from html_templates import Visualize3DHtml
 
@@ -27,17 +28,19 @@ class _ForceFieldMethod:
 
 
 class Molecule:
-    def __init__(self, smiles: str):
+    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
         self.molecule = Chem.MolFromSmiles(smiles)
         if self.molecule is None:
             raise ValueError("Invalid SMILES string provided")
         self.molecule_with_hydrogens = Chem.AddHs(self.molecule)
         self.canonical_smiles = Chem.MolToSmiles(self.molecule, isomericSmiles=True)
+        self.source = source
+        self.id = self._generate_id()
 
     @classmethod
-    def from_rdkit_mol(cls, mol):
+    def from_rdkit_mol(cls, mol, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
         smi = Chem.MolToSmiles(mol, isomericSmiles=True)
-        m = cls(smi)
+        m = cls(smi, source=source)
         m.molecule = mol
         m.molecule_with_hydrogens = Chem.AddHs(mol)
         return m
@@ -52,7 +55,7 @@ class Molecule:
         img = Draw.MolToImage(self.molecule_with_hydrogens)
         img.save("molecule.png")
 
-    def embed_3d(self, max_attempts=5) -> bool:
+    def embed_3d(self, max_attempts=3) -> bool:
         params = AllChem.ETKDGv3()
         params.numThreads = 0
         for attempt in range(max_attempts):
@@ -85,6 +88,29 @@ class Molecule:
 
         return Chem.MolToMolBlock(self.molecule_with_hydrogens)
 
+    def export_conformer_coordinates(self, conf_id=0, idx_start=1):
+        """
+        Export the 3D coordinates of a conformer in a specified format.
+
+        :param conf_id: The ID of the conformer to export (default is 0).
+        :return: A string with the coordinates in the specified format.
+        """
+        self.generate_3d_coordinates()
+
+        mol = self.molecule_with_hydrogens
+
+        conf = mol.GetConformer(conf_id)
+        lines = []
+
+        for atom in mol.GetAtoms():
+            pos = conf.GetAtomPosition(atom.GetIdx())
+            symbol = atom.GetSymbol()
+            idx = atom.GetIdx() + idx_start  # add Atom index start
+            line = f"{symbol}{idx:<2} {pos.x:>20.10f} {pos.y:>20.10f} {pos.z:>20.10f}"
+            lines.append(line)
+
+        return "\n".join(lines)
+
     def visualize_3d(self, label='') -> str:
         mb = Chem.MolToMolBlock(self.molecule_with_hydrogens)
         mb_escaped = mb.replace('\n', '\\n').replace('\'', '\\\'').replace('\"', '\\"')
@@ -98,6 +124,34 @@ class Molecule:
     def get_canonical_smiles(self):
         return self.canonical_smiles
 
+    def _generate_id(self):
+        df = pd.read_csv(self.source)
+        if self.canonical_smiles in df['reactant_smiles'].values:
+            matching_row = df[df['reactant_smiles'] == self.canonical_smiles]
+            return matching_row.index[0]
+
+        # Generate a new ID
+        new_id = df.index.max() + 1 if not df.empty else 0
+
+        # Create new row to append
+        new_row = {
+            'index': new_id,
+            'reactant_smiles': self.canonical_smiles,
+        }
+
+        # Set other columns to None or a specific marker
+        for col in df.columns:
+            if col not in new_row:
+                new_row[col] = None
+
+        # Append the new row to the DataFrame using concat
+        df = pd.concat([df, pd.DataFrame([new_row], index=[new_id])])
+
+        # Save the updated DataFrame back to the CSV file
+        df.to_csv(self.source, index=False)
+
+        return new_id
+
 
 class OxaphosEmbedParams:
     """Create 3D embedding parameters for an Oxaphosphetane."""
@@ -106,7 +160,7 @@ class OxaphosEmbedParams:
     cis_chop_sdf_idxs = [4, 5]
     trans_chop_sdf_idxs = [6, 7]
 
-    path_to_templates = os.path.join(nav.find_project_root(), 'data')
+    path_to_templates = os.path.join(os_nav.find_project_root(), 'data')
 
     core_ring_smiles = 'C1COP1'
     core_ring_pph3_smiles = 'C1COP1(c1ccccc1)(c1ccccc1)c1ccccc1'
@@ -222,9 +276,8 @@ class OxaphosEmbedParams:
 
 
 class Oxaphosphetane(Molecule):
-    def __init__(self, smiles: str):
-        super().__init__(smiles)
-        # Initialize any Oxaphosphetane-specific properties if needed
+    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
+        super().__init__(smiles, source=source)
         self.ring_indices = OxaphosEmbedParams.get_ring_indices(self.molecule_with_hydrogens)
         self.cis_templates = self.make_cis_templates()
         self.constraint_core_mol = OxaphosEmbedParams(
@@ -304,7 +357,7 @@ class Oxaphosphetane(Molecule):
     def embed_3d(self, max_attempts=10) -> bool:
         # Perform the constrained embedding
         try:
-            # Attempt to match the core structure and constrain the embedding
+            # Attempt to match the core coordinates and constrain the embedding
             cid = AllChem.ConstrainedEmbed(self.molecule_with_hydrogens, Chem.RemoveAllHs(self.constraint_core_mol))
             print("Constrained embedding successful, conformation ID:", cid)
             return True
@@ -329,7 +382,7 @@ class Oxaphosphetane(Molecule):
             # Find the matching substructure to apply constraints
             match = self.molecule_with_hydrogens.GetSubstructMatch(Chem.RemoveAllHs(self.constraint_core_mol))
             if not match:
-                raise Exception("Core structure not found in the molecule.")
+                raise Exception("Core coordinates not found in the molecule.")
             # Apply constraints to the matched core atoms
             for idx in match:
                 ff.AddFixedPoint(idx)

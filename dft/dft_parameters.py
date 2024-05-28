@@ -2,6 +2,7 @@ import enum
 import molecule as mol
 from rdkit import Chem
 
+
 class JaguarInputParams:
     HEADER = '&gen'
     ENTRY_NAME = 'entry_name'

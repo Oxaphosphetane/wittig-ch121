@@ -1,270 +1,115 @@
-from dft_parameters import *
-import os
-import os_navigation as os_nav
-import enum
-import pandas as pd
-
-from rdkit import Chem
+from job import *
 import molecule as mol
+from typing import List
+from job_utils import JsonParser
+import subprocess
 
-from collections import Counter
-
-job_storage_path = os.path.join(os_nav.find_project_root(), 'data', 'jobs')
-mol_storage_path = os.path.join(os_nav.find_project_root(), 'data', 'mols')
-
-
-class JobInfo(enum.Enum):
-    JOB_ID = 'job_id'
-    JOB_STATUS = 'job_status'
+from dft_parameters import DFTBases, DFTMethods
+from slurm_manager import jaguar_sub, create_slurm_submission_script
 
 
-class JobStatus(enum.Enum):
-    PENDING = 'PENDING'
-    QUEUED = "QUEUED"
-    RUNNING = "RUNNING"
-    ERROR = "ERROR"
-    FINISHED = "FINISHED"
+class JobManager:
+    def __init__(self, output_dir: str):
+        self.output_dir = output_dir
+        self.job_counter = 0
+        self.jobs = []
+
+    def create_jobs(
+            self,
+            molecules: List[mol.Molecule],
+            job_type: JobTypes,
+            dft_method: DFTMethods = DFTMethods.B3LYP_D3,
+            dft_basis: DFTBases = DFTBases.GAUSS_6_31_SS
+    ) -> List[JaguarJob]:
+        job_cls = globals()[job_type.value.jaguar_class_name]
+
+        jobs = []
+        for molecule in molecules:
+            try:
+                job = job_cls(
+                    mols=(molecule,),
+                    dft_method=dft_method,
+                    dft_basis=dft_basis
+                )
+                self.job_counter += 1
+                jobs.append(job)
+            except Exception as e:
+                print(e)
+
+        return jobs
+
+    """
+    input: list of smiles strings
+    loop through strings and create list of jobs.
+    Loop through jobs
+        - create job directory
+        - create .in file in job directory
+        
+        Create sub file
+        - define resources 
+        - add jaguar run commands              
+    """
 
 
-class _JobType:
-    def __init__(self, code: int, job_type: str):
-        self.code = code
-        self.job_type = job_type
+# Main workflow
+def main():
+    # Step 1: Extract unique molecules from JSON
+    json_parser = JsonParser(os.path.join(os_nav.find_project_root(), 'data', 'all_dfs.json'))
+    unique_molecules = json_parser.get_unique_molecules()
 
+    # for testing
+    for category in unique_molecules:
+        unique_molecules[category] = unique_molecules[category][:5]
 
-class JobTypes(enum.Enum):
-    UNSPECIFIED = _JobType(code=0, job_type='UNSPECIFIED')
-    OPT = _JobType(code=1, job_type='OPT')
-    TS_OPT = _JobType(code=2, job_type='TS_OPT')
-    RC_SCAN = _JobType(code=3, job_type='RC_SCAN')
-
-    @classmethod
-    def from_code(cls, code: int):
-        for method in cls:
-            if method.value.code == code:
-                return method
-        return None
-
-
-class Stereochem(enum.Enum):
-    NO_STEREO = 'A'
-    E = 0
-    Z = 1
-    R = 2
-    S = 3
-
-
-def retrieve_job(job_id: str, store_path: str):
-    jobs = pd.read_csv(store_path)
-
-    assert job_id in jobs[JobInfo.JOB_ID.value].values
-
-    retrieved_job = jobs[jobs[JobInfo.JOB_ID.value] == job_id]
-    job_tuple = tuple(retrieved_job.iloc[0])
-
-    return job_tuple
-
-
-def retrieve_mols(mol_ids: list[str], store_path: str) -> list[mol.Molecule]:
-    mols = []
-    for mol_id in mol_ids:
-        if 's' in mol_id:
-            mol_container = os.path.join(store_path, 'solvents.csv')
-            idx, qty = mol_id.split('s')
-        elif 'a' in mol_id:
-            mol_container = os.path.join(store_path, 'additives.csv')
-            idx, qty = mol_id.split('a')
+    # Step 2: Create Jaguar jobs
+    job_manager = JobManager(os.path.join(os_nav.find_project_root(), 'out'))
+    all_jobs = []
+    for category in unique_molecules:
+        molecules = []
+        if 'pdt' in category:
+            mol_cls = mol.Oxaphosphetane
+            source = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'oxaphosphetanes.csv')
         else:
-            mol_container = os.path.join(store_path, 'wittig_reactants.csv')
-            idx = mol_id
-            qty = 1
+            mol_cls = mol.Molecule
+            source = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_reactants.csv')
 
-        for i in range(int(qty)):
-            container = pd.read_csv(mol_container, index_col=0)
-            mol_smiles = container.loc[idx, 'reactant_smiles']
-            mols.append(mol.Molecule(smiles=mol_smiles))
+        for m in unique_molecules[category]:
+            print(m)
+            try:
+                molecules.append(mol_cls(m, source=source))
+            except Exception as e:
+                print(e)
+                print()
 
-        return mols
+        jobs = job_manager.create_jobs(molecules, job_type=JobTypes.OPT, dft_basis=DFTBases.GAUSS_6_31_SS.value, dft_method=DFTMethods.PBE_D3.value)
+        all_jobs.extend(jobs)
 
+    new_jobs = []
+    for job in all_jobs:
+        old_jobs = pd.read_csv(os.path.join(os_nav.find_project_root(), 'data', 'jobs', 'all_jaguar_jobs.csv'))
+        if job.id in old_jobs['job_id'].values:
+            continue
 
-def decode_id(job_id: str, job_store_path=os.path.join(job_storage_path, 'all_jaguar_jobs.csv'), mol_store_path=mol_storage_path):
-    try:
-        components = job_id.split('_')
-        assert components[0][0] == 'J'
+        new_jobs.append(job)
+        new_job = pd.DataFrame({'job_id': [job.id], 'job_status': [job.status.value]})
+        pd.concat([old_jobs, new_job], ignore_index=True).to_csv(os.path.join(os_nav.find_project_root(), 'data', 'jobs', 'all_jaguar_jobs.csv'), index=False)
 
-        job_type = JobTypes.from_code(int(components[0][-1]))
-        mol_ids = components[1].split('.')
-    except AssertionError:
-        print('job_id is not valid')
-        return
+        # make directory and in_file
+        directory_path = os.path.join(os_nav.find_project_root(), 'out', f"{job.id}")
+        os.makedirs(directory_path, exist_ok=True)
 
-    dft_method_code, dft_basis_code = [int(i) for i in components[2]]
+        with open(os.path.join(directory_path, f"{job.id}.in"), 'w') as in_file:
+            in_file.write(job.write_input())
+            in_file.close()
 
-    mols = tuple(retrieve_mols(mol_ids, mol_store_path))
+    batch_size = 10
+    for i in range(0, len(new_jobs), batch_size):
+        batch = new_jobs[i: min(len(new_jobs), i + batch_size)]
+        job_paths = [os.path.join(os_nav.find_project_root(), 'out', job.id, f"{job.id}.in") for job in batch]
+        script_path = create_slurm_submission_script(input_files=job_paths, script_path=os.path.join(os_nav.find_project_root(), 'out', f"jaguar_sub_{i}.sh"), cores=8, memory='2G', walltime='24:00:00')
 
-    try:
-        _, job_status = retrieve_job(job_id, job_store_path)
-    except AssertionError:
-        job_status = JobStatus.PENDING
-
-    return JaguarJob(
-        mols=mols,
-        store_path=job_store_path,
-        job_type=job_type,
-        job_status=job_status,
-        dft_method=DFTMethods.from_code(dft_method_code),
-        dft_basis=DFTBases.from_code(dft_basis_code)
-    )
-
-
-class JaguarJob:
-    def __init__(
-        self,
-        mols: tuple[mol.Molecule, ...] = (),
-        store_path=os.path.join(job_storage_path, 'all_jaguar_jobs.csv'),
-        job_type=JobTypes.UNSPECIFIED,
-        job_status=JobStatus.PENDING,
-        dft_method=DFTMethods.B3LYP.value,
-        dft_basis=DFTBases.GAUSS_6_31_SS.value
-    ):
-        self.store_path = store_path
-        self.type = job_type
-        self.molecules = mols
-        self.status = job_status
-        self.id = self.encode_id()
-        self.dft_method = dft_method
-        self.dft_basis = dft_basis
-        self.structure = ''
-
-    def __repr__(self):
-        return ('JaguarJob(job_id=%r, store_path=%r)'
-            % (
-                self.id,
-                self.store_path
-                ))
-
-    def change_status(self, new_status: JobStatus):
-        self.status = new_status
-
-    def encode_id(self) -> str:
-        job_id = f"J{self.type.value}"
-
-        return job_id
-
-    def is_new(self) -> bool:
-        """
-        Checks if the job has been previously created.
-
-        :return: True if the job has not been created.
-        """
-        all_jobs = pd.read_csv(self.store_path)
-        return self.id in all_jobs[JobInfo.JOB_ID.value].values
-
-    def write_input(self) -> str:
-        jaguar_method = self.dft_method.jaguar_name
-        jaguar_basis = self.dft_basis.jaguar_name
-
-        input_content = f"{JaguarInputParams.HEADER}\n"
-        input_content += f"{JaguarInputParams.BASIS}={jaguar_basis}\n"
-        input_content += f"{JaguarInputParams.DFT_NAME}={jaguar_method}\n"
-        input_content += "&\n"
-        input_content += f"{JaguarInputParams.ENTRY_NAME}={self.id}.in\n"
-        input_content += f"{JaguarInputParams.Z_MAT}\n"
-        input_content += f"{self.structure}\n"
-        input_content += "&"
-
-        return input_content
-
-    # def store_id(self):
+        subprocess.run(['sbatch', script_path])
 
 
-class JaguarOptimization(JaguarJob):
-    def __init__(
-        self,
-        mols: tuple[mol.Molecule] = (),
-        store_path=os.path.join(job_storage_path, 'all_jaguar_jobs.csv'),
-        dft_method=DFTMethods.B3LYP_D3.value,
-        dft_basis=DFTBases.GAUSS_6_31_SS.value,
-        job_status=JobStatus.PENDING,
-        job_type=JobTypes.OPT,
-        igeopt=1,
-        ifreqs=0
-    ):
-        super().__init__(mols=mols, store_path=store_path, job_type=job_type, job_status=job_status, dft_method=dft_method,
-                         dft_basis=dft_basis)
-        self.igeopt = igeopt
-        self.ifreqs = ifreqs
-
-    def __repr__(self):
-        return 'JaguarOptimization(job_id=%r, store_path=%r, method)' % (self.id, self.store_path)
-
-    def write_input(self) -> str:
-        super_input = super().write_input()
-        lines = super_input.split('\n')
-        for i, line in enumerate(lines):
-            if line.startswith(f"{JaguarInputParams.BASIS}="):
-                basis_line_index = i
-                break
-
-        # Insert the new lines at the correct position
-        lines.insert(basis_line_index + 1, f"{JaguarInputParams.IGEOPT}=1")
-        if self.ifreqs:
-            lines.insert(basis_line_index + 3, f"{JaguarInputParams.IFREQ}=1")
-
-        # Join the lines back into a single string
-        content = '\n'.join(lines)
-        return content
-
-
-class JaguarTSOptimization(JaguarOptimization):
-    def __init__(
-        self,
-        mols: tuple[mol.Molecule] = (),
-        store_path=os.path.join(job_storage_path, 'all_jaguar_jobs.csv'),
-        dft_method=DFTMethods.B3LYP_D3.value,
-        dft_basis=DFTBases.GAUSS_6_31_SS.value,
-        job_type=JobTypes.TS_OPT,
-        job_status=JobStatus.PENDING,
-        igeopt=2,  # *** the defining property of a TS Optimization
-        ifreqs=0,
-    ):
-        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis, job_status=job_status,
-                         job_type=job_type, igeopt=igeopt, ifreqs=ifreqs)
-
-
-class JaguarRCScan(JaguarOptimization):
-    def __init__(
-        self,
-        scan_start: float,
-        scan_end: float,
-        scan_n_steps: int,
-        mols: tuple[mol.Molecule] = (),
-        store_path=os.path.join(job_storage_path, 'all_jaguar_jobs.csv'),
-        dft_method=DFTMethods.B3LYP_D3.value,
-        dft_basis=DFTBases.GAUSS_6_31_SS.value,
-        job_type=JobTypes.RC_SCAN,
-        job_status=JobStatus.PENDING,
-        scan_atoms: tuple[Chem.Atom] = (),
-        scan_type=RCScanTypes.DISTANCE,
-        igeopt=1,
-        ifreqs=0,
-        n_steps=10
-    ):
-        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis, job_status=job_status,
-                         job_type=job_type, igeopt=igeopt, ifreqs=ifreqs)
-        self.n_steps = n_steps
-        self.scan = RCScan(mols[0], scan_atoms, scan_start, scan_end, scan_n_steps, scan_type)
-
-    def write_input(self) -> str:
-        scan_lines = f"{JaguarInputParams.ZVAR}\n"
-        # NEEDS WORK
-        scan_lines += '&\n'
-        scan_lines += f"{JaguarInputParams.COORD}\n"
-        # NEEDS WORK
-        scan_lines += '&'
-
-        return super().write_input() + '\n' + scan_lines
-
-
-job = JaguarOptimization()
-print(job.write_input())
+if __name__ == "__main__":
+    main()
