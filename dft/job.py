@@ -41,6 +41,7 @@ class JobTypes(enum.Enum):
                 return method
         return None
 
+
 class Stereochem(enum.Enum):
     NO_STEREO = 'A'
     E = 0
@@ -58,7 +59,9 @@ class JaguarJob:
         job_type=JobTypes.UNSPECIFIED,
         job_status=JobStatus.PENDING,
         dft_method=DFTMethods.B3LYP.value,
-        dft_basis=DFTBases.GAUSS_6_31_SS.value
+        dft_basis=DFTBases.GAUSS_6_31_SS.value,
+        igeopt=0,
+        ifreqs=0
     ):
         self.store_path = store_path
         self.type = job_type
@@ -66,6 +69,8 @@ class JaguarJob:
         self.status = job_status
         self.dft_method = dft_method
         self.dft_basis = dft_basis
+        self.igeopt = igeopt
+        self.ifreqs = ifreqs
         self.id = self.encode_id()
         self.coordinates = self._get_all_coordinates()
         self.out_path = os.path.join(out_dir, self.id)
@@ -121,7 +126,7 @@ class JaguarJob:
     def _get_all_coordinates(self):
         atom_coords = []
         for mol in self.molecules:
-            idx_start = len(atom_coords)
+            idx_start = len(atom_coords) + 1  # change from 0-indexing to 1-indexing for Jaguar
             atom_coords.append(mol.export_conformer_coordinates(idx_start=idx_start))
         return '\n'.join(atom_coords)
 
@@ -133,7 +138,7 @@ class JaguarJob:
         input_content += f"{JaguarInputParams.BASIS}={jaguar_basis}\n"
         input_content += f"{JaguarInputParams.DFT_NAME}={jaguar_method}\n"
         input_content += "&\n"
-        input_content += f"{JaguarInputParams.ENTRY_NAME}={self.id}.in\n"
+        input_content += f"{JaguarInputParams.ENTRY_NAME}: {self.id}.in\n"
         input_content += f"{JaguarInputParams.Z_MAT}\n"
         input_content += f"{self.coordinates}\n"
         input_content += "&"
@@ -198,7 +203,7 @@ class JaguarJob:
         except AssertionError:
             raise ValueError('job_id is not valid')
 
-        dft_method_code, dft_basis_code = [int(i) for i in components[2]]
+        dft_method_code, dft_basis_code = [int(i) for i in components[2][:2]]
 
         mols = tuple(JaguarJob.retrieve_mols(mol_ids, mol_store_path))
 
@@ -215,6 +220,7 @@ class JaguarJob:
             "dft_method": DFTMethods.from_code(dft_method_code),
             "dft_basis": DFTBases.from_code(dft_basis_code)
         }
+        return
 
     @classmethod
     def from_id(cls, job_id: str):
@@ -242,12 +248,14 @@ class JaguarOptimization(JaguarJob):
         ifreqs=0
     ):
         super().__init__(mols=mols, store_path=store_path, job_type=job_type, job_status=job_status, dft_method=dft_method,
-                         dft_basis=dft_basis)
-        self.igeopt = igeopt
-        self.ifreqs = ifreqs
+                         dft_basis=dft_basis, igeopt=igeopt, ifreqs=ifreqs)
 
     def __repr__(self):
         return 'JaguarOptimization(job_id=%r, store_path=%r, method)' % (self.id, self.store_path)
+
+    def encode_id(self) -> str:
+        base_id = super().encode_id()
+        return base_id + f"{self.igeopt}{self.ifreqs}"
 
     def write_input(self) -> str:
         super_input = super().write_input()

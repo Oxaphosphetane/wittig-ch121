@@ -19,7 +19,8 @@ class JobManager:
             molecules: List[mol.Molecule],
             job_type: JobTypes,
             dft_method: DFTMethods = DFTMethods.B3LYP_D3,
-            dft_basis: DFTBases = DFTBases.GAUSS_6_31_SS
+            dft_basis: DFTBases = DFTBases.GAUSS_6_31_SS,
+            calculate_vibrational_energies: bool = False
     ) -> List[JaguarJob]:
         job_cls = globals()[job_type.value.jaguar_class_name]
 
@@ -29,7 +30,8 @@ class JobManager:
                 job = job_cls(
                     mols=(molecule,),
                     dft_method=dft_method,
-                    dft_basis=dft_basis
+                    dft_basis=dft_basis,
+                    ifreqs=int(calculate_vibrational_energies)
                 )
                 self.job_counter += 1
                 jobs.append(job)
@@ -81,7 +83,7 @@ def main():
                 print(e)
                 print()
 
-        jobs = job_manager.create_jobs(molecules, job_type=JobTypes.OPT, dft_basis=DFTBases.GAUSS_6_31_SS.value, dft_method=DFTMethods.PBE_D3.value)
+        jobs = job_manager.create_jobs(molecules, job_type=JobTypes.OPT, dft_basis=DFTBases.GAUSS_6_31_SS.value, dft_method=DFTMethods.PBE_D3.value, calculate_vibrational_energies=True)
         all_jobs.extend(jobs)
 
     new_jobs = []

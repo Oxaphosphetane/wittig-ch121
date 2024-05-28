@@ -33,12 +33,12 @@ class JobMonitor:
             if "ERROR" in log_content or "FATAL ERROR" in log_content:
                 return JobStatus.ERROR
 
-            if "Finished:" in log_content:
+            if "Job input completed:" in log_content:
                 return JobStatus.FINISHED
 
             return JobStatus.RUNNING
         except FileNotFoundError:
-            return JobStatus.ERROR
+            return JobStatus.QUEUED
 
     def update_status(self):
         # Read the current job log

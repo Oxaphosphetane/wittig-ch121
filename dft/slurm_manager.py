@@ -10,7 +10,15 @@ def create_slurm_submission_script(
         nodes=1,
         memory='4G'
 ) -> str:
-    script_content = jaguar_sub(walltime=walltime, job_paths=input_files, cores=cores, nodes=nodes, memory=memory)
+    script_content = jaguar_sub(
+        walltime=walltime,
+        job_paths=input_files,
+        cores=cores,
+        nodes=nodes,
+        memory=memory,
+        outlog=os.path.join(script_path, 'slurm.%N.%j.out'),
+        errlog=os.path.join(script_path, 'slurm.%N.%j.err')
+    )
     with open(script_path, 'w') as file:
         file.write(script_content)
     return script_path
