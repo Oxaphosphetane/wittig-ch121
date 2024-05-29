@@ -31,7 +31,7 @@ class JobManager:
                     mols=(molecule,),
                     dft_method=dft_method,
                     dft_basis=dft_basis,
-                    ifreqs=int(calculate_vibrational_energies)
+                    ifreq=int(calculate_vibrational_energies)
                 )
                 self.job_counter += 1
                 jobs.append(job)
@@ -65,9 +65,9 @@ def main():
 
     # Step 2: Create Jaguar jobs
     job_manager = JobManager(os.path.join(os_nav.find_project_root(), 'out'))
-    all_jobs = []
+
+    molecules = []
     for category in unique_molecules:
-        molecules = []
         if 'pdt' in category:
             mol_cls = mol.Oxaphosphetane
             source = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'oxaphosphetanes.csv')
@@ -83,8 +83,7 @@ def main():
                 print(e)
                 print()
 
-        jobs = job_manager.create_jobs(molecules, job_type=JobTypes.OPT, dft_basis=DFTBases.GAUSS_6_31_SS.value, dft_method=DFTMethods.PBE_D3.value, calculate_vibrational_energies=True)
-        all_jobs.extend(jobs)
+    all_jobs = job_manager.create_jobs(molecules, job_type=JobTypes.OPT, dft_basis=DFTBases.GAUSS_6_31_SS.value, dft_method=DFTMethods.PBE_D3.value, calculate_vibrational_energies=True)
 
     new_jobs = []
     for job in all_jobs:
@@ -93,7 +92,7 @@ def main():
             continue
 
         new_jobs.append(job)
-        new_job = pd.DataFrame({'job_id': [job.id], 'job_status': [job.status.value]})
+        new_job = pd.DataFrame({JobInfo.JOB_ID.value: [job.id], JobInfo.JOB_STATUS.value: [job.status.value]})
         pd.concat([old_jobs, new_job], ignore_index=True).to_csv(os.path.join(os_nav.find_project_root(), 'data', 'jobs', 'all_jaguar_jobs.csv'), index=False)
 
         # make directory and in_file

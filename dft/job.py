@@ -61,7 +61,7 @@ class JaguarJob:
         dft_method=DFTMethods.B3LYP.value,
         dft_basis=DFTBases.GAUSS_6_31_SS.value,
         igeopt=0,
-        ifreqs=0
+        ifreq=0
     ):
         self.store_path = store_path
         self.type = job_type
@@ -70,7 +70,7 @@ class JaguarJob:
         self.dft_method = dft_method
         self.dft_basis = dft_basis
         self.igeopt = igeopt
-        self.ifreqs = ifreqs
+        self.ifreq = ifreq
         self.id = self.encode_id()
         self.coordinates = self._get_all_coordinates()
         self.out_path = os.path.join(out_dir, self.id)
@@ -141,7 +141,7 @@ class JaguarJob:
         input_content += f"{JaguarInputParams.ENTRY_NAME}: {self.id}.in\n"
         input_content += f"{JaguarInputParams.Z_MAT}\n"
         input_content += f"{self.coordinates}\n"
-        input_content += "&"
+        input_content += "&\n\n"  # for some reason needs a empty line at end of file if ifreq=1, and a single \n does not produce an empty line
 
         return input_content
 
@@ -245,17 +245,17 @@ class JaguarOptimization(JaguarJob):
         job_status=JobStatus.PENDING,
         job_type=JobTypes.OPT,
         igeopt=1,
-        ifreqs=0
+        ifreq=0
     ):
-        super().__init__(mols=mols, store_path=store_path, job_type=job_type, job_status=job_status, dft_method=dft_method,
-                         dft_basis=dft_basis, igeopt=igeopt, ifreqs=ifreqs)
+        super().__init__(mols=mols, store_path=store_path, job_type=job_type, job_status=job_status,
+                         dft_method=dft_method, dft_basis=dft_basis, igeopt=igeopt, ifreq=ifreq)
 
     def __repr__(self):
         return 'JaguarOptimization(job_id=%r, store_path=%r, method)' % (self.id, self.store_path)
 
     def encode_id(self) -> str:
         base_id = super().encode_id()
-        return base_id + f"{self.igeopt}{self.ifreqs}"
+        return base_id + f"{self.igeopt}{self.ifreq}"
 
     def write_input(self) -> str:
         super_input = super().write_input()
@@ -267,7 +267,7 @@ class JaguarOptimization(JaguarJob):
 
         # Insert the new lines at the correct position
         lines.insert(basis_line_index + 1, f"{JaguarInputParams.IGEOPT}=1")
-        if self.ifreqs:
+        if self.ifreq:
             lines.insert(basis_line_index + 3, f"{JaguarInputParams.IFREQ}=1")
 
         # Join the lines back into a single string
@@ -285,10 +285,10 @@ class JaguarTSOptimization(JaguarOptimization):
         job_type=JobTypes.TS_OPT,
         job_status=JobStatus.PENDING,
         igeopt=2,  # *** the defining property of a TS Optimization
-        ifreqs=0,
+        ifreq=0,
     ):
-        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis, job_status=job_status,
-                         job_type=job_type, igeopt=igeopt, ifreqs=ifreqs)
+        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis,
+                         job_status=job_status, job_type=job_type, igeopt=igeopt, ifreq=ifreq)
 
 
 class JaguarRCScan(JaguarOptimization):
@@ -306,11 +306,11 @@ class JaguarRCScan(JaguarOptimization):
         scan_atoms: tuple[Chem.Atom] = (),
         scan_type=RCScanTypes.DISTANCE,
         igeopt=1,
-        ifreqs=0,
+        ifreq=0,
         n_steps=10
     ):
-        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis, job_status=job_status,
-                         job_type=job_type, igeopt=igeopt, ifreqs=ifreqs)
+        super().__init__(mols=mols, store_path=store_path, dft_method=dft_method, dft_basis=dft_basis,
+                         job_status=job_status, job_type=job_type, igeopt=igeopt, ifreq=ifreq)
         self.n_steps = n_steps
         self.scan = RCScan(mols[0], scan_atoms, scan_start, scan_end, scan_n_steps, scan_type)
 
@@ -326,7 +326,10 @@ class JaguarRCScan(JaguarOptimization):
 
 
 # test_mols = (mol.Molecule('C=CCC/C=C/[C@@H](O[Si](C)(C)C(C)(C)C)[C@H](C)/C=C(\C)C=O', source=os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_reactants.csv')),)
-# job = JaguarOptimization(ifreqs=1, dft_basis=DFTBases.DEF2_TZVP_F.value, dft_method=DFTMethods.B3LYP_D3.value, mols=test_mols)
+# job = JaguarOptimization(ifreq=1, dft_basis=DFTBases.DEF2_TZVP_F.value, dft_method=DFTMethods.B3LYP_D3.value, mols=test_mols)
 # print(job.type.value.job_type)
+# with open('lol.in', 'w') as file:
+#     file.write(job.write_input())
+#     file.close()
 # print(job.write_input())
 

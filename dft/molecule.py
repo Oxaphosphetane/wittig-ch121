@@ -276,7 +276,7 @@ class OxaphosEmbedParams:
 
 
 class Oxaphosphetane(Molecule):
-    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
+    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'oxaphosphetanes.csv')):
         super().__init__(smiles, source=source)
         self.ring_indices = OxaphosEmbedParams.get_ring_indices(self.molecule_with_hydrogens)
         self.cis_templates = self.make_cis_templates()
