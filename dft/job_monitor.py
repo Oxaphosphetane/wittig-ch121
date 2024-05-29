@@ -1,7 +1,7 @@
-
 import pandas as pd
 import os
 import sys
+import datetime as dt
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
@@ -13,6 +13,8 @@ from job_utils import JobStatus, JobInfo
 
 
 class JobMonitor:
+    log_date_format = "%a %b %d %H:%M:%S %Y"
+
     def __init__(
             self,
             job_log=os.path.join(os_nav.find_project_root(), 'data', 'jobs', 'all_jaguar_jobs.csv'),
@@ -20,6 +22,57 @@ class JobMonitor:
     ):
         self.job_log = job_log
         self.job_out_dir = job_out_dir
+
+    @staticmethod
+    def format_timedelta(delta):
+        # Get the total number of seconds
+        total_seconds = delta.total_seconds()
+
+        # Extract hours, minutes, and seconds
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        # Format the result with one decimal place for seconds
+        formatted_time = f"{int(hours):02}:{int(minutes):02}:{seconds:05.1f}"
+
+        return formatted_time
+
+    def scrape_log_for_runtime(self, job_id, job_status):
+        """
+        Scrape the log log_file for the job runtime.
+        """
+        try:
+            with open(os.path.join(self.job_out_dir, job_id, f"{job_id}.log"), 'r') as log_file:
+                log_lines = log_file.readlines()
+        except FileNotFoundError:
+            return
+
+        for line in log_lines:
+            if f"Job {job_id} started on" in line:
+                start_date_string = line.split(' at ')[-1].strip()
+                try:
+                    start_time = dt.datetime.strptime(start_date_string, JobMonitor.log_date_format)
+                except Exception as e:
+                    print(e)
+                    print(job_id)
+                    print(str(start_date_string), repr(start_date_string))
+                    print()
+                break
+
+        if job_status == JobStatus.FINISHED or job_status == JobStatus.ERROR:
+            for line in log_lines:
+                if f"Finished:" in line:
+                    end_date_string = line.split("Finished:")[-1].strip()
+                    end_time = dt.datetime.strptime(end_date_string, JobMonitor.log_date_format)
+                    break
+
+        elif job_status == JobStatus.RUNNING:
+            end_time = dt.datetime.now()
+        else:
+            return
+
+        run_time = end_time - start_time
+        return JobMonitor.format_timedelta(run_time)
 
     def scrape_log_for_status(self, job_id):
         """
@@ -48,14 +101,22 @@ class JobMonitor:
             job_dir = os.path.join(self.job_out_dir, file)
             if os.path.isdir(job_dir):
                 job_status = self.scrape_log_for_status(job_id=file)
+                runtime = self.scrape_log_for_runtime(job_id=file, job_status=job_status)
 
                 # Update the job status in the DataFrame
                 old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.JOB_STATUS.value] = job_status.value
+                old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.RUNTIME.value] = runtime
 
         # Save the updated DataFrame back to the CSV file
         old_jobs.to_csv(self.job_log, index=False)
 
         print("Job statuses updated successfully.")
+
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        print(old_jobs)
+        pd.reset_option('display.max_rows')
+        pd.reset_option('display.max_columns')
 
 
 def main():

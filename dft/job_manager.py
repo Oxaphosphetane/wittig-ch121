@@ -60,25 +60,29 @@ def main():
     unique_molecules = json_parser.get_unique_molecules()
 
     # for testing
-    for category in unique_molecules:
-        unique_molecules[category] = unique_molecules[category][:5]
+    # for category in unique_molecules:
+    #     unique_molecules[category] = unique_molecules[category][:5]
 
     # Step 2: Create Jaguar jobs
     job_manager = JobManager(os.path.join(os_nav.find_project_root(), 'out'))
 
     molecules = []
     for category in unique_molecules:
+        mol_cls = mol.Molecule
         if 'pdt' in category:
             mol_cls = mol.Oxaphosphetane
-            source = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'oxaphosphetanes.csv')
+            mol_type = mol.MoleculeType.OXAPHOSPHETANE
+        elif 'ylide' in category:
+            mol_type = mol.MoleculeType.YLIDE
+        elif 'ald' in category:
+            mol_type = mol.MoleculeType.CARBONYL
         else:
-            mol_cls = mol.Molecule
-            source = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_reactants.csv')
+            mol_type = mol.MoleculeType.UNCATEGORIZED
 
         for m in unique_molecules[category]:
             print(m)
             try:
-                molecules.append(mol_cls(m, source=source))
+                molecules.append(mol_cls(m, type=mol_type, source=os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_molecules.csv')))
             except Exception as e:
                 print(e)
                 print()

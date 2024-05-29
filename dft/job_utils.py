@@ -7,6 +7,7 @@ from collections import defaultdict
 class JobInfo(enum.Enum):
     JOB_ID = 'job_id'
     JOB_STATUS = 'job_status'
+    RUNTIME = 'runtime'
 
 
 class JobStatus(enum.Enum):

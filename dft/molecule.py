@@ -3,6 +3,7 @@ from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
 import sys
 import os
+import enum
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
@@ -27,18 +28,34 @@ class _ForceFieldMethod:
     MMFF = 'mmff'
 
 
+class MoleculeType(enum.Enum):
+    UNCATEGORIZED = 'UNCATEGORIZED'
+    OXAPHOSPHETANE = 'OXAPHOSPHETANE'
+    CARBONYL = 'CARBONYL'
+    YLIDE = 'YLIDE'
+    SOLVENT = 'SOLVENT'
+    ADDITIVE = 'ADDITIVE'
+    PHOSPHINE = 'PHOSPHINE'
+
+
 class Molecule:
-    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
+    def __init__(
+            self,
+            smiles: str,
+            source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv'),
+            type: MoleculeType = MoleculeType.UNCATEGORIZED
+    ):
         self.molecule = Chem.MolFromSmiles(smiles)
         if self.molecule is None:
             raise ValueError("Invalid SMILES string provided")
         self.molecule_with_hydrogens = Chem.AddHs(self.molecule)
         self.canonical_smiles = Chem.MolToSmiles(self.molecule, isomericSmiles=True)
         self.source = source
+        self.type = type
         self.id = self._generate_id()
 
     @classmethod
-    def from_rdkit_mol(cls, mol, source: str = os.path.join(os_nav.find_project_root(), 'data', 'test_mols', 'uncategorized.csv')):
+    def from_rdkit_mol(cls, mol, source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv')):
         smi = Chem.MolToSmiles(mol, isomericSmiles=True)
         m = cls(smi, source=source)
         m.molecule = mol
@@ -126,8 +143,8 @@ class Molecule:
 
     def _generate_id(self):
         df = pd.read_csv(self.source)
-        if self.canonical_smiles in df['reactant_smiles'].values:
-            matching_row = df[df['reactant_smiles'] == self.canonical_smiles]
+        if self.canonical_smiles in df['smiles'].values:
+            matching_row = df[df['smiles'] == self.canonical_smiles]
             return matching_row.index[0]
 
         # Generate a new ID
@@ -136,7 +153,8 @@ class Molecule:
         # Create new row to append
         new_row = {
             'index': new_id,
-            'reactant_smiles': self.canonical_smiles,
+            'type': self.type.value,
+            'smiles': self.canonical_smiles,
         }
 
         # Set other columns to None or a specific marker
@@ -276,8 +294,13 @@ class OxaphosEmbedParams:
 
 
 class Oxaphosphetane(Molecule):
-    def __init__(self, smiles: str, source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'oxaphosphetanes.csv')):
-        super().__init__(smiles, source=source)
+    def __init__(
+            self,
+            smiles: str,
+            source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_molecules.csv'),
+            type: MoleculeType = MoleculeType.OXAPHOSPHETANE
+    ):
+        super().__init__(smiles, source=source, type=type)
         self.ring_indices = OxaphosEmbedParams.get_ring_indices(self.molecule_with_hydrogens)
         self.cis_templates = self.make_cis_templates()
         self.constraint_core_mol = OxaphosEmbedParams(

@@ -97,8 +97,8 @@ class JaguarJob:
         # Read the CSV file into a DataFrame
         df = pd.read_csv(csv_path)
 
-        # Search for the SMILES string in the reactant_smiles column
-        matching_row = df[df['reactant_smiles'] == smiles]
+        # Search for the SMILES string in the smiles column
+        matching_row = df[df['smiles'] == smiles]
 
         if not matching_row.empty:
             # Return the index of the matching row
@@ -181,13 +181,13 @@ class JaguarJob:
                 mol_container = os.path.join(store_path, 'additives.csv')
                 idx, qty = mol_id.split('a')
             else:
-                mol_container = os.path.join(store_path, 'wittig_reactants.csv')
+                mol_container = os.path.join(store_path, 'wittig_molecules.csv')
                 idx = mol_id
                 qty = 1
 
             for i in range(int(qty)):
                 container = pd.read_csv(mol_container, index_col=0)
-                mol_smiles = container.loc[idx, 'reactant_smiles']
+                mol_smiles = container.loc[idx, 'smiles']
                 mols.append(mol.Molecule(smiles=mol_smiles, source=mol_container))
 
         return mols
@@ -325,7 +325,7 @@ class JaguarRCScan(JaguarOptimization):
         return super().write_input() + '\n' + scan_lines
 
 
-# test_mols = (mol.Molecule('C=CCC/C=C/[C@@H](O[Si](C)(C)C(C)(C)C)[C@H](C)/C=C(\C)C=O', source=os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_reactants.csv')),)
+# test_mols = (mol.Molecule('C=CCC/C=C/[C@@H](O[Si](C)(C)C(C)(C)C)[C@H](C)/C=C(\C)C=O', source=os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_molecules.csv')),)
 # job = JaguarOptimization(ifreq=1, dft_basis=DFTBases.DEF2_TZVP_F.value, dft_method=DFTMethods.B3LYP_D3.value, mols=test_mols)
 # print(job.type.value.job_type)
 # with open('lol.in', 'w') as file:
