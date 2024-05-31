@@ -1,0 +1,28 @@
+{
+  "hpc_resources": {
+    "cores":            8,
+    "memory":           "2G",
+    "walltime":         "48:00:00"
+  },
+  "jobs": {
+    "batch_size":       8,
+    "software":         "Jaguar",
+    "job_specs": {
+      "job_type":       "OPT",
+      "properties": {
+        "vib_freqs":    1,
+        "surfaces":     0
+      }
+    },
+    "dft_specs": {
+      "method":         "B3LYP-D3",
+      "basis":          "6-31G**"
+    }
+  },
+  "files": {
+    "molecules":        "data/mols/wittig_molecules.csv",
+    "molecule_source":  "data/all_dfs.json",
+    "out_dir":          "out",
+    "job_tracker":      "data/jobs/all_jaguar_jobs.csv"
+  }
+}

@@ -4,6 +4,12 @@ from typing import List, Dict
 from collections import defaultdict
 
 
+class JobSoftware(enum.Enum):
+    JAGUAR = 'J'
+    XTB = 'X'
+    ORCA = 'O'
+
+
 class JobInfo(enum.Enum):
     JOB_ID = 'job_id'
     JOB_STATUS = 'job_status'

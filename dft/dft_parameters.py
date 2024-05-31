@@ -1,6 +1,8 @@
 import enum
 import molecule as mol
 from rdkit import Chem
+import numpy as np
+from abc import ABC, abstractmethod
 
 
 class JaguarInputParams:
@@ -15,30 +17,47 @@ class JaguarInputParams:
     ZVAR = '&zvar'
 
 
+class _DFTParam:
+    def __init__(self, code: int, name: str, jaguar_name: str):
+        self.code = code
+        self.name = name
+        self.jaguar_name = jaguar_name
+
+
+
 """
 dft methods
 """
 
 
-class _DFTMethod:
-    def __init__(self, code: int, jaguar_name: str):
-        self.code = code
-        self.jaguar_name = jaguar_name
+class _DFTMethod(_DFTParam):
+    def __init__(self, code: int, name: str, jaguar_name: str, runtime_estimator: list[float] = None):
+        super().__init__(code, name, jaguar_name)
+        self.runtime_estimator = np.poly1d(runtime_estimator)
 
     def __repr__(self):
         return f"_DFTMethod(code={self.code}, jaguar_name='{self.jaguar_name}')"
 
 
 class DFTMethods(enum.Enum):
-    PBE = _DFTMethod(0, 'PBE')
-    B3LYP = _DFTMethod(1, 'B3LYP')
-    PBE_D3 = _DFTMethod(2, 'PBE-D3')
-    B3LYP_D3 = _DFTMethod(3, 'B3LYP-D3')
+    PBE = _DFTMethod(0, 'pbe', 'PBE')
+    B3LYP = _DFTMethod(1, 'b3lyp', 'B3LYP')
+    PBE_D3 = _DFTMethod(2, 'pbe-d3', 'PBE-D3',
+                        [1.06482738e-08, -4.61542348e-06, 7.92766672e-04, -6.89593731e-02,
+                         3.23848009e+00, -7.96960678e+01, 9.67486090e+02, -4.24036733e+03])
+    B3LYP_D3 = _DFTMethod(3, 'b3lyp-d3', 'B3LYP-D3')
 
     @classmethod
     def from_code(cls, code: int):
         for method in cls:
             if method.value.code == code:
+                return method
+        return None
+
+    @classmethod
+    def from_name(cls, name: str):
+        for method in cls:
+            if method.value.name.lower() == name.lower():
                 return method
         return None
 
@@ -48,26 +67,32 @@ dft bases
 """
 
 
-class _DFTBasis:
-    def __init__(self, code: int, jaguar_name: str):
-        self.code = code
-        self.jaguar_name = jaguar_name
+class _DFTBasis(_DFTParam):
+    def __init__(self, code: int, name: str, jaguar_name: str):
+        super().__init__(code, name, jaguar_name)
 
     def __repr__(self):
         return f"_DFTBasis(code={self.code}, jaguar_name='{self.jaguar_name}')"
 
 
 class DFTBases(enum.Enum):
-    GAUSS_6_31 = _DFTBasis(0, '6-31G')
-    GAUSS_6_31_SS = _DFTBasis(1, '6-31G**')
-    DEF2_TZVP = _DFTBasis(2, 'DEF2-TZVP')
-    DEF2_TZVP_F = _DFTBasis(3, 'DEF2-TZVP(-F)')
+    GAUSS_6_31 = _DFTBasis(0, '6-31g', '6-31G')
+    GAUSS_6_31_SS = _DFTBasis(1, '6-31g**', '6-31G**')
+    DEF2_TZVP = _DFTBasis(2, 'def2-tzvp', 'DEF2-TZVP')
+    DEF2_TZVP_F = _DFTBasis(3, 'def2-tzvp(-f)', 'DEF2-TZVP(-F)')
 
     @classmethod
     def from_code(cls, code: int):
-        for method in cls:
-            if method.value.code == code:
-                return method
+        for basis in cls:
+            if basis.value.code == code:
+                return basis
+        return None
+
+    @classmethod
+    def from_name(cls, name: str):
+        for basis in cls:
+            if basis.value.name.lower() == name.lower():
+                return basis
         return None
 
 
@@ -123,8 +148,3 @@ class RCScan:
 
     def get_step_size(self) -> float:
         return (self.end - self.start) / (self.n_steps - 1)
-
-
-
-
-

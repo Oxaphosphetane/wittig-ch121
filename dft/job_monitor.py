@@ -33,7 +33,7 @@ class JobMonitor:
         minutes, seconds = divmod(remainder, 60)
 
         # Format the result with one decimal place for seconds
-        formatted_time = f"{int(hours):02}:{int(minutes):02}:{seconds:05.1f}"
+        formatted_time = f"{int(hours):02}:{int(minutes):02}:{seconds:04.1f}"
 
         return formatted_time
 
@@ -65,7 +65,6 @@ class JobMonitor:
                     end_date_string = line.split("Finished:")[-1].strip()
                     end_time = dt.datetime.strptime(end_date_string, JobMonitor.log_date_format)
                     break
-
         elif job_status == JobStatus.RUNNING:
             end_time = dt.datetime.now()
         else:
@@ -117,6 +116,12 @@ class JobMonitor:
         print(old_jobs)
         pd.reset_option('display.max_rows')
         pd.reset_option('display.max_columns')
+
+        # Count the number of each status
+        print()
+        for status in JobStatus:
+            count = old_jobs[JobInfo.JOB_STATUS.value].value_counts().get(status.value, 0)
+            print(f"Number of {status.value} jobs: {count}")
 
 
 def main():

@@ -36,9 +36,16 @@ class JobTypes(enum.Enum):
 
     @classmethod
     def from_code(cls, code: int):
-        for method in cls:
-            if method.value.code == code:
-                return method
+        for e in cls:
+            if e.value.code == code:
+                return e
+        return None
+
+    @classmethod
+    def from_name(cls, name: str):
+        for e in cls:
+            if e.value.job_type.lower() == name.lower():
+                return e
         return None
 
 

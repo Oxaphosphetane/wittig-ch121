@@ -1,9 +1,12 @@
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors, Draw, AllChem, rdFMCS
+from rdkit.Geometry import Point3D
 import sys
 import os
 import enum
+import re
+import numpy as np
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
@@ -43,7 +46,8 @@ class Molecule:
             self,
             smiles: str,
             source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv'),
-            type: MoleculeType = MoleculeType.UNCATEGORIZED
+            type: MoleculeType = MoleculeType.UNCATEGORIZED,
+            coordinates_path: str = None
     ):
         self.molecule = Chem.MolFromSmiles(smiles)
         if self.molecule is None:
@@ -52,7 +56,14 @@ class Molecule:
         self.canonical_smiles = Chem.MolToSmiles(self.molecule, isomericSmiles=True)
         self.source = source
         self.type = type
+        if coordinates_path is not None:
+            self.coordinates = self.scrape_coordinates(coordinates_path)
+        else:
+            self.coordinates = None
         self.id = self._generate_id()
+
+    def add_coordinates_from_file(self, coordinates_path):
+        self.coordinates = self.scrape_coordinates(coordinates_path)
 
     @classmethod
     def from_rdkit_mol(cls, mol, source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv')):
@@ -71,6 +82,77 @@ class Molecule:
     def visualize(self):
         img = Draw.MolToImage(self.molecule_with_hydrogens)
         img.save("molecule.png")
+
+    @staticmethod
+    def infer_bonds_from_coordinates(atom_symbols, coordinates):
+        mol = Chem.RWMol()
+        atom_indices = []
+
+        # Add atoms to the molecule
+        for symbol in atom_symbols:
+            atom = Chem.Atom(symbol)
+            atom_idx = mol.AddAtom(atom)
+            atom_indices.append(atom_idx)
+
+        # Create a conformer and set atom positions
+        conformer = Chem.Conformer(len(atom_indices))
+        for idx, (x, y, z) in enumerate(coordinates):
+            conformer.SetAtomPosition(idx, Point3D(x, y, z))
+
+        # Add the conformer to the molecule
+        mol.AddConformer(conformer, assignId=True)
+
+        # Define bond length thresholds (in Angstroms)
+        bond_thresholds = {
+            ('C', 'C'): 1.54,
+            ('C', 'O'): 1.43,
+            ('O', 'O'): 1.48,
+            # Add more as needed
+        }
+
+        # Calculate distances and infer bonds
+        for i in range(len(atom_indices)):
+            for j in range(i + 1, len(atom_indices)):
+                pos_i = conformer.GetAtomPosition(i)
+                pos_j = conformer.GetAtomPosition(j)
+                distance = np.sqrt((pos_i.x - pos_j.x) ** 2 + (pos_i.y - pos_j.y) ** 2 + (pos_i.z - pos_j.z) ** 2)
+
+                atom_i = atom_symbols[i]
+                atom_j = atom_symbols[j]
+
+                if (atom_i, atom_j) in bond_thresholds and distance <= bond_thresholds[(atom_i, atom_j)]:
+                    mol.AddBond(i, j, Chem.BondType.SINGLE)
+                elif (atom_j, atom_i) in bond_thresholds and distance <= bond_thresholds[(atom_j, atom_i)]:
+                    mol.AddBond(i, j, Chem.BondType.SINGLE)
+
+        return mol.GetMol()
+
+    def scrape_coordinates(self, path):
+        with open(path, 'r') as f:
+            lines = f.readlines()
+
+        for i, line in enumerate(lines):
+            if '&zmat' in line:
+                start_index = i + 1
+                break
+
+        j = start_index
+        coord_lines = []
+        while '&' not in lines[j]:
+            coord_lines.append(lines[j])
+            j += 1
+
+        conformer = Chem.Conformer(self.molecule_with_hydrogens.GetNumAtoms())
+        atom_symbols = []
+        for idx, coord_str in enumerate(coord_lines):
+            atom_symbol, x, y, z = coord_str.split()
+            atom_symbols.append(re.sub(r'\d+', '', atom_symbol))
+            conformer.SetAtomPosition(idx, Point3D(int(x), int(y), int(z)))
+
+        # Add the conformer to the molecule
+        self.molecule_with_hydrogens.AddConformer(conformer, assignId=True)
+
+        return Chem.MolToMolBlock(self.molecule_with_hydrogens)
 
     def embed_3d(self, max_attempts=3) -> bool:
         params = AllChem.ETKDGv3()
@@ -96,7 +178,10 @@ class Molecule:
         else:
             raise Exception("Failed to create force field for optimization.")
 
-    def generate_3d_coordinates(self, optimize=True, force_field=_ForceFieldMethod.UFF, constrain_opt=False):
+    def get_3d_coordinates(self, optimize=True, force_field=_ForceFieldMethod.UFF, constrain_opt=False):
+        if self.coordinates is not None:
+            return self.coordinates
+
         if self.embed_3d():  # modifies Molecule in place and returns bool True if success
             if optimize:
                 self.optimize_3d(force_field, constrain=constrain_opt)
@@ -109,10 +194,11 @@ class Molecule:
         """
         Export the 3D coordinates of a conformer in a specified format.
 
+        :param idx_start:
         :param conf_id: The ID of the conformer to export (default is 0).
         :return: A string with the coordinates in the specified format.
         """
-        self.generate_3d_coordinates()
+        self.get_3d_coordinates()
 
         mol = self.molecule_with_hydrogens
 
@@ -182,6 +268,7 @@ class OxaphosEmbedParams:
 
     core_ring_smiles = 'C1COP1'
     core_ring_pph3_smiles = 'C1COP1(c1ccccc1)(c1ccccc1)c1ccccc1'
+    pph3_smiles = 'P(c1ccccc1)(c1ccccc1)c1ccccc1'
 
     extract_phosphine_smirks = "C1COP1([*:1])([*:2])[*:3]>>P([*:1])([*:2])[*:3]"
 
@@ -235,23 +322,48 @@ class OxaphosEmbedParams:
         return tuple(neighbors)
 
     @staticmethod
-    def replace_atom(mol, atom_index, new_atomic_num):
-        """Replace an atom in a molecule with another atom of a different type."""
-        rw_mol = Chem.RWMol(mol)  # Create an editable molecule from the original molecule
-        rw_mol.ReplaceAtom(atom_index, Chem.Atom(
-            new_atomic_num))  # Replace the specified atom with a new atom of the specified type
-        new_mol = rw_mol.GetMol()  # Get a new molecule from the editable molecule
-        Chem.SanitizeMol(new_mol)  # Important to update the molecule's properties
+    def replace_atom(mol, atom_index: int, new_atomic_num: int) -> Chem.Mol:
+        """
+        Replace an atom in a molecule with another atom of a different type.
+
+        Parameters:
+        mol (Chem.Mol): The original RDKit molecule.
+        atom_index (int): The index of the atom to replace.
+        new_atomic_num (int): The atomic number of the new atom.
+
+        Returns:
+        Chem.Mol: A new RDKit molecule with the atom replaced and excess hydrogens removed.
+        """
+        # Create an editable molecule from the original molecule
+        rw_mol = Chem.RWMol(mol)
+
+        # Replace the specified atom with a new atom of the specified type
+        rw_mol.ReplaceAtom(atom_index, Chem.Atom(new_atomic_num))
+
+        # Remove hydrogens attached to the new atom if the new atom is not carbon
+        if new_atomic_num != 6:  # Carbon's atomic number is 6
+            atom = rw_mol.GetAtomWithIdx(atom_index)
+            neighbors = atom.GetNeighbors()
+            for neighbor in neighbors:
+                if neighbor.GetAtomicNum() == 1:  # Hydrogen's atomic number is 1
+                    rw_mol.RemoveAtom(neighbor.GetIdx())
+
+        # Get the new molecule from the editable molecule
+        new_mol = rw_mol.GetMol()
+
+        # Sanitize the new molecule
+        Chem.SanitizeMol(new_mol)
 
         return new_mol
 
     @staticmethod
-    def update_chain_atoms(mol, chain_atoms: tuple):
+    def update_chain_atoms(mol, new_chain_atoms: tuple):
         chain_atoms = OxaphosEmbedParams.find_chain_leads(mol)
 
-        non_carbon_atoms = [atom for atom in chain_atoms if atom.GetSymbol() != 'C']
-        for (i, atom) in enumerate(non_carbon_atoms):
-            mol = OxaphosEmbedParams.replace_atom(mol, chain_atoms[i], atom.GetAtomicNum())
+        non_carbon_atoms = [atom for atom in new_chain_atoms if atom.GetSymbol() != 'C']
+        for (i, atom) in enumerate(new_chain_atoms):
+            if atom.GetSymbol() != 'C':
+                mol = OxaphosEmbedParams.replace_atom(mol, chain_atoms[i].GetIdx(), atom.GetAtomicNum())
 
         return mol
 
@@ -281,6 +393,7 @@ class OxaphosEmbedParams:
 
             if chain_atoms is not None:
                 prelim_template_mol = OxaphosEmbedParams.update_chain_atoms(prelim_template_mol, chain_atoms)
+                print(Chem.MolToSmiles(prelim_template_mol))
             if ligand_atoms is not None:
                 prelim_template_mol = OxaphosEmbedParams.update_ligand_atoms(prelim_template_mol, ligand_atoms)
 
@@ -363,7 +476,7 @@ class Oxaphosphetane(Molecule):
 
     def is_triphenyl(self) -> bool:
         """Checks if the Oxaphosphetane is derived from a triphenyl phosphine."""
-        triphenyl_ring_template = Chem.MolFromSmiles(OxaphosEmbedParams.core_ring_pph3_smiles)
+        pph3_template = Chem.MolFromSmiles(OxaphosEmbedParams.pph3_smiles)
 
         transform = AllChem.ReactionFromSmarts(OxaphosEmbedParams.extract_phosphine_smirks)
 
@@ -371,7 +484,7 @@ class Oxaphosphetane(Molecule):
 
         phosphine = products[0][0]
 
-        if phosphine.HasSubstructMatch(triphenyl_ring_template) and triphenyl_ring_template.hasSubstructMatch(
+        if phosphine.HasSubstructMatch(pph3_template) and pph3_template.HasSubstructMatch(
                 phosphine):
             return True
 
@@ -415,29 +528,29 @@ class Oxaphosphetane(Molecule):
         print("Optimization with constrained core successful.")
 
 
-test_file = False
-if test_file:
-    # Example usage:
-    try:
-        # oxaphos = Oxaphosphetane("CC[C@@H]1[C@@H](C2=CC=C3C(=C2)N=C4C=CC=CC4=N3)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("C[C@@H]1OP2(c3ccccc3)(c3ccccc3-c3ccccc32)[C@H]1C(=O)c1ccccc1")  # FAILED
-        # oxaphos = Oxaphosphetane("C=CCCCCCCCC[C@]1(C(=O)OC)[C@@H](C(C)c2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-        oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@@H](CCl)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-        # oxaphos = Oxaphosphetane("COC(=O)[C@@H]1[C@H](C2=C[C@H](O)[C@H]3OC(C)(C)O[C@H]3O2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2COCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2CO[Si](C)(C)C(C)(C)C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@H]([C@H]2O[C@@H]3OC(C)(C)O[C@@H]3[C@H]2OCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H](CS)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H]([C@@H]2O[C@@H]2[C@H]2O[C@@H](c3ccccc3)OC[C@@H]2O)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
-        # oxaphos = Oxaphosphetane("CCC[C@@H]1[C@@]2(CCC3C4CCc5cc(OC)ccc5C4CC[C@@]32C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
-        # oxaphos = Oxaphosphetane("CCCCC[C@H]1OP(c2ccccc2)(c2ccccc2)(c2ccccc2)[C@@H]1/C=C/CO")  # SUCCESS
-        # oxaphos = Oxaphosphetane("C[Si](C)(C)C#C[C@@H]1[C@@H](C2CCCCO2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
-        print("Molecular Formula:", oxaphos.get_formula())
-        print("Number of Atoms:", oxaphos.num_atoms())
-        print("Canonical SMILES:", oxaphos.get_canonical_smiles())
-        print("Constraint:", Chem.MolToSmiles(Chem.RemoveAllHs(oxaphos.constraint_core_mol)))
-        print()
-        print(oxaphos.generate_3d_coordinates(optimize=True, constrain_opt=False))
-        oxaphos.visualize_3d(label='ALPHATEST')
-    except ValueError as e:
-        print(e)
+if __name__ == "__main__":
+    test_file = False
+    if test_file:
+        # Example usage:
+        try:
+            # oxaphos = Oxaphosphetane("CC[C@@H]1[C@@H](C2=CC=C3C(=C2)N=C4C=CC=CC4=N3)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("C[C@@H]1OP2(c3ccccc3)(c3ccccc3-c3ccccc32)[C@H]1C(=O)c1ccccc1")  # FAILED
+            # oxaphos = Oxaphosphetane("C=CCCCCCCCC[C@]1(C(=O)OC)[C@@H](C(C)c2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@@H](CCl)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+            # oxaphos = Oxaphosphetane("COC(=O)[C@@H]1[C@H](C2=C[C@H](O)[C@H]3OC(C)(C)O[C@H]3O2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2COCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@@H]([C@@H]2OC(C)(C)O[C@H]2CO[Si](C)(C)C(C)(C)C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@@H]1[C@H]([C@H]2O[C@@H]3OC(C)(C)O[C@@H]3[C@H]2OCc2ccccc2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H](CS)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCOC(=O)[C@]1(C)[C@H]([C@@H]2O[C@@H]2[C@H]2O[C@@H](c3ccccc3)OC[C@@H]2O)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # SUCCESS
+            # oxaphos = Oxaphosphetane("CCC[C@@H]1[C@@]2(CCC3C4CCc5cc(OC)ccc5C4CC[C@@]32C)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")  # FAILED
+            # oxaphos = Oxaphosphetane("CCCCC[C@H]1OP(c2ccccc2)(c2ccccc2)(c2ccccc2)[C@@H]1/C=C/CO")  # SUCCESS
+            # oxaphos = Oxaphosphetane("C[Si](C)(C)C#C[C@@H]1[C@@H](C2CCCCO2)OP1(c1ccccc1)(c1ccccc1)c1ccccc1")
+            oxaphos = Oxaphosphetane("COCOCC[C@@H]1CCC[C@@H]2[C@H]1CC[C@@H](CC[C@@H]1OP(c3ccccc3)(c3ccccc3)(c3ccccc3)[C@@H]1C=O)N2C(=O)OCC(Cl)(Cl)Cl",
+                               source=os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_molecules.csv'))
+            print("Molecular Formula:", oxaphos.get_formula())
+            print("ID:", oxaphos.id)
+            print(oxaphos.get_3d_coordinates())
+        except ValueError as e:
+            print(e)
+
