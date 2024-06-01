@@ -1,4 +1,4 @@
-from job import JaguarJob, JaguarOptimization
+from jaguar_job import JaguarJob, JaguarOptimization
 import slurm_manager
 import os
 import sys

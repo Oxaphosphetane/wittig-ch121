@@ -1,4 +1,4 @@
-from job import *
+from jaguar_job import *
 import molecule as mol
 from typing import List
 from job_utils import JsonParser

@@ -56,3 +56,32 @@ class JsonParser:
             unique_molecules[key] = list(unique_molecules[key])
 
         return unique_molecules
+
+
+class _JobType:
+    def __init__(self, code: int, job_type: str, jaguar_class_name: str):
+        self.code = code
+        self.job_type = job_type
+        self.jaguar_class_name = jaguar_class_name
+
+
+class JobTypes(enum.Enum):
+    UNSPECIFIED = _JobType(code=0, job_type='UNSPECIFIED', jaguar_class_name='JaguarJob')
+    OPT = _JobType(code=1, job_type='OPT', jaguar_class_name='JaguarOptimization')
+    TS_OPT = _JobType(code=2, job_type='TS_OPT', jaguar_class_name='JaguarTSOptimization')
+    RC_SCAN = _JobType(code=3, job_type='RC_SCAN', jaguar_class_name='JaguarRCScan')
+
+    @classmethod
+    def from_code(cls, code: int):
+        for e in cls:
+            if e.value.code == code:
+                return e
+        return None
+
+    @classmethod
+    def from_name(cls, name: str):
+        for e in cls:
+            if e.value.job_type.lower() == name.lower():
+                return e
+        return None
+

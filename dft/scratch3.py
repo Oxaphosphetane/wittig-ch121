@@ -2,7 +2,7 @@
 For dealing with smiles vs canonical smiles
 """
 
-from job import *
+from jaguar_job import *
 import molecule as mol
 from job_utils import JsonParser
 import shutil

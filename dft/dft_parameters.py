@@ -2,7 +2,6 @@ import enum
 import molecule as mol
 from rdkit import Chem
 import numpy as np
-from abc import ABC, abstractmethod
 
 
 class JaguarInputParams:
