@@ -1,0 +1,1976 @@
+Command:  /groups/wag/programs/Schrodinger_2020_3/jaguar run -WAIT -PARALLEL 8 /central/home/labounad/wittig-ch121/out/J1_6632_2111/J1_6632_2111.in
+Release:  2020-3
+Exec:     /groups/wag/programs/Schrodinger_2020_3/jaguar-v10.9/bin/Linux-x86_64
+Host:     hpc-89-09.cm.cluster
+JobId:    hpc-89-09-0-6656f1b6
+JobDir:   /central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6
+Date:     Wed May 29 02:13:28 2024
+
+Contents of /central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6:
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/hpc-89-09-0-6656f1b6.mpinodes
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/.write_dir.json
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/hpc-89-09-0-6656f1b6.nodes
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/hpc-89-09-0-6656f1b6.recover
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/J1_6632_2111.in
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/J1_6632_2111.log
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/J1_6632_2111.recover
+/central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6/hpc-89-09-0-6656f1b6
+
+Executing subprocess:
+/groups/wag/programs/Schrodinger_2020_3/jaguar-v10.9/bin/Linux-x86_64/jexec J1_6632_2111.in -T 8 -out /central/scratch/labounad/J1_6632_2111#hpc-89-09-0-6656f1b6 -cwd
+
+Job J1_6632_2111 started on hpc-89-09.cm.cluster at Wed May 29 02:13:28 2024
+jobid: hpc-89-09-0-6656f1b6 
+Jaguar version 10.9, release 139
+ Using up to   8 threads per process
+Molecular Point Group: C1      
+Point Group used: C1
+pre (input checking) done.
+onee (1-electron integrals) done.
+hfig (HF initial guess) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+scf type: DFT=PBE(X+LC)+PW91 (PBE-D3)
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  5  M    -650.52961521554           8.7E-03  1.2E-01
+etot    2  Y  Y  6  M    -651.35928762959  8.3E-01  6.5E-03  1.1E-01
+etot    3  Y  Y  6  M    -652.12444440898  7.7E-01  3.5E-03  9.7E-02
+etot    4  N  Y  2  U    -652.51479616117  3.9E-01  1.8E-03  5.4E-02
+etot    5  Y  Y  6  M    -652.65308131197  1.4E-01  7.2E-04  1.6E-02
+etot    6  N  Y  2  U    -652.66725084749  1.4E-02  3.4E-04  6.6E-03
+etot    7  Y  Y  6  M    -652.66985857606  2.6E-03  1.5E-04  1.8E-03
+etot    8  Y  Y  6  M    -652.67038576454  5.3E-04  5.0E-05  7.0E-04
+etot    9  N  Y  2  U    -652.67057415037  1.9E-04  1.2E-05  2.0E-04
+etot   10  N  Y  2  U    -652.67057763168  3.5E-06  5.7E-06  1.1E-04
+etot   11  N  Y  2  U    -652.67057859672  9.7E-07  2.1E-06  2.5E-05
+etot   12  N  N  2  U    -652.67057862547  2.9E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   1
+  Total energy:      -652.68853733019 hartrees
+  gradient maximum:        3.8898E-02 .  (  4.5000E-04 )
+  gradient rms:            1.0188E-02 .  (  3.0000E-04 )
+  displacement maximum:    9.4940E-02 .  (  1.8000E-03 )
+  displacement rms:        3.2183E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.3192E-02
+  step size:     0.30019
+  trust radius:  0.30000
+---------------- geometry iteration   1 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66339736731           7.2E-04  6.7E-03
+etot    2  Y  Y  6  M    -652.68101997096  1.8E-02  3.1E-04  4.0E-03
+etot    3  N  Y  2  U    -652.67798552365 -3.0E-03  2.3E-04  1.1E-02
+etot    4  Y  Y  6  M    -652.68155395408  3.6E-03  5.7E-05  2.5E-03
+etot    5  Y  Y  6  M    -652.68176844407  2.1E-04  1.4E-05  1.8E-04
+etot    6  N  Y  2  U    -652.68181155703  4.3E-05  5.1E-06  7.2E-05
+etot    7  N  Y  2  U    -652.68181260139  1.0E-06  2.5E-06  3.7E-05
+etot    8  N  N  2  U    -652.68181267014  6.9E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   2
+  Total energy:      -652.69929596173 hartrees
+  energy change:          -1.0759E-02 .  (  5.0000E-05 )
+  gradient maximum:        1.0623E-02 .  (  4.5000E-04 )
+  gradient rms:            3.3600E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.9430E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2256E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.2729E-03
+  step size:     0.30086
+  trust radius:  0.30000
+---------------- geometry iteration   2 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.64629082648           9.5E-04  1.4E-02
+etot    2  Y  Y  6  M    -652.68357783283  3.7E-02  3.0E-04  4.3E-03
+etot    3  N  Y  2  U    -652.68163243138 -1.9E-03  1.9E-04  7.6E-03
+etot    4  Y  Y  6  M    -652.68432701169  2.7E-03  2.8E-05  5.2E-04
+etot    5  N  Y  2  U    -652.68429882861 -2.8E-05  1.5E-05  6.5E-04
+etot    6  N  Y  2  U    -652.68431594341  1.7E-05  4.0E-06  8.2E-05
+etot    7  N  N  2  U    -652.68431643646  4.9E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   3
+  Total energy:      -652.70204573660 hartrees
+  energy change:          -2.7498E-03 .  (  5.0000E-05 )
+  gradient maximum:        9.9050E-03 .  (  4.5000E-04 )
+  gradient rms:            1.7093E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.4254E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2166E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.2159E-03
+  step size:     0.30003
+  trust radius:  0.30000
+---------------- geometry iteration   3 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.64064433809           1.1E-03  1.6E-02
+etot    2  Y  Y  6  M    -652.68544783363  4.5E-02  3.7E-04  4.8E-03
+etot    3  N  Y  2  U    -652.68234054374 -3.1E-03  2.4E-04  7.9E-03
+etot    4  Y  Y  6  M    -652.68652983826  4.2E-03  4.0E-05  1.1E-03
+etot    5  N  Y  2  U    -652.68654515646  1.5E-05  2.0E-05  9.0E-04
+etot    6  N  Y  2  U    -652.68657646448  3.1E-05  4.7E-06  5.9E-05
+etot    7  N  N  2  U    -652.68657700998  5.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   4
+  Total energy:      -652.70448087076 hartrees
+  energy change:          -2.4351E-03 .  (  5.0000E-05 )
+  gradient maximum:        6.9543E-03 .  (  4.5000E-04 )
+  gradient rms:            1.9504E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.4754E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2201E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.4666E-03
+  step size:     0.30035
+  trust radius:  0.30000
+---------------- geometry iteration   4 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.64338174590           1.1E-03  1.6E-02
+etot    2  Y  Y  6  M    -652.68731913653  4.4E-02  3.9E-04  4.8E-03
+etot    3  N  Y  2  U    -652.68410498501 -3.2E-03  2.5E-04  7.9E-03
+etot    4  Y  Y  6  M    -652.68853590422  4.4E-03  2.4E-05  3.1E-04
+etot    5  N  Y  2  U    -652.68854198152  6.1E-06  1.0E-05  2.5E-04
+etot    6  N  Y  2  U    -652.68854537333  3.4E-06  4.1E-06  9.2E-05
+etot    7  N  N  2  U    -652.68854594057  5.7E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   5
+  Total energy:      -652.70662558740 hartrees
+  energy change:          -2.1447E-03 .  (  5.0000E-05 )
+  gradient maximum:        1.3474E-02 .  (  4.5000E-04 )
+  gradient rms:            2.6994E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.4105E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2178E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.0956E-03
+  step size:     0.30013
+  trust radius:  0.30000
+---------------- geometry iteration   5 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66578953481           8.5E-04  9.3E-03
+etot    2  Y  Y  6  M    -652.68958310824  2.4E-02  3.0E-04  2.8E-03
+etot    3  N  Y  2  U    -652.68746467062 -2.1E-03  2.0E-04  5.7E-03
+etot    4  Y  Y  6  M    -652.69018261780  2.7E-03  4.8E-05  1.8E-03
+etot    5  N  Y  2  U    -652.69029468954  1.1E-04  1.5E-05  5.9E-04
+etot    6  N  Y  2  U    -652.69030977215  1.5E-05  4.2E-06  5.3E-05
+etot    7  N  N  2  U    -652.69031013280  3.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   6
+  Total energy:      -652.70849530361 hartrees
+  energy change:          -1.8697E-03 .  (  5.0000E-05 )
+  gradient maximum:        9.7444E-03 .  (  4.5000E-04 )
+  gradient rms:            2.8001E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.3170E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2163E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.6254E-03
+  step size:     0.29999
+  trust radius:  0.30000
+---------------- geometry iteration   6 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66794762404           8.3E-04  8.5E-03
+etot    2  Y  Y  6  M    -652.69109819679  2.3E-02  2.7E-04  2.0E-03
+etot    3  N  Y  2  U    -652.68963625175 -1.5E-03  1.8E-04  3.8E-03
+etot    4  Y  Y  6  M    -652.69154219299  1.9E-03  4.7E-05  1.3E-03
+etot    5  N  Y  2  U    -652.69160185990  6.0E-05  1.6E-05  6.2E-04
+etot    6  N  Y  2  U    -652.69162413268  2.2E-05  3.9E-06  5.8E-05
+etot    7  N  N  2  U    -652.69162459766  4.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   7
+  Total energy:      -652.70987167953 hartrees
+  energy change:          -1.3764E-03 .  (  5.0000E-05 )
+  gradient maximum:        6.9292E-03 .  (  4.5000E-04 )
+  gradient rms:            1.7887E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.4002E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2195E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.8546E-03
+  step size:     0.30030
+  trust radius:  0.30000
+---------------- geometry iteration   7 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66042303774           9.4E-04  8.5E-03
+etot    2  Y  Y  6  M    -652.69089265925  3.0E-02  2.3E-04  2.9E-03
+etot    3  N  Y  2  U    -652.68948430766 -1.4E-03  1.7E-04  8.0E-03
+etot    4  Y  Y  6  M    -652.69138957359  1.9E-03  5.0E-05  1.9E-03
+etot    5  Y  Y  6  M    -652.69152284549  1.3E-04  1.6E-05  2.7E-04
+etot    6  N  Y  2  U    -652.69154760358  2.5E-05  4.5E-06  5.1E-05
+etot    7  N  N  2  U    -652.69154800286  4.0E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   8
+  Total energy:      -652.70965592991 hartrees
+  energy change:           2.1575E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.7162E-02 .  (  4.5000E-04 )
+  gradient rms:            4.0053E-03 .  (  3.0000E-04 )
+  displacement maximum:    7.3543E-02 .  (  1.8000E-03 )
+  displacement rms:        1.2467E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.3845E-03
+  step size:     0.11629
+  trust radius:  0.30000
+---------------- geometry iteration   8 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68539480124           4.9E-04  5.1E-03
+etot    2  Y  Y  6  M    -652.69288620190  7.5E-03  1.2E-04  1.1E-03
+etot    3  N  Y  2  U    -652.69246584263 -4.2E-04  8.2E-05  2.1E-03
+etot    4  Y  Y  6  M    -652.69288424781  4.2E-04  1.3E-05  1.9E-04
+etot    5  N  Y  2  U    -652.69287562906 -8.6E-06  5.3E-06  1.7E-04
+etot    6  N  Y  2  U    -652.69287688119  1.3E-06  2.6E-06  7.9E-05
+etot    7  N  N  2  U    -652.69287713052  2.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step   9
+  Total energy:      -652.71101894583 hartrees
+  energy change:          -1.3630E-03 .  (  5.0000E-05 )
+  gradient maximum:        2.8999E-03 .  (  4.5000E-04 )
+  gradient rms:            8.2793E-04 .  (  3.0000E-04 )
+  displacement maximum:    7.0441E-02 .  (  1.8000E-03 )
+  displacement rms:        1.0275E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.6635E-04
+  step size:     0.09584
+  trust radius:  0.30000
+---------------- geometry iteration   9 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69042735458           2.9E-04  3.0E-03
+etot    2  Y  Y  6  M    -652.69310329131  2.7E-03  8.2E-05  8.2E-04
+etot    3  Y  Y  6  M    -652.69297197843 -1.3E-04  6.0E-05  1.5E-03
+etot    4  N  Y  2  U    -652.69312206582  1.5E-04  1.7E-05  6.7E-04
+etot    5  N  Y  2  U    -652.69313995968  1.8E-05  5.9E-06  1.6E-04
+etot    6  N  Y  2  U    -652.69314243012  2.5E-06  1.4E-06  2.3E-05
+etot    7  N  N  2  U    -652.69314248449  5.4E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  10
+  Total energy:      -652.71131162994 hartrees
+  energy change:          -2.9268E-04 .  (  5.0000E-05 )
+  gradient maximum:        2.3472E-03 .  (  4.5000E-04 )
+  gradient rms:            5.1930E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.0221E-01 .  (  1.8000E-03 )
+  displacement rms:        1.7689E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.6473E-04
+  step size:     0.16499
+  trust radius:  0.30000
+---------------- geometry iteration  10 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68577008937           4.7E-04  4.5E-03
+etot    2  Y  Y  6  M    -652.69320652607  7.4E-03  1.0E-04  1.1E-03
+etot    3  N  Y  2  U    -652.69294261289 -2.6E-04  8.0E-05  2.6E-03
+etot    4  Y  Y  6  M    -652.69324091680  3.0E-04  2.2E-05  9.8E-04
+etot    5  N  Y  2  U    -652.69328798238  4.7E-05  5.7E-06  1.1E-04
+etot    6  N  Y  2  U    -652.69328972057  1.7E-06  1.9E-06  1.8E-05
+etot    7  N  N  2  U    -652.69328977021  5.0E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  11
+  Total energy:      -652.71143824192 hartrees
+  energy change:          -1.2661E-04 .  (  5.0000E-05 )
+  gradient maximum:        2.7761E-03 .  (  4.5000E-04 )
+  gradient rms:            5.5968E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.3948E-01 .  (  1.8000E-03 )
+  displacement rms:        2.0055E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.1925E-04
+  step size:     0.18706
+  trust radius:  0.30000
+---------------- geometry iteration  11 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68548619116           5.2E-04  5.4E-03
+etot    2  Y  Y  6  M    -652.69323417745  7.7E-03  1.5E-04  1.5E-03
+etot    3  N  Y  2  U    -652.69272821452 -5.1E-04  1.1E-04  3.8E-03
+etot    4  Y  Y  6  M    -652.69338487523  6.6E-04  2.8E-05  1.1E-03
+etot    5  N  Y  2  U    -652.69343595877  5.1E-05  1.0E-05  1.8E-04
+etot    6  N  Y  2  U    -652.69344185126  5.9E-06  2.5E-06  3.0E-05
+etot    7  N  N  2  U    -652.69344195578  1.0E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  12
+  Total energy:      -652.71156798311 hartrees
+  energy change:          -1.2974E-04 .  (  5.0000E-05 )
+  gradient maximum:        3.3533E-03 .  (  4.5000E-04 )
+  gradient rms:            6.3853E-04 .  (  3.0000E-04 )
+  displacement maximum:    4.4019E-02 .  (  1.8000E-03 )
+  displacement rms:        1.2081E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -7.7911E-05
+  step size:     0.11269
+  trust radius:  0.30000
+---------------- geometry iteration  12 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69114815959           2.8E-04  2.6E-03
+etot    2  Y  Y  6  M    -652.69358966157  2.4E-03  5.4E-05  7.9E-04
+etot    3  Y  Y  6  M    -652.69351872082 -7.1E-05  4.0E-05  1.4E-03
+etot    4  N  Y  2  U    -652.69359694486  7.8E-05  1.3E-05  5.0E-04
+etot    5  N  Y  2  U    -652.69360689799  1.0E-05  5.1E-06  9.7E-05
+etot    6  N  Y  2  U    -652.69360822103  1.3E-06  2.8E-06  2.9E-05
+etot    7  N  N  2  U    -652.69360826898  4.8E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  13
+  Total energy:      -652.71171063597 hartrees
+  energy change:          -1.4265E-04 .  (  5.0000E-05 )
+  gradient maximum:        8.0848E-04 .  (  4.5000E-04 )
+  gradient rms:            2.4883E-04 *  (  3.0000E-04 )
+  displacement maximum:    8.3312E-02 .  (  1.8000E-03 )
+  displacement rms:        2.1957E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -8.4327E-05
+  step size:     0.20480
+  trust radius:  0.30000
+---------------- geometry iteration  13 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68735105456           4.7E-04  3.8E-03
+etot    2  Y  Y  6  M    -652.69382069720  6.5E-03  9.6E-05  1.2E-03
+etot    3  N  Y  2  U    -652.69358330198 -2.4E-04  6.9E-05  2.6E-03
+etot    4  Y  Y  6  M    -652.69380420331  2.2E-04  2.1E-05  8.6E-04
+etot    5  N  Y  2  U    -652.69382725562  2.3E-05  6.7E-06  1.0E-04
+etot    6  N  Y  2  U    -652.69382919429  1.9E-06  2.9E-06  2.9E-05
+etot    7  N  N  2  U    -652.69382925597  6.2E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  14
+  Total energy:      -652.71191272470 hartrees
+  energy change:          -2.0209E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.3061E-03 .  (  4.5000E-04 )
+  gradient rms:            3.5167E-04 .  (  3.0000E-04 )
+  displacement maximum:    6.7748E-02 .  (  1.8000E-03 )
+  displacement rms:        1.8136E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -4.1545E-05
+  step size:     0.16916
+  trust radius:  0.30000
+---------------- geometry iteration  14 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68954147070           3.8E-04  3.2E-03
+etot    2  Y  Y  6  M    -652.69391216675  4.4E-03  7.8E-05  9.0E-04
+etot    3  Y  Y  6  M    -652.69380571773 -1.1E-04  5.4E-05  1.9E-03
+etot    4  N  Y  2  U    -652.69390316546  9.7E-05  1.8E-05  7.3E-04
+etot    5  N  Y  2  U    -652.69392400045  2.1E-05  5.9E-06  8.5E-05
+etot    6  N  Y  2  U    -652.69392566871  1.7E-06  2.8E-06  3.8E-05
+etot    7  N  N  2  U    -652.69392574869  8.0E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  15
+  Total energy:      -652.71201518772 hartrees
+  energy change:          -1.0246E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.0331E-03 .  (  4.5000E-04 )
+  gradient rms:            3.4678E-04 .  (  3.0000E-04 )
+  displacement maximum:    3.4776E-02 .  (  1.8000E-03 )
+  displacement rms:        8.3430E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.4229E-05
+  step size:     0.07782
+  trust radius:  0.30000
+---------------- geometry iteration  15 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69256882583           2.0E-04  1.8E-03
+etot    2  Y  Y  6  M    -652.69397826586  1.4E-03  4.0E-05  2.8E-04
+etot    3  N  Y  2  U    -652.69396476863 -1.3E-05  2.6E-05  5.7E-04
+etot    4  N  Y  2  U    -652.69398462760  2.0E-05  9.3E-06  3.7E-04
+etot    5  N  Y  2  U    -652.69398986476  5.2E-06  3.3E-06  8.7E-05
+etot    6  N  N  2  U    -652.69399053752  6.7E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  16
+  Total energy:      -652.71210022226 hartrees
+  energy change:          -8.5035E-05 .  (  5.0000E-05 )
+  gradient maximum:        5.5681E-04 .  (  4.5000E-04 )
+  gradient rms:            1.6890E-04 *  (  3.0000E-04 )
+  displacement maximum:    1.8685E-02 .  (  1.8000E-03 )
+  displacement rms:        4.5645E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -7.1288E-06
+  step size:     0.04258
+  trust radius:  0.30000
+---------------- geometry iteration  16 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69366421108           1.0E-04  9.7E-04
+etot    2  Y  Y  6  M    -652.69401908016  3.5E-04  2.1E-05  2.7E-04
+etot    3  N  Y  2  U    -652.69399927764 -2.0E-05  1.4E-05  3.5E-04
+etot    4  N  Y  2  U    -652.69400858235  9.3E-06  3.4E-06  8.5E-05
+etot    5  N  N  2  U    -652.69400903897  4.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  17
+  Total energy:      -652.71212794034 hartrees
+  energy change:          -2.7718E-05 *  (  5.0000E-05 )
+  gradient maximum:        4.6543E-04 .  (  4.5000E-04 )
+  gradient rms:            1.0171E-04 *  (  3.0000E-04 )
+  displacement maximum:    5.1028E-03 .  (  1.8000E-03 )
+  displacement rms:        1.3450E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.8537E-06
+  step size:     0.01255
+  trust radius:  0.30000
+---------------- geometry iteration  17 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69399204795           2.7E-05  2.5E-04
+etot    2  N  Y  2  U    -652.69401432510  2.2E-05  7.7E-06  6.2E-05
+etot    3  N  Y  2  U    -652.69401358007 -7.5E-07  5.0E-06  7.9E-05
+etot    4  N  N  2  U    -652.69401480759  1.2E-06  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  18
+  Total energy:      -652.71212872509 hartrees
+  energy change:          -7.8476E-07 #  (  5.0000E-05 )
+  gradient maximum:        2.6662E-04 *  (  4.5000E-04 )
+  gradient rms:            6.6298E-05 *  (  3.0000E-04 )
+  displacement maximum:    8.5474E-03 .  (  1.8000E-03 )
+  displacement rms:        1.3053E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.1810E-06
+  step size:     0.01217
+  trust radius:  0.30000
+---------------- geometry iteration  18 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69399127334           3.7E-05  4.0E-04
+etot    2  N  Y  2  U    -652.69402777439  3.7E-05  1.1E-05  1.4E-04
+etot    3  N  Y  2  U    -652.69402316986 -4.6E-06  8.3E-06  3.7E-04
+etot    4  N  Y  2  U    -652.69402869276  5.5E-06  1.7E-06  4.6E-05
+etot    5  N  N  2  U    -652.69402880964  1.2E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  19
+  Total energy:      -652.71214079268 hartrees
+  energy change:          -1.2068E-05 *  (  5.0000E-05 )
+  gradient maximum:        1.7097E-04 *  (  4.5000E-04 )
+  gradient rms:            4.8314E-05 #  (  3.0000E-04 )
+  displacement maximum:    2.9864E-02 .  (  1.8000E-03 )
+  displacement rms:        4.2543E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.3658E-06
+  step size:     0.03968
+  trust radius:  0.30000
+---------------- geometry iteration  19 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69368960849           1.2E-04  1.3E-03
+etot    2  Y  Y  6  M    -652.69409187884  4.0E-04  1.5E-05  4.7E-04
+etot    3  N  Y  2  U    -652.69407983639 -1.2E-05  1.0E-05  2.2E-04
+etot    4  N  Y  2  U    -652.69408186715  2.0E-06  4.1E-06  1.2E-04
+etot    5  N  N  2  U    -652.69408278402  9.2E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  20
+  Total energy:      -652.71218570543 hartrees
+  energy change:          -4.4913E-05 *  (  5.0000E-05 )
+  gradient maximum:        2.9320E-04 *  (  4.5000E-04 )
+  gradient rms:            8.1589E-05 *  (  3.0000E-04 )
+  displacement maximum:    7.9396E-02 .  (  1.8000E-03 )
+  displacement rms:        1.4688E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.0066E-05
+  step size:     0.13700
+  trust radius:  0.30000
+---------------- geometry iteration  20 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68750307367           4.5E-04  5.3E-03
+etot    2  Y  Y  6  M    -652.69402898871  6.5E-03  5.4E-05  1.5E-03
+etot    3  N  Y  2  U    -652.69402068413 -8.3E-06  4.0E-05  8.9E-04
+etot    4  N  Y  2  U    -652.69404808301  2.7E-05  1.8E-05  8.5E-04
+etot    5  N  Y  2  U    -652.69407573709  2.8E-05  4.8E-06  9.6E-05
+etot    6  N  N  2  U    -652.69407680504  1.1E-06  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  21
+  Total energy:      -652.71216321622 hartrees
+  energy change:           2.2489E-05 *  (  5.0000E-05 )
+  gradient maximum:        4.4360E-03 .  (  4.5000E-04 )
+  gradient rms:            9.3794E-04 .  (  3.0000E-04 )
+  displacement maximum:    7.7812E-02 .  (  1.8000E-03 )
+  displacement rms:        1.1210E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -6.9420E-05
+  step size:     0.10456
+  trust radius:  0.30000
+---------------- geometry iteration  21 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69231668248           2.7E-04  3.1E-03
+etot    2  Y  Y  6  M    -652.69418962514  1.9E-03  4.6E-05  9.5E-04
+etot    3  N  Y  2  U    -652.69413975653 -5.0E-05  3.0E-05  7.2E-04
+etot    4  N  Y  2  U    -652.69417401554  3.4E-05  1.0E-05  3.0E-04
+etot    5  N  Y  2  U    -652.69417850079  4.5E-06  3.2E-06  8.5E-05
+etot    6  N  N  2  U    -652.69417892021  4.2E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  22
+  Total energy:      -652.71226208466 hartrees
+  energy change:          -9.8868E-05 .  (  5.0000E-05 )
+  gradient maximum:        2.0616E-03 .  (  4.5000E-04 )
+  gradient rms:            4.9338E-04 .  (  3.0000E-04 )
+  displacement maximum:    2.1353E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2172E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -8.5472E-05
+  step size:     0.30008
+  trust radius:  0.30000
+---------------- geometry iteration  22 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.67154525073           8.8E-04  9.5E-03
+etot    2  Y  Y  6  M    -652.69420228566  2.3E-02  1.3E-04  2.8E-03
+etot    3  N  Y  2  U    -652.69400822228 -1.9E-04  8.7E-05  1.5E-03
+etot    4  Y  Y  6  M    -652.69418531067  1.8E-04  2.8E-05  8.6E-04
+etot    5  N  Y  2  U    -652.69424048422  5.5E-05  7.4E-06  1.4E-04
+etot    6  N  Y  2  U    -652.69424244489  2.0E-06  4.0E-06  8.2E-05
+etot    7  N  N  2  U    -652.69424264341  2.0E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  23
+  Total energy:      -652.71227584783 hartrees
+  energy change:          -1.3763E-05 *  (  5.0000E-05 )
+  gradient maximum:        4.3841E-03 .  (  4.5000E-04 )
+  gradient rms:            1.0218E-03 .  (  3.0000E-04 )
+  displacement maximum:    9.7146E-02 .  (  1.8000E-03 )
+  displacement rms:        2.2554E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.4752E-04
+  step size:     0.21037
+  trust radius:  0.30000
+---------------- geometry iteration  23 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68601698236           5.1E-04  4.7E-03
+etot    2  Y  Y  6  M    -652.69406316982  8.0E-03  1.3E-04  1.6E-03
+etot    3  N  Y  2  U    -652.69382119777 -2.4E-04  8.8E-05  2.3E-03
+etot    4  Y  Y  6  M    -652.69425724910  4.4E-04  1.8E-05  3.6E-04
+etot    5  N  Y  2  U    -652.69424441683 -1.3E-05  7.9E-06  2.4E-04
+etot    6  N  Y  2  U    -652.69424861620  4.2E-06  3.0E-06  7.4E-05
+etot    7  N  N  2  U    -652.69424879230  1.8E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  24
+  Total energy:      -652.71225427577 hartrees
+  energy change:           2.1572E-05 *  (  5.0000E-05 )
+  gradient maximum:        3.8006E-03 .  (  4.5000E-04 )
+  gradient rms:            1.0290E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.0955E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2186E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -5.1945E-04
+  step size:     0.30021
+  trust radius:  0.30000
+---------------- geometry iteration  24 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.67887974148           6.9E-04  5.3E-03
+etot    2  Y  Y  6  M    -652.69240306425  1.4E-02  1.4E-04  1.3E-03
+etot    3  N  Y  2  U    -652.69208868396 -3.1E-04  9.3E-05  2.2E-03
+etot    4  Y  Y  6  M    -652.69252172499  4.3E-04  3.6E-05  1.2E-03
+etot    5  N  Y  2  U    -652.69258604032  6.4E-05  1.0E-05  3.0E-04
+etot    6  N  Y  2  U    -652.69259316001  7.1E-06  3.3E-06  6.8E-05
+etot    7  N  N  2  U    -652.69259342943  2.7E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  25
+  Total energy:      -652.71054551587 hartrees
+  ** restarting optimization from step   22 **
+  energy change:           1.7088E-03 .  (  5.0000E-05 )
+  gradient maximum:        2.0616E-03 .  (  4.5000E-04 )
+  gradient rms:            4.9338E-04 .  (  3.0000E-04 )
+  displacement maximum:    9.8726E-02 .  (  1.8000E-03 )
+  displacement rms:        1.6182E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -9.6097E-05
+  step size:     0.15094
+  trust radius:  0.15000
+---------------- geometry iteration  25 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68013415369           7.1E-04  5.6E-03
+etot    2  Y  Y  6  M    -652.69416068818  1.4E-02  1.4E-04  1.8E-03
+etot    3  N  Y  2  U    -652.69388464451 -2.8E-04  9.0E-05  1.9E-03
+etot    4  Y  Y  6  M    -652.69435090722  4.7E-04  2.4E-05  3.9E-04
+etot    5  N  Y  2  U    -652.69436679001  1.6E-05  8.4E-06  2.4E-04
+etot    6  N  Y  2  U    -652.69436982786  3.0E-06  3.4E-06  8.8E-05
+etot    7  N  N  2  U    -652.69437023288  4.1E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  26
+  Total energy:      -652.71240365379 hartrees
+  energy change:          -1.4157E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.0234E-03 .  (  4.5000E-04 )
+  gradient rms:            3.2161E-04 .  (  3.0000E-04 )
+  displacement maximum:    5.3451E-02 .  (  1.8000E-03 )
+  displacement rms:        8.0515E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -4.0628E-05
+  step size:     0.07510
+  trust radius:  0.07500
+---------------- geometry iteration  26 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69295146745           2.3E-04  2.6E-03
+etot    2  Y  Y  6  M    -652.69446572266  1.5E-03  3.0E-05  9.1E-04
+etot    3  N  Y  2  U    -652.69443459040 -3.1E-05  2.4E-05  5.6E-04
+etot    4  N  Y  2  U    -652.69445138896  1.7E-05  1.0E-05  3.9E-04
+etot    5  N  Y  2  U    -652.69445832178  6.9E-06  2.9E-06  7.6E-05
+etot    6  N  N  2  U    -652.69445891686  6.0E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  27
+  Total energy:      -652.71246030619 hartrees
+  energy change:          -5.6652E-05 .  (  5.0000E-05 )
+  gradient maximum:        1.2711E-03 .  (  4.5000E-04 )
+  gradient rms:            3.0981E-04 .  (  3.0000E-04 )
+  displacement maximum:    2.2920E-02 .  (  1.8000E-03 )
+  displacement rms:        4.0631E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -3.7163E-05
+  step size:     0.03790
+  trust radius:  0.03750
+---------------- geometry iteration  27 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69413567679           1.2E-04  1.2E-03
+etot    2  Y  Y  6  M    -652.69453158037  4.0E-04  1.7E-05  4.4E-04
+etot    3  N  Y  2  U    -652.69451719392 -1.4E-05  1.3E-05  3.0E-04
+etot    4  N  Y  2  U    -652.69452375922  6.6E-06  3.9E-06  1.0E-04
+etot    5  N  N  2  U    -652.69452440428  6.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  28
+  Total energy:      -652.71250556888 hartrees
+  energy change:          -4.5263E-05 *  (  5.0000E-05 )
+  gradient maximum:        9.6554E-04 .  (  4.5000E-04 )
+  gradient rms:            2.4257E-04 *  (  3.0000E-04 )
+  displacement maximum:    3.8155E-02 .  (  1.8000E-03 )
+  displacement rms:        5.6987E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -3.4316E-05
+  step size:     0.05315
+  trust radius:  0.05303
+---------------- geometry iteration  28 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69388539539           1.6E-04  1.7E-03
+etot    2  Y  Y  6  M    -652.69458675809  7.0E-04  2.1E-05  5.8E-04
+etot    3  N  Y  2  U    -652.69456223349 -2.5E-05  1.6E-05  3.0E-04
+etot    4  N  Y  2  U    -652.69457018472  8.0E-06  6.5E-06  2.0E-04
+etot    5  N  Y  2  U    -652.69457235772  2.2E-06  2.2E-06  6.9E-05
+etot    6  N  N  2  U    -652.69457271927  3.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  29
+  Total energy:      -652.71253780194 hartrees
+  energy change:          -3.2233E-05 *  (  5.0000E-05 )
+  gradient maximum:        1.0781E-03 .  (  4.5000E-04 )
+  gradient rms:            1.9784E-04 *  (  3.0000E-04 )
+  displacement maximum:    5.0748E-02 .  (  1.8000E-03 )
+  displacement rms:        8.0938E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -4.6741E-05
+  step size:     0.07549
+  trust radius:  0.07500
+---------------- geometry iteration  29 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69357640874           1.9E-04  2.0E-03
+etot    2  Y  Y  6  M    -652.69455686026  9.8E-04  2.9E-05  6.0E-04
+etot    3  N  Y  2  U    -652.69453211743 -2.5E-05  2.1E-05  6.0E-04
+etot    4  N  Y  2  U    -652.69454980247  1.8E-05  6.7E-06  2.0E-04
+etot    5  N  Y  2  U    -652.69455173739  1.9E-06  1.7E-06  2.5E-05
+etot    6  N  N  2  U    -652.69455184200  1.0E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  30
+  Total energy:      -652.71252901097 hartrees
+  energy change:           8.7910E-06 *  (  5.0000E-05 )
+  gradient maximum:        2.3345E-03 .  (  4.5000E-04 )
+  gradient rms:            5.8312E-04 .  (  3.0000E-04 )
+  displacement maximum:    2.2753E-02 .  (  1.8000E-03 )
+  displacement rms:        4.0344E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -4.0361E-05
+  step size:     0.03763
+  trust radius:  0.03750
+---------------- geometry iteration  30 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69422294629           1.2E-04  1.3E-03
+etot    2  Y  Y  6  M    -652.69465702131  4.3E-04  2.3E-05  4.5E-04
+etot    3  N  Y  2  U    -652.69462358163 -3.3E-05  1.7E-05  3.5E-04
+etot    4  N  Y  2  U    -652.69463602703  1.2E-05  3.9E-06  8.9E-05
+etot    5  N  N  2  U    -652.69463653751  5.1E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  31
+  Total energy:      -652.71257817692 hartrees
+  energy change:          -4.9166E-05 *  (  5.0000E-05 )
+  gradient maximum:        3.0602E-04 *  (  4.5000E-04 )
+  gradient rms:            7.9051E-05 *  (  3.0000E-04 )
+  displacement maximum:    3.2593E-02 .  (  1.8000E-03 )
+  displacement rms:        5.6896E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.6365E-05
+  step size:     0.05307
+  trust radius:  0.05303
+---------------- geometry iteration  31 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69404581786           1.4E-04  1.5E-03
+etot    2  Y  Y  6  M    -652.69468010529  6.3E-04  3.1E-05  4.9E-04
+etot    3  N  Y  2  U    -652.69462139034 -5.9E-05  2.4E-05  8.8E-04
+etot    4  N  Y  2  U    -652.69466037306  3.9E-05  5.8E-06  1.8E-04
+etot    5  N  Y  2  U    -652.69466226912  1.9E-06  1.9E-06  4.7E-05
+etot    6  N  N  2  U    -652.69466252305  2.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  32
+  Total energy:      -652.71258837756 hartrees
+  energy change:          -1.0201E-05 *  (  5.0000E-05 )
+  gradient maximum:        5.2657E-04 .  (  4.5000E-04 )
+  gradient rms:            1.0137E-04 *  (  3.0000E-04 )
+  displacement maximum:    3.9028E-02 .  (  1.8000E-03 )
+  displacement rms:        8.0450E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -8.7218E-06
+  step size:     0.07504
+  trust radius:  0.07500
+---------------- geometry iteration  32 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69360797822           1.9E-04  1.9E-03
+etot    2  Y  Y  6  M    -652.69471850560  1.1E-03  2.8E-05  5.1E-04
+etot    3  N  Y  2  U    -652.69467853672 -4.0E-05  2.1E-05  3.9E-04
+etot    4  N  Y  2  U    -652.69469344690  1.5E-05  8.0E-06  2.3E-04
+etot    5  N  Y  2  U    -652.69469652350  3.1E-06  2.8E-06  9.2E-05
+etot    6  N  N  2  U    -652.69469717360  6.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  33
+  Total energy:      -652.71259256051 hartrees
+  energy change:          -4.1829E-06 *  (  5.0000E-05 )
+  gradient maximum:        4.2353E-04 *  (  4.5000E-04 )
+  gradient rms:            1.0161E-04 *  (  3.0000E-04 )
+  displacement maximum:    2.1377E-02 .  (  1.8000E-03 )
+  displacement rms:        5.1994E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.9996E-06
+  step size:     0.04850
+  trust radius:  0.10607
+---------------- geometry iteration  33 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69433648518           1.0E-04  1.0E-03
+etot    2  Y  Y  6  M    -652.69469625726  3.6E-04  2.3E-05  1.5E-04
+etot    3  N  Y  2  U    -652.69468945094 -6.8E-06  1.5E-05  3.2E-04
+etot    4  N  Y  2  U    -652.69469996693  1.1E-05  4.5E-06  1.2E-04
+etot    5  N  N  2  U    -652.69470073119  7.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  34
+  Total energy:      -652.71258681656 hartrees
+  energy change:           5.7439E-06 *  (  5.0000E-05 )
+  gradient maximum:        3.2034E-04 *  (  4.5000E-04 )
+  gradient rms:            9.2235E-05 *  (  3.0000E-04 )
+  displacement maximum:    9.7271E-03 .  (  1.8000E-03 )
+  displacement rms:        2.5997E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.3666E-06
+  step size:     0.02425
+  trust radius:  0.15000
+---------------- geometry iteration  34 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69461390702           4.8E-05  3.8E-04
+etot    2  N  Y  2  U    -652.69467606697  6.2E-05  1.7E-05  1.3E-04
+etot    3  N  Y  2  U    -652.69466786809 -8.2E-06  1.2E-05  3.9E-04
+etot    4  N  Y  2  U    -652.69467840930  1.1E-05  3.4E-06  1.1E-04
+etot    5  N  N  2  U    -652.69467886987  4.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  35
+  Total energy:      -652.71257238694 hartrees
+  ** restarting optimization from step   34 **
+  energy change:           1.4430E-05 *  (  5.0000E-05 )
+  gradient maximum:        3.2034E-04 *  (  4.5000E-04 )
+  gradient rms:            9.2235E-05 *  (  3.0000E-04 )
+  displacement maximum:    1.3266E-02 .  (  1.8000E-03 )
+  displacement rms:        3.2530E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.4715E-06
+  step size:     0.03034
+  trust radius:  0.07500
+---------------- geometry iteration  35 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69446396106           8.9E-05  8.7E-04
+etot    2  Y  Y  6  M    -652.69470141891  2.4E-04  2.6E-05  2.4E-04
+etot    3  N  Y  2  U    -652.69467726067 -2.4E-05  1.8E-05  6.1E-04
+etot    4  N  Y  2  U    -652.69469662785  1.9E-05  4.8E-06  1.3E-04
+etot    5  N  N  2  U    -652.69469758810  9.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  36
+  Total energy:      -652.71257146635 hartrees
+  energy change:           1.5350E-05 *  (  5.0000E-05 )
+  gradient maximum:        3.5463E-04 *  (  4.5000E-04 )
+  gradient rms:            6.4092E-05 *  (  3.0000E-04 )
+  displacement maximum:    2.8797E-02 .  (  1.8000E-03 )
+  displacement rms:        6.6437E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.8539E-06
+  step size:     0.06197
+  trust radius:  0.07500
+---------------- geometry iteration  36 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69420519108           1.2E-04  1.4E-03
+etot    2  Y  Y  6  M    -652.69470337764  5.0E-04  3.1E-05  2.9E-04
+etot    3  N  Y  2  U    -652.69466736617 -3.6E-05  2.2E-05  8.2E-04
+etot    4  N  Y  2  U    -652.69469779624  3.0E-05  5.3E-06  1.4E-04
+etot    5  N  Y  2  U    -652.69469919449  1.4E-06  1.6E-06  2.6E-05
+etot    6  N  N  2  U    -652.69469930753  1.1E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  37
+  Total energy:      -652.71254817338 hartrees
+  energy change:           2.3293E-05 *  (  5.0000E-05 )
+  gradient maximum:        3.1126E-04 *  (  4.5000E-04 )
+  gradient rms:            7.5580E-05 *  (  3.0000E-04 )
+  displacement maximum:    6.9673E-02 .  (  1.8000E-03 )
+  displacement rms:        1.6186E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -3.0744E-05
+  step size:     0.15097
+  trust radius:  0.15000
+---------------- geometry iteration  37 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69120594170           3.3E-04  4.0E-03
+etot    2  Y  Y  6  M    -652.69467501908  3.5E-03  6.2E-05  4.8E-04
+etot    3  Y  Y  6  M    -652.69466021059 -1.5E-05  4.0E-05  8.6E-04
+etot    4  N  Y  2  U    -652.69469985471  4.0E-05  1.4E-05  4.3E-04
+etot    5  N  Y  2  U    -652.69470805332  8.2E-06  5.7E-06  1.7E-04
+etot    6  N  Y  2  U    -652.69471003272  2.0E-06  2.5E-06  3.0E-05
+etot    7  N  N  2  U    -652.69471009092  5.8E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  38
+  Total energy:      -652.71249723961 hartrees
+  energy change:           5.0934E-05 .  (  5.0000E-05 )
+  gradient maximum:        1.0720E-03 .  (  4.5000E-04 )
+  gradient rms:            2.1266E-04 *  (  3.0000E-04 )
+  displacement maximum:    6.8836E-02 .  (  1.8000E-03 )
+  displacement rms:        1.6100E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.2310E-04
+  step size:     0.15017
+  trust radius:  0.15000
+---------------- geometry iteration  38 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69119735909           3.2E-04  3.8E-03
+etot    2  Y  Y  6  M    -652.69469608289  3.5E-03  5.9E-05  5.9E-04
+etot    3  Y  Y  6  M    -652.69469920517  3.1E-06  3.8E-05  8.1E-04
+etot    4  N  Y  2  U    -652.69471509915  1.6E-05  1.4E-05  5.4E-04
+etot    5  N  Y  2  U    -652.69472697523  1.2E-05  5.2E-06  1.3E-04
+etot    6  N  Y  2  U    -652.69472832542  1.4E-06  2.3E-06  3.4E-05
+etot    7  N  N  2  U    -652.69472838442  5.9E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  39
+  Total energy:      -652.71240586715 hartrees
+  energy change:           9.1372E-05 .  (  5.0000E-05 )
+  gradient maximum:        3.7937E-03 .  (  4.5000E-04 )
+  gradient rms:            9.4686E-04 .  (  3.0000E-04 )
+  displacement maximum:    3.3804E-02 .  (  1.8000E-03 )
+  displacement rms:        5.9642E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.0890E-04
+  step size:     0.05563
+  trust radius:  0.07500
+---------------- geometry iteration  39 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69375181096           1.9E-04  2.5E-03
+etot    2  Y  Y  6  M    -652.69480320230  1.1E-03  3.0E-05  2.7E-04
+etot    3  N  Y  2  U    -652.69479610249 -7.1E-06  2.1E-05  4.1E-04
+etot    4  N  Y  2  U    -652.69481608409  2.0E-05  4.4E-06  9.0E-05
+etot    5  N  N  2  U    -652.69481645657  3.7E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  40
+  Total energy:      -652.71252735738 hartrees
+  energy change:          -1.2149E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.5100E-03 .  (  4.5000E-04 )
+  gradient rms:            3.0018E-04 .  (  3.0000E-04 )
+  displacement maximum:    2.7031E-02 .  (  1.8000E-03 )
+  displacement rms:        6.4625E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.7064E-05
+  step size:     0.06028
+  trust radius:  0.07500
+---------------- geometry iteration  40 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69431699599           1.3E-04  1.3E-03
+etot    2  Y  Y  6  M    -652.69481983240  5.0E-04  2.1E-05  2.0E-04
+etot    3  N  Y  2  U    -652.69482237938  2.5E-06  1.2E-05  1.7E-04
+etot    4  N  Y  2  U    -652.69482680166  4.4E-06  4.0E-06  6.6E-05
+etot    5  N  N  2  U    -652.69482752549  7.2E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  41
+  Total energy:      -652.71252762845 hartrees
+  energy change:          -2.7107E-07 #  (  5.0000E-05 )
+  gradient maximum:        4.7300E-04 .  (  4.5000E-04 )
+  gradient rms:            1.3513E-04 *  (  3.0000E-04 )
+  displacement maximum:    1.5289E-02 .  (  1.8000E-03 )
+  displacement rms:        4.0393E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.3018E-05
+  step size:     0.03768
+  trust radius:  0.03750
+---------------- geometry iteration  41 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69467976979           7.3E-05  7.5E-04
+etot    2  Y  Y  6  M    -652.69484234678  1.6E-04  1.4E-05  1.5E-04
+etot    3  N  Y  2  U    -652.69483787835 -4.5E-06  1.0E-05  2.3E-04
+etot    4  N  Y  2  U    -652.69484208471  4.2E-06  3.1E-06  6.9E-05
+etot    5  N  N  2  U    -652.69484244099  3.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  42
+  Total energy:      -652.71254671748 hartrees
+  energy change:          -1.9089E-05 *  (  5.0000E-05 )
+  gradient maximum:        4.7482E-04 .  (  4.5000E-04 )
+  gradient rms:            1.1958E-04 *  (  3.0000E-04 )
+  displacement maximum:    2.3141E-02 .  (  1.8000E-03 )
+  displacement rms:        5.6901E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.7031E-05
+  step size:     0.05307
+  trust radius:  0.05303
+---------------- geometry iteration  42 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69451069171           1.1E-04  1.0E-03
+etot    2  Y  Y  6  M    -652.69486200192  3.5E-04  2.2E-05  2.0E-04
+etot    3  N  Y  2  U    -652.69485120214 -1.1E-05  1.6E-05  4.5E-04
+etot    4  N  Y  2  U    -652.69486166758  1.0E-05  5.2E-06  1.8E-04
+etot    5  N  Y  2  U    -652.69486322906  1.6E-06  1.9E-06  5.3E-05
+etot    6  N  N  2  U    -652.69486346395  2.3E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  43
+  Total energy:      -652.71255985103 hartrees
+  energy change:          -1.3134E-05 *  (  5.0000E-05 )
+  gradient maximum:        5.6907E-04 .  (  4.5000E-04 )
+  gradient rms:            1.4074E-04 *  (  3.0000E-04 )
+  displacement maximum:    1.4975E-02 .  (  1.8000E-03 )
+  displacement rms:        3.9217E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.1872E-05
+  step size:     0.03658
+  trust radius:  0.30000
+---------------- geometry iteration  43 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69471857686           7.5E-05  8.1E-04
+etot    2  Y  Y  6  M    -652.69490096433  1.8E-04  1.6E-05  1.4E-04
+etot    3  N  Y  2  U    -652.69488758946 -1.3E-05  1.2E-05  3.6E-04
+etot    4  N  Y  2  U    -652.69489395812  6.4E-06  3.9E-06  1.2E-04
+etot    5  N  N  2  U    -652.69489463433  6.8E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  44
+  Total energy:      -652.71259780645 hartrees
+  energy change:          -3.7955E-05 *  (  5.0000E-05 )
+  gradient maximum:        5.1419E-04 .  (  4.5000E-04 )
+  gradient rms:            1.1699E-04 *  (  3.0000E-04 )
+  displacement maximum:    1.0366E-01 .  (  1.8000E-03 )
+  displacement rms:        2.6959E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -7.0478E-05
+  step size:     0.25145
+  trust radius:  0.30000
+---------------- geometry iteration  44 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68704462238           5.1E-04  5.9E-03
+etot    2  Y  Y  6  M    -652.69493857679  7.9E-03  1.2E-04  9.3E-04
+etot    3  N  Y  2  U    -652.69462044893 -3.2E-04  8.8E-05  2.3E-03
+etot    4  Y  Y  6  M    -652.69499376104  3.7E-04  2.6E-05  7.8E-04
+etot    5  N  Y  2  U    -652.69503559492  4.2E-05  1.1E-05  3.3E-04
+etot    6  N  Y  2  U    -652.69504366886  8.1E-06  3.8E-06  4.5E-05
+etot    7  N  N  2  U    -652.69504374674  7.8E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  45
+  Total energy:      -652.71279631269 hartrees
+  energy change:          -1.9851E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.1572E-03 .  (  4.5000E-04 )
+  gradient rms:            3.8458E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.2552E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2219E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.0331E-03
+  step size:     0.30052
+  trust radius:  0.30000
+---------------- geometry iteration  45 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66936923871           8.1E-04  1.0E-02
+etot    2  Y  Y  6  M    -652.68992642760  2.1E-02  1.5E-04  1.3E-03
+etot    3  N  Y  2  U    -652.68973039527 -2.0E-04  9.5E-05  2.3E-03
+etot    4  Y  Y  6  M    -652.69010504913  3.7E-04  2.2E-05  4.9E-04
+etot    5  N  Y  2  U    -652.69010566573  6.2E-07  8.5E-06  2.3E-04
+etot    6  N  Y  2  U    -652.69010890482  3.2E-06  3.5E-06  1.1E-04
+etot    7  N  N  2  U    -652.69010936611  4.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  46
+  Total energy:      -652.70799552617 hartrees
+  ** restarting optimization from step   45 **
+  energy change:           4.8008E-03 .  (  5.0000E-05 )
+  gradient maximum:        1.1572E-03 .  (  4.5000E-04 )
+  gradient rms:            3.8458E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.2057E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2160E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.9176E-04
+  step size:     0.29996
+  trust radius:  0.30000
+---------------- geometry iteration  46 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.66496568737           9.6E-04  1.0E-02
+etot    2  Y  Y  6  M    -652.69501728135  3.0E-02  1.6E-04  1.1E-03
+etot    3  N  Y  2  U    -652.69464079665 -3.8E-04  1.1E-04  2.0E-03
+etot    4  Y  Y  6  M    -652.69520266339  5.6E-04  3.7E-05  1.1E-03
+etot    5  N  Y  2  U    -652.69526404868  6.1E-05  1.6E-05  5.7E-04
+etot    6  N  Y  2  U    -652.69528336854  1.9E-05  4.8E-06  4.5E-05
+etot    7  N  N  2  U    -652.69528362067  2.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  47
+  Total energy:      -652.71313099355 hartrees
+  energy change:          -3.3468E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.7491E-03 .  (  4.5000E-04 )
+  gradient rms:            4.7895E-04 .  (  3.0000E-04 )
+  displacement maximum:    5.4453E-02 .  (  1.8000E-03 )
+  displacement rms:        1.6066E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.0424E-04
+  step size:     0.14985
+  trust radius:  0.30000
+---------------- geometry iteration  47 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68863022926           4.5E-04  4.9E-03
+etot    2  Y  Y  6  M    -652.69517424284  6.5E-03  9.9E-05  1.1E-03
+etot    3  N  Y  2  U    -652.69504083609 -1.3E-04  6.6E-05  1.8E-03
+etot    4  Y  Y  6  M    -652.69530479531  2.6E-04  1.5E-05  4.2E-04
+etot    5  N  Y  2  U    -652.69530395704 -8.4E-07  7.9E-06  3.2E-04
+etot    6  N  Y  2  U    -652.69530905982  5.1E-06  2.4E-06  1.9E-05
+etot    7  N  N  2  U    -652.69530908271  2.3E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  48
+  Total energy:      -652.71321757166 hartrees
+  energy change:          -8.6578E-05 .  (  5.0000E-05 )
+  gradient maximum:        3.4647E-03 .  (  4.5000E-04 )
+  gradient rms:            8.0263E-04 .  (  3.0000E-04 )
+  displacement maximum:    6.5140E-02 .  (  1.8000E-03 )
+  displacement rms:        1.6925E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.0153E-04
+  step size:     0.15786
+  trust radius:  0.30000
+---------------- geometry iteration  48 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69278147405           3.1E-04  3.1E-03
+etot    2  Y  Y  6  M    -652.69559754986  2.8E-03  8.7E-05  6.3E-04
+etot    3  Y  Y  6  M    -652.69546852776 -1.3E-04  6.0E-05  1.6E-03
+etot    4  N  Y  2  U    -652.69564521595  1.8E-04  1.6E-05  6.0E-04
+etot    5  N  Y  2  U    -652.69565813519  1.3E-05  6.7E-06  2.1E-04
+etot    6  N  Y  2  U    -652.69566099774  2.9E-06  2.4E-06  2.6E-05
+etot    7  N  N  2  U    -652.69566108551  8.8E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  49
+  Total energy:      -652.71356214086 hartrees
+  energy change:          -3.4457E-04 .  (  5.0000E-05 )
+  gradient maximum:        2.3140E-03 .  (  4.5000E-04 )
+  gradient rms:            6.8073E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.1739E-01 .  (  1.8000E-03 )
+  displacement rms:        3.2200E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -4.0559E-04
+  step size:     0.30034
+  trust radius:  0.30000
+---------------- geometry iteration  49 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68597568928           5.8E-04  6.2E-03
+etot    2  Y  Y  6  M    -652.69581220703  9.8E-03  1.7E-04  1.2E-03
+etot    3  N  Y  2  U    -652.69519179211 -6.2E-04  1.2E-04  3.0E-03
+etot    4  Y  Y  6  M    -652.69597152594  7.8E-04  3.1E-05  1.1E-03
+etot    5  N  Y  2  U    -652.69601777592  4.6E-05  1.4E-05  5.1E-04
+etot    6  N  Y  2  U    -652.69603154361  1.4E-05  4.1E-06  4.2E-05
+etot    7  N  N  2  U    -652.69603177741  2.3E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  50
+  Total energy:      -652.71403208733 hartrees
+  energy change:          -4.6995E-04 .  (  5.0000E-05 )
+  gradient maximum:        3.0989E-03 .  (  4.5000E-04 )
+  gradient rms:            7.8038E-04 .  (  3.0000E-04 )
+  displacement maximum:    7.3771E-02 .  (  1.8000E-03 )
+  displacement rms:        2.0355E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.1757E-04
+  step size:     0.18986
+  trust radius:  0.30000
+---------------- geometry iteration  50 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69172365820           3.8E-04  3.6E-03
+etot    2  Y  Y  6  M    -652.69605180890  4.3E-03  1.1E-04  1.0E-03
+etot    3  Y  Y  6  M    -652.69577794170 -2.7E-04  8.0E-05  2.4E-03
+etot    4  N  Y  2  U    -652.69609615843  3.2E-04  2.1E-05  6.0E-04
+etot    5  N  Y  2  U    -652.69611600020  2.0E-05  8.9E-06  1.9E-04
+etot    6  N  Y  2  U    -652.69612101501  5.0E-06  2.8E-06  2.5E-05
+etot    7  N  N  2  U    -652.69612106493  5.0E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  51
+  Total energy:      -652.71421345887 hartrees
+  energy change:          -1.8137E-04 .  (  5.0000E-05 )
+  gradient maximum:        2.5571E-03 .  (  4.5000E-04 )
+  gradient rms:            7.7977E-04 .  (  3.0000E-04 )
+  displacement maximum:    3.9679E-02 .  (  1.8000E-03 )
+  displacement rms:        1.0220E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.3691E-04
+  step size:     0.09532
+  trust radius:  0.30000
+---------------- geometry iteration  51 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69276266782           3.1E-04  3.4E-03
+etot    2  Y  Y  6  M    -652.69618715525  3.4E-03  4.9E-05  7.9E-04
+etot    3  N  Y  2  U    -652.69616074162 -2.6E-05  3.8E-05  8.4E-04
+etot    4  N  Y  2  U    -652.69618786783  2.7E-05  1.6E-05  6.5E-04
+etot    5  N  Y  2  U    -652.69621138502  2.4E-05  3.2E-06  5.4E-05
+etot    6  N  N  2  U    -652.69621186695  4.8E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  52
+  Total energy:      -652.71437586967 hartrees
+  energy change:          -1.6241E-04 .  (  5.0000E-05 )
+  gradient maximum:        2.3717E-03 .  (  4.5000E-04 )
+  gradient rms:            5.9438E-04 .  (  3.0000E-04 )
+  displacement maximum:    4.8207E-02 .  (  1.8000E-03 )
+  displacement rms:        1.3621E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -9.0543E-05
+  step size:     0.12705
+  trust radius:  0.30000
+---------------- geometry iteration  52 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69186638915           3.7E-04  4.2E-03
+etot    2  Y  Y  6  M    -652.69621326808  4.3E-03  6.6E-05  6.4E-04
+etot    3  Y  Y  6  M    -652.69619795354 -1.5E-05  4.6E-05  7.4E-04
+etot    4  N  Y  2  U    -652.69623747902  4.0E-05  1.6E-05  4.3E-04
+etot    5  N  Y  2  U    -652.69625176309  1.4E-05  5.5E-06  1.7E-04
+etot    6  N  Y  2  U    -652.69625413864  2.4E-06  2.1E-06  2.9E-05
+etot    7  N  N  2  U    -652.69625418393  4.5E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  53
+  Total energy:      -652.71454338969 hartrees
+  energy change:          -1.6752E-04 .  (  5.0000E-05 )
+  gradient maximum:        9.6023E-04 .  (  4.5000E-04 )
+  gradient rms:            2.9919E-04 *  (  3.0000E-04 )
+  displacement maximum:    7.5758E-02 .  (  1.8000E-03 )
+  displacement rms:        2.0417E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -6.5988E-05
+  step size:     0.19044
+  trust radius:  0.30000
+---------------- geometry iteration  53 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.68680194924           5.4E-04  6.4E-03
+etot    2  Y  Y  6  M    -652.69618709303  9.4E-03  9.2E-05  1.1E-03
+etot    3  N  Y  2  U    -652.69614684534 -4.0E-05  6.2E-05  9.9E-04
+etot    4  Y  Y  6  M    -652.69624485712  9.8E-05  1.9E-05  4.6E-04
+etot    5  N  Y  2  U    -652.69627959489  3.5E-05  3.7E-06  5.3E-05
+etot    6  N  N  2  U    -652.69627985304  2.6E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  54
+  Total energy:      -652.71471014391 hartrees
+  energy change:          -1.6675E-04 .  (  5.0000E-05 )
+  gradient maximum:        1.5216E-03 .  (  4.5000E-04 )
+  gradient rms:            4.3158E-04 .  (  3.0000E-04 )
+  displacement maximum:    6.2799E-02 .  (  1.8000E-03 )
+  displacement rms:        1.3300E-02 .  (  1.2000E-03 )
+  
+  predicted energy change: -3.7206E-05
+  step size:     0.12406
+  trust radius:  0.30000
+---------------- geometry iteration  54 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69130571604           3.9E-04  5.5E-03
+etot    2  Y  Y  6  M    -652.69626539751  5.0E-03  6.5E-05  8.5E-04
+etot    3  Y  Y  6  M    -652.69626721006  1.8E-06  4.7E-05  7.9E-04
+etot    4  N  Y  2  U    -652.69627403748  6.8E-06  2.0E-05  5.7E-04
+etot    5  N  Y  2  U    -652.69629878078  2.5E-05  5.7E-06  2.1E-04
+etot    6  N  Y  2  U    -652.69630119494  2.4E-06  2.0E-06  2.0E-05
+etot    7  N  N  2  U    -652.69630123743  4.2E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  55
+  Total energy:      -652.71480261830 hartrees
+  energy change:          -9.2474E-05 .  (  5.0000E-05 )
+  gradient maximum:        9.5496E-04 .  (  4.5000E-04 )
+  gradient rms:            2.8444E-04 *  (  3.0000E-04 )
+  displacement maximum:    1.2030E-02 .  (  1.8000E-03 )
+  displacement rms:        3.5055E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -1.2411E-05
+  step size:     0.03270
+  trust radius:  0.30000
+---------------- geometry iteration  55 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69608527179           8.8E-05  1.0E-03
+etot    2  Y  Y  6  M    -652.69632261885  2.4E-04  1.5E-05  1.3E-04
+etot    3  N  Y  2  U    -652.69631561047 -7.0E-06  9.9E-06  1.8E-04
+etot    4  N  Y  2  U    -652.69631872787  3.1E-06  2.4E-06  6.8E-05
+etot    5  N  N  2  U    -652.69631907350  3.5E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  56
+  Total energy:      -652.71482394292 hartrees
+  energy change:          -2.1325E-05 *  (  5.0000E-05 )
+  gradient maximum:        2.2751E-04 *  (  4.5000E-04 )
+  gradient rms:            8.1647E-05 *  (  3.0000E-04 )
+  displacement maximum:    9.6534E-03 .  (  1.8000E-03 )
+  displacement rms:        2.4078E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.0345E-06
+  step size:     0.02246
+  trust radius:  0.30000
+---------------- geometry iteration  56 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69621647123           5.8E-05  4.5E-04
+etot    2  Y  Y  6  M    -652.69631313864  9.7E-05  1.1E-05  9.4E-05
+etot    3  N  Y  2  U    -652.69630843496 -4.7E-06  8.7E-06  2.6E-04
+etot    4  N  Y  2  U    -652.69631239636  4.0E-06  2.7E-06  8.7E-05
+etot    5  N  N  2  U    -652.69631276768  3.7E-07  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  57
+  Total energy:      -652.71483147848 hartrees
+  energy change:          -7.5356E-06 *  (  5.0000E-05 )
+  gradient maximum:        1.8900E-04 *  (  4.5000E-04 )
+  gradient rms:            4.4525E-05 #  (  3.0000E-04 )
+  displacement maximum:    5.4151E-03 .  (  1.8000E-03 )
+  displacement rms:        1.3483E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -7.9811E-07
+  step size:     0.01258
+  trust radius:  0.30000
+---------------- geometry iteration  57 complete ----------------
+geopt (optimize geometry) done.
+onee (1-electron integrals) done.
+probe (project orbitals) done.
+grid (grid generation) done.
+rwr (Q operators) done.
+  
+       i  u  d  i  g
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -652.69627667989           3.3E-05  2.7E-04
+etot    2  N  Y  2  U    -652.69630653477  3.0E-05  9.5E-06  9.3E-05
+etot    3  N  Y  2  U    -652.69630316782 -3.4E-06  7.0E-06  2.6E-04
+etot    4  N  Y  2  U    -652.69630719314  4.0E-06  1.5E-06  3.6E-05
+etot    5  N  N  2  U    -652.69630726909  7.6E-08  0.0E+00  0.0E+00
+scf (DFT) done.
+der1a (1-e 1st deriv.) done.
+rwr (1st deriv. Q) done.
+der1b (2-e 1st deriv.) done.
+  Geometry optimization step  58
+  Total energy:      -652.71483205900 hartrees
+  energy change:          -5.8052E-07 #  (  5.0000E-05 )
+  gradient maximum:        1.2474E-04 *  (  4.5000E-04 )
+  gradient rms:            3.1531E-05 #  (  3.0000E-04 )
+  displacement maximum:    4.6232E-03 .  (  1.8000E-03 )
+  displacement rms:        1.2015E-03 .  (  1.2000E-03 )
+  
+  predicted energy change: -2.6333E-07
+  step size:     0.01121
+  trust radius:  0.30000
+------------- final geometry iteration  58 complete -------------
+geopt (optimize geometry) done.
+cutabab2 (abab integrals) done.
+der2a (1-e JK-1st deriv.) done.
+der2b (2-e JK-1st deriv.) done.
+der2nda (1-e 2nd deriv.) done.
+der2ndb (2-e 2nd deriv.) done.
+rwr (Q operators) done.
+cphfa (gradient of wave function) done.
+freq (vib. frequencies) done.
+Job J1_6632_2111 completed on hpc-89-09.cm.cluster at Wed May 29 02:51:11 2024
+Timer (jaguar_backend.py) : 2263.31 secs (0 hrs, 37 mins, 43 secs)
+Finished:   Wed May 29 02:51:11 2024

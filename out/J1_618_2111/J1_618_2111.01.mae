@@ -1,0 +1,181 @@
+{ 
+ s_m_m2io_version
+ :::
+ 2.0.0 
+} 
+
+f_m_ct { 
+ s_m_title
+ s_m_entry_name
+ i_m_Spin_multiplicity
+ s_j_Task
+ s_j_Jaguar_input_file
+ s_j_Jaguar_restart_input_file
+ s_j_Jaguar_restart_mae_file
+ s_j_Jaguar_output_file
+ s_j_Jaguar_log_file
+ s_j_Jaguar_mae_file
+ s_j_QM_Method
+ s_j_QM_Basis
+ i_j_Number_of_canonical_orbitals
+ i_j_Geometry_convergence_category
+ r_j_Gas_Phase_Energy
+ r_j_Final_Energy
+ r_j_HOMO
+ r_j_LUMO
+ r_j_Lowest_Frequency_(cm-1)
+ r_j_Highest_Frequency_(cm-1)
+ r_j_2nd_Lowest_Frequency_(cm-1)
+ i_j_Num_Negative_Frequencies
+ r_j_Zero_Point_Energy_(kcal/mol)
+ r_j_Entropy_(cal/mol/K)_298.15K_1.00E+00atm
+ r_j_Enthalpy_(kcal/mol)_298.15K_1.00E+00atm
+ r_j_Free_Energy_(kcal/mol)_298.15K_1.00E+00atm
+ r_j_Internal_Energy_(kcal/mol)_298.15K_1.00E+00atm
+ r_j_Heat_Capacity_(cal/mol/K)_298.15K_1.00E+00atm
+ r_j_ln(Q)_(kcal/mol)_298.15K_1.00E+00atm
+ r_j_Total_Internal_Energy_(au)_298.15K_1.00E+00atm
+ r_j_Total_Enthalpy_(au)_298.15K_1.00E+00atm
+ r_j_Total_Free_Energy_(au)_298.15K_1.00E+00atm
+ i_m_ct_format
+ :::
+ J1_618_2111.in 
+  J1_618_2111.in 
+  1
+  Optimization 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.in 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.01.in 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.01.mae 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.out 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.log 
+  /central/home/labounad/wittig-ch121/out/J1_618_2111/J1_618_2111.mae 
+  DFT(pbe-d3) 
+  6-31g** 
+  240
+  0
+  -612.235221196046
+  -612.235221196046
+  -0.210024466410572
+  -0.079321514772042
+  22.0258829419249
+  3111.33646809148
+  30.0104051741535
+  0
+  119.305745153842
+  113.8782852851
+  8.81089408222062
+  -25.1419166755319
+  8.21840849339335
+  46.4589347637508
+  42.4346467654954
+  -612.031998520144
+  -612.031054334252
+  -612.085161582638
+  2
+ m_depend[30] { 
+  # First column is dependency index #
+  i_m_depend_dependency
+  s_m_depend_property
+  :::
+  1 20 i_m_Spin_multiplicity 
+  2 20 s_j_Task 
+  3 20 s_j_Jaguar_input_file 
+  4 20 s_j_Jaguar_restart_input_file 
+  5 20 s_j_Jaguar_restart_mae_file 
+  6 20 s_j_Jaguar_output_file 
+  7 20 s_j_Jaguar_log_file 
+  8 20 s_j_Jaguar_mae_file 
+  9 20 s_j_QM_Method 
+  10 20 s_j_QM_Basis 
+  11 20 i_j_Number_of_canonical_orbitals 
+  12 20 i_j_Geometry_convergence_category 
+  13 20 r_j_Gas_Phase_Energy 
+  14 20 r_j_Final_Energy 
+  15 20 r_j_HOMO 
+  16 20 r_j_LUMO 
+  17 20 r_j_Lowest_Frequency_(cm-1) 
+  18 20 r_j_Highest_Frequency_(cm-1) 
+  19 20 r_j_2nd_Lowest_Frequency_(cm-1) 
+  20 20 i_j_Num_Negative_Frequencies 
+  21 20 r_j_Zero_Point_Energy_(kcal/mol) 
+  22 20 r_j_Entropy_(cal/mol/K)_298.15K_1.00E+00atm 
+  23 20 r_j_Enthalpy_(kcal/mol)_298.15K_1.00E+00atm 
+  24 20 r_j_Free_Energy_(kcal/mol)_298.15K_1.00E+00atm 
+  25 20 r_j_Internal_Energy_(kcal/mol)_298.15K_1.00E+00atm 
+  26 20 r_j_Heat_Capacity_(cal/mol/K)_298.15K_1.00E+00atm 
+  27 20 r_j_ln(Q)_(kcal/mol)_298.15K_1.00E+00atm 
+  28 20 r_j_Total_Internal_Energy_(au)_298.15K_1.00E+00atm 
+  29 20 r_j_Total_Enthalpy_(au)_298.15K_1.00E+00atm 
+  30 20 r_j_Total_Free_Energy_(au)_298.15K_1.00E+00atm 
+  :::
+ } 
+ m_atom[24] { 
+  # First column is atom index #
+  i_m_mmod_type
+  r_m_x_coord
+  r_m_y_coord
+  r_m_z_coord
+  i_m_color
+  i_m_atomic_number
+  s_m_atom_name
+  :::
+  1 15 2.661262 -0.211020 -1.665893 70 8 O1 
+  2 2 2.435571 -0.810854 -0.625442 2 6 C2 
+  3 16 3.389749 -1.472417 0.088527 70 8 O3 
+  4 3 4.708621 -1.422650 -0.499460 2 6 C4 
+  5 3 1.075984 -0.946525 0.038966 2 6 C5 
+  6 3 0.073421 0.085054 -0.484314 2 6 C6 
+  7 3 -1.335445 -0.113477 0.093802 2 6 C7 
+  8 3 -2.294141 0.923237 -0.451491 2 6 C8 
+  9 3 -3.448409 1.509137 0.297459 2 6 C9 
+  10 2 -3.746732 1.104900 1.706581 2 6 C10 
+  11 15 -4.872829 0.825479 2.090021 70 8 O11 
+  12 16 -2.222001 2.247778 0.090852 70 8 O12 
+  13 41 4.706211 -1.878002 -1.502406 21 1 H13 
+  14 41 5.356684 -1.988906 0.181965 21 1 H14 
+  15 41 5.054610 -0.380942 -0.589633 21 1 H15 
+  16 41 0.715918 -1.975363 -0.155788 21 1 H16 
+  17 41 1.204606 -0.879119 1.133085 21 1 H17 
+  18 41 0.048578 0.031917 -1.586845 21 1 H18 
+  19 41 0.425614 1.101833 -0.237923 21 1 H19 
+  20 41 -1.717919 -1.118660 -0.166704 21 1 H20 
+  21 41 -1.302799 -0.059389 1.195099 21 1 H21 
+  22 41 -2.416816 0.900812 -1.547615 21 1 H22 
+  23 41 -4.323237 1.845272 -0.277453 21 1 H23 
+  24 41 -2.855618 1.090078 2.389329 21 1 H24 
+  :::
+ } 
+ m_bond[24] { 
+  # First column is bond index #
+  i_m_from
+  i_m_to
+  i_m_order
+  :::
+  1 1 2 2
+  2 2 3 1
+  3 2 5 1
+  4 3 4 1
+  5 4 14 1
+  6 4 13 1
+  7 4 15 1
+  8 5 17 1
+  9 5 16 1
+  10 5 6 1
+  11 6 19 1
+  12 6 18 1
+  13 6 7 1
+  14 7 20 1
+  15 7 21 1
+  16 7 8 1
+  17 8 22 1
+  18 8 12 1
+  19 8 9 1
+  20 9 23 1
+  21 9 12 1
+  22 9 10 1
+  23 10 24 1
+  24 10 11 2
+  :::
+ } 
+} 
+

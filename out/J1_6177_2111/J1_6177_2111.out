@@ -1,0 +1,114 @@
+Job J1_6177_2111 started on hpc-93-13.cm.cluster at Wed May 29 05:48:37 2024
+jobid: hpc-93-13-0-66572423
+
+  +--------------------------------------------------------------------+
+  |  Jaguar version 10.9, release 139                                  |
+  |                                                                    |
+  |  Copyright Schrodinger, Inc.                                       |
+  |  All Rights Reserved.                                              |
+  |                                                                    |
+  |  The following have contributed to Jaguar (listed alphabetically): |
+  |  Mike Beachy, Art Bochevarov, Dale Braden, Yixiang Cao,            |
+  |  Alan Chien, Chris Cortis, Rich Friesner, Bill Goddard,            |
+  |  Hod Greeley, Tom Hughes, Leif Jacobson, Jean-Marc Langlois,       |
+  |  Daniel Levine, Daniel Mainz, Rob Murphy, Dean Philipp,            |
+  |  Tom Pollard, Murco Ringnalda, Mark Watson, Haoyu Yu.              |
+  |                                                                    |
+  |  Use of this program should be acknowledged in publications as:    |
+  |                                                                    |
+  |  Jaguar, version 10.9, Schrodinger, Inc., New York, NY, 2020.      |
+  |                                                                    |
+  |  A. D. Bochevarov, E. Harder, T. F. Hughes, J. R. Greenwood,       |
+  |  D. A. Braden, D. M. Philipp, D. Rinaldo, M. D. Halls,             |
+  |  J. Zhang, R. A. Friesner, "Jaguar: A High-Performance Quantum     |
+  |  Chemistry Software Program with Strengths in Life and Materials   |
+  |  Sciences", Int. J. Quantum Chem., 2013, 113(18), 2110-2142.       |
+  +--------------------------------------------------------------------+
+  
+  start of program pre
+  
+  Job name: J1_6177_2111
+  Executables used: /groups/wag/programs/Schrodinger_2020_3/jaguar-v10.9/bin/Linux-x86_64
+  Temporary files : /central/scratch/labounad/J1_6177_2111#hpc-93-13-0-66572423
+  Maestro file (input):  J1_6177_2111.mae
+  Maestro file (output): J1_6177_2111.01.mae
+  
+ Contents of input file: &gen section only
+ ----------------Contents start----------------
+&gen
+basis=6-31G**
+igeopt=1
+dftname=PBE-D3
+ifreq=1
+&
+ -----------------Contents end-----------------
+ 
+  basis set:             6-31g**                         
+  net molecular charge:    0
+  multiplicity:            1
+  
+  Using up to   8 threads per process
+  
+  
+ ERROR 922: fatal error
+  
+   basis set 6-31g not found for atom            1
+
+
+  Consult our Knowledge Base webpage for advice
+  on how to resolve this kind of problem:
+ 
+  http://www.schrodinger.com/kb/1612
+
+
+
+ ----------------------------------------------------------------------
+ Jaguar cannot recover from this error and will now abort. 
+ For technical support please contact the Schrodinger Support Center at
+ http://www.schrodinger.com/supportcenter/ or help@schrodinger.com
+ ----------------------------------------------------------------------
+
+
+
+ Total cpu seconds     user:       0.000   user+sys:       0.000
+
+  
+Date:          Wed 29 May 2024 05:48:41
+SCHRODINGER:   /groups/wag/programs/Schrodinger_2020_3
+uname -a:      Linux hpc-93-13.cm.cluster 5.14.0-162.23.1.el9_1.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Mar 23 20:08:28 EDT 2023 x86_64 x86_64 x86_64 GNU/Linux
+FQDN:          hpc-93-13.cm.cluster
+Main memory:   191507 MB
+Free disk:     388950600 MB
+Host ID:       0000110ffe80
+Machine name:  hpc-93-13.cm.cluster
+OS:            Red Hat Enterprise Linux 9.3 (Plow)
+CPU:           Intel(R) Xeon(R) Gold 6130 CPU @ 2.10GHz
+Processors:    32
+Memory:        200810463 kB
+Swap:          4294963 kB
+kernel:        5.14.0-162.23.1.el9_1.x86_64
+glibc:         2.34.
+Product:       aacg-v33139-Linux-x86_64 ( aacg-src:3f363cc6584bd133e9015a25f7fe0dc12dd8231d )
+Product:       bioluminate-v40139-Linux-x86_64 ( bioluminate-src:9ed49aa1bd75bb16b81db2af1fb478d3ff18433b )
+Product:       canvas-v45139-Linux-x86_64 ( canvas-src:6c22b354834df27b227f9f945780b9ffee615caa )
+Product:       combiglide-v58139-Linux-x86_64 ( vcs-src:00ba49ca313a6094d5828209c96b5159c23a505f )
+Product:       desmond-v63139-Linux-x86_64 ( desmond-gpu-src:77b884861966b6bb6ebfccbbab52c551fa3be03d
+                                             desmond-src:2567b6f9c1bd2b33e53bdb6a91d7c830c65de5fd )
+Product:       epik-v53139-Linux-x86_64 ( epik-src:be182183ac84b58216cb1d23e39bc3fcd51f8bb9 )
+Product:       glide-v88139-Linux-x86_64 ( glide-src:36b2e06af0912712f5068d060c87c4ab3926837e )
+Product:       impact-v88139-Linux-x86_64 ( impact-src:8fd0809a41ea2692c08fead2a86f7893d2b266c8 )
+Product:       jaguar-v109139-Linux-x86_64 ( jaguar-src:ac29f234200d8f9c74982aa458f9a01b513d4c26 )
+Product:       knime-v51139-Linux-x86_64 ( knime-src:65b0ce5fb43256a5500379e25114b826ae136d90 )
+Product:       macromodel-v129139-Linux-x86_64 ( macromodel-src:a8ad8273ad0750f7bbec33703b924e823b69e6f2 )
+Product:       maestro-v125139-Linux-x86_64 ( maestro-src:33d488d6d8b2a3312378ae67b4d7ddce5cec1a5e )
+Product:       mmshare-v51139-Linux-x86_64 ( DeepAutoQSAR:42f8cb6b42af1d9b602654eb5ed8e018d31e19c0
+                                             datamouse:08d79adbb71b492a57a85d20dabdaa7a64ad3eb9
+                                             khan_internal:4143750d7a91af30d058cdd7cf35f8eeeae03b54
+                                             ligand_ml:6404a28a8f51f2f1e2b434e84ea7dc9d19de8d9d
+                                             mmshare:5ea18c9a23af783b722e23ed115f848a30eb97fa
+                                             pharma-src:5441afddb84ea8b2b1f7deb0ac50ae58e014aec2 )
+Product:       pldb-v51139-Linux-x86_64 ( pldb-src:15b9f746ba1af86cd12daf8209497659e351a403 )
+Product:       psp-v61139-Linux-x86_64 ( plop:3be81820cbcc2f44dd9dfb25e974ada78a0f75e3
+                                         psp-src:1be683e950c827fa668cd1e0c1b497efbc8cf9ce )
+Product:       qikprop-v65139-Linux-x86_64 ( qikprop-src:b748aac7a64bcc5777ea209deecb4847576faf7e )
+Build Start Time: 2020-08-12 04:21 UTC

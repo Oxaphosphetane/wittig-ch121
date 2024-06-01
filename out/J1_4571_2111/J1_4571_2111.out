@@ -1,0 +1,2774 @@
+Job J1_4571_2111 started on hpc-89-18.cm.cluster at Wed May 29 02:20:31 2024
+jobid: hpc-89-18-0-6656f35d
+
+  +--------------------------------------------------------------------+
+  |  Jaguar version 10.9, release 139                                  |
+  |                                                                    |
+  |  Copyright Schrodinger, Inc.                                       |
+  |  All Rights Reserved.                                              |
+  |                                                                    |
+  |  The following have contributed to Jaguar (listed alphabetically): |
+  |  Mike Beachy, Art Bochevarov, Dale Braden, Yixiang Cao,            |
+  |  Alan Chien, Chris Cortis, Rich Friesner, Bill Goddard,            |
+  |  Hod Greeley, Tom Hughes, Leif Jacobson, Jean-Marc Langlois,       |
+  |  Daniel Levine, Daniel Mainz, Rob Murphy, Dean Philipp,            |
+  |  Tom Pollard, Murco Ringnalda, Mark Watson, Haoyu Yu.              |
+  |                                                                    |
+  |  Use of this program should be acknowledged in publications as:    |
+  |                                                                    |
+  |  Jaguar, version 10.9, Schrodinger, Inc., New York, NY, 2020.      |
+  |                                                                    |
+  |  A. D. Bochevarov, E. Harder, T. F. Hughes, J. R. Greenwood,       |
+  |  D. A. Braden, D. M. Philipp, D. Rinaldo, M. D. Halls,             |
+  |  J. Zhang, R. A. Friesner, "Jaguar: A High-Performance Quantum     |
+  |  Chemistry Software Program with Strengths in Life and Materials   |
+  |  Sciences", Int. J. Quantum Chem., 2013, 113(18), 2110-2142.       |
+  +--------------------------------------------------------------------+
+  
+  start of program pre
+  
+  Job name: J1_4571_2111
+  Executables used: /groups/wag/programs/Schrodinger_2020_3/jaguar-v10.9/bin/Linux-x86_64
+  Temporary files : /central/scratch/labounad/J1_4571_2111#hpc-89-18-0-6656f35d
+  Maestro file (input):  J1_4571_2111.mae
+  Maestro file (output): J1_4571_2111.01.mae
+  
+ Contents of input file: &gen section only
+ ----------------Contents start----------------
+&gen
+basis=6-31G**
+igeopt=1
+dftname=PBE-D3
+ifreq=1
+&
+ -----------------Contents end-----------------
+ 
+  basis set:             6-31g**                         
+  net molecular charge:    0
+  multiplicity:            1
+  
+  Using up to   8 threads per process
+  
+  number of basis functions....          169
+  
+ Input geometry:
+                                   angstroms
+  atom               x                 y                 z
+  C1            2.4123749131      0.2649049417     -0.5286813823 
+  C2            1.3379198053     -0.7061280725     -0.1502504644 
+  Si3          -0.4055949780     -0.1429449177      0.1053796774 
+  C4           -0.4573930819      1.1202116569      1.4792864611 
+  C5           -1.4852010269     -1.5960332338      0.5656187286 
+  C6           -1.0493465936      0.6260609457     -1.4694479492 
+  O7            1.6133458693     -1.8864407775     -0.0077374014 
+  H8            3.2056532536      0.2620927817      0.2477371380 
+  H9            2.0071679726      1.2944290807     -0.6198633710 
+  H10           2.8541928422     -0.0312903461     -1.5029449380 
+  H11          -0.0657330757      0.6665494244      2.4127148324 
+  H12           0.1663862234      1.9948346736      1.2029618889 
+  H13          -1.5046906655      1.4492017982      1.6387794430 
+  H14          -1.1089576498     -2.0540764617      1.5032954958 
+  H15          -1.4608825978     -2.3478444575     -0.2497270930 
+  H16          -2.5276402685     -1.2480646519      0.7165805233 
+  H17          -0.4238686404      1.5021093457     -1.7372855150 
+  H18          -1.0094382533     -0.1212403737     -2.2882550802 
+  H19          -2.0982940479      0.9536686438     -1.3181609942 
+   
+  principal moments of inertia:
+        amu*angstrom^2:      203.78258      305.08987      348.26979
+                g*cm^2: 3.38388897E-38 5.06613590E-38 5.78315525E-38
+   
+  rotational constants:
+               cm^(-1):      0.08272360      0.05525463      0.04840394
+                   GHz:      2.47999118      1.65649224      1.45111353
+   
+  Molecular weight:     116.07 amu
+   
+  Stoichiometry: SiC5H12O
+  Molecular Point Group: Cs      
+	Molecule translated to center of mass 
+	Molecule reoriented along symmetry axes
+  Point Group used: Cs
+  
+ 
+Number of optimization coordinates:    52
+Number of independent coordinates:     52
+Number of non-redundant coordinates:   51
+Number of frozen coordinates:           0
+Number of harmonic constraints:         0
+ 
+Number of geometric degrees of freedom:    51
+Maximum geometric degrees of freedom:      51
+ " " " " " excluding dummy atoms:          51
+ 
+  
+ Symmetrized geometry:
+                                   angstroms
+  atom               x                 y                 z
+  C1           -0.9898112717      2.1437549807      0.0000000000 
+  C2           -1.0466884268      0.6479829920      0.0000000000 
+  Si3           0.5029711666     -0.3624233518      0.0000000000 
+  C4            1.5058571509      0.0346665568     -1.5239445945 
+  C5            0.0793347514     -2.1815899322      0.0000000000 
+  C6            1.5058571509      0.0346665568      1.5239445945 
+  O7           -2.1292860292      0.0846979818      0.0000000000 
+  H8           -1.5003326548      2.5347417377     -0.9047770183 
+  H9            0.0601994279      2.5041773762      0.0000000000 
+  H10          -1.5003326548      2.5347417377      0.9047770183 
+  H11           0.9066004438     -0.1918661757     -2.4295220902 
+  H12           1.7775384952      1.1101157104     -1.5195586406 
+  H13           2.4295652684     -0.5795405348     -1.5281864114 
+  H14          -0.5133994343     -2.4233683200     -0.9059855133 
+  H15          -0.5133994343     -2.4233683200      0.9059855133 
+  H16           1.0145006212     -2.7782606669      0.0000000000 
+  H17           1.7775384952      1.1101157104      1.5195586406 
+  H18           0.9066004438     -0.1918661757      2.4295220902 
+  H19           2.4295652684     -0.5795405348      1.5281864114 
+   
+  nuclear repulsion energy.......     386.038874723 hartrees
+ 
+ Non-default options chosen:
+   SCF calculation type: DFT(pbe-d3)                 
+   DFT=PBE(X+LC)+PW91 (PBE-D3)
+   Geometry will be optimized in redundant internal coordinates
+   Vibrational frequencies and related properties will be computed
+      from analytic second derivatives
+   IR intensities will be computed
+   Thermochemical properties will be computed
+   Scaling standard convergence criteria by a factor of   1.00
+  
+ Temporary integer options set:
+     73=  2
+  
+  Peak memory usage:   2633 Mb
+  
+  end of program pre
+   
+ Time(pre)  user:        6.0  user+sys:        6.0  wallclock:        2.6
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    3.946E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        3.3  user+sys:        3.3  wallclock:        0.9
+  
+  start of program hfig
+  
+  initial wavefunction generated automatically from atomic wavefunctions
+ 
+  Irreducible     Total no   No of occupied orbitals 
+  representation  orbitals   Shell_1  Shell_2    ...
+  Ap               106         23
+  App               63          9
+  ------------------------
+  Orbital occupation/shell    1.000
+ 
+  Peak memory usage:   2549 Mb
+  
+  end of program hfig
+   
+ Time(hfig)  user:        3.3  user+sys:        3.3  wallclock:        0.6
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        3.2  user+sys:        3.2  wallclock:        0.6
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       48       57      270        0       47       77       73
+  grid # 2      160      202      270        0      163      274      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      112        0        0        0        0
+  grid # 2        0      252      446        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      108       64      106      109      107     1243
+  grid # 2      440      259      438      442      441     4079
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        6.4  user+sys:        6.4  wallclock:        1.1
+  
+  start of program rwr
+  
+  Peak memory usage:   2554 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        5.8  user+sys:        5.8  wallclock:        1.0
+  
+  start of program scf
+  
+ number of electrons..........         64
+ number of alpha electrons....         32
+ number of beta electrons.....         32
+ number of orbitals, total....        169
+ number of doubly-occ'd orbs..         32
+ number of open shell orbs....          0
+ number of occupied orbitals..         32
+ number of virtual orbitals...        137
+ number of hamiltonians.......          1
+ number of shells.............          1
+ SCF type: DFT=PBE(X+LC)+PW91 (PBE-D3)
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  5  M    -560.84714339257           9.3E-03  1.9E-01
+etot    2  Y  Y  6  M    -561.30958835792  4.6E-01  7.9E-03  1.8E-01
+etot    3  Y  Y  6  M    -561.65251374314  3.4E-01  3.9E-03  1.4E-01
+etot    4  N  Y  2  U    -561.92370082552  2.7E-01  1.7E-03  3.4E-02
+etot    5  Y  Y  6  M    -561.97006778747  4.6E-02  5.9E-04  1.4E-02
+etot    6  N  Y  2  U    -561.97239801979  2.3E-03  3.3E-04  6.1E-03
+etot    7  Y  Y  6  M    -561.97280973274  4.1E-04  1.7E-04  2.5E-03
+etot    8  Y  Y  6  M    -561.97331576967  5.1E-04  2.2E-05  6.7E-04
+etot    9  N  Y  2  U    -561.97336852137  5.3E-05  6.6E-06  1.4E-04
+etot   10  N  Y  2  U    -561.97336952542  1.0E-06  2.5E-06  3.1E-05
+etot   11  N  N  2  U    -561.97336952140 -4.0E-09  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     386.03887472288
+   (E)  Total one-electron terms.....   -1537.06515587042
+   (I)  Total two-electron terms.....     589.05291162614
+   (J)    Coulomb....................     649.63251472076
+   (K)    Exchange+Correlation.......     -60.57960309462
+   (L)  Electronic energy............    -948.01224424428  (E+I)
+   (N0) D3 correction................      -0.00757401392
+   (N)  Total energy.................    -561.98094353531  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98094353531
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98094353531 hartrees   iterations:  11
+  
+ 
+ HOMO energy:    -0.17076
+ LUMO energy:    -0.06662
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.39440 Ap        -18.75805 Ap         -9.95541 Ap         -9.89820 Ap     
+    -9.88265 Ap         -9.88265 App        -9.87348 Ap         -5.02836 Ap     
+    -3.43953 Ap         -3.43916 App        -3.43903 Ap         -0.93933 Ap     
+    -0.66912 Ap         -0.64257 Ap         -0.60962 App        -0.60243 Ap     
+    -0.49653 Ap         -0.41715 Ap         -0.39138 App        -0.38067 Ap     
+    -0.37241 Ap         -0.36052 Ap         -0.35943 App        -0.35096 Ap     
+    -0.34664 App        -0.33963 Ap         -0.33293 App        -0.30760 App    
+    -0.30082 Ap         -0.25808 App        -0.25269 Ap         -0.17076 Ap     
+    -0.06662 App         0.04219 Ap          0.06607 Ap          0.08201 Ap     
+     0.08310 App         0.09190 Ap          0.10482 Ap          0.11189 Ap     
+     0.11261 App         0.13485 App    
+ 
+  Peak memory usage:   3659 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       31.4  user+sys:       31.4  wallclock:        7.0
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        3.6  user+sys:        3.6  wallclock:        1.0
+  
+  start of program rwr
+  
+  Peak memory usage:   2513 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        7.9  user+sys:        7.9  wallclock:        1.1
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1          7.410083E-03   1.924496E-02   1.174678E-20
+    2 C2         -4.814993E-03   1.168596E-02   2.011688E-20
+    3 Si3         2.124493E-02  -2.138466E-02  -3.987513E-20
+    4 C4          2.657109E-03   4.777842E-03  -7.088967E-03
+    5 C5         -4.218312E-03  -4.381327E-03  -6.152809E-21
+    6 C6          2.657109E-03   4.777842E-03   7.088967E-03
+    7 O7         -2.710597E-02  -1.462168E-02   4.264855E-21
+    8 H8          5.209615E-04  -1.310587E-04   5.100206E-03
+    9 H9         -4.934946E-03   1.987634E-03   2.528862E-20
+   10 H10         5.209615E-04  -1.310587E-04  -5.100206E-03
+   11 H11         5.621787E-03   1.999741E-03   1.529546E-03
+   12 H12         1.240552E-03  -4.761865E-03  -3.982208E-03
+   13 H13        -3.150300E-03   3.826541E-03  -2.409177E-03
+   14 H14         1.854411E-03  -2.293587E-03   5.766150E-03
+   15 H15         1.854411E-03  -2.293587E-03  -5.766150E-03
+   16 H16        -5.157705E-03   5.558592E-04  -7.648783E-21
+   17 H17         1.240552E-03  -4.761865E-03   3.982208E-03
+   18 H18         5.621787E-03   1.999741E-03  -1.529546E-03
+   19 H19        -3.150300E-03   3.826541E-03   2.409177E-03
+ -------------   -------------  -------------  -------------
+     total       -8.786850E-05  -7.802375E-05  -4.336809E-19
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:        6.4  user+sys:        6.4  wallclock:        1.2
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   1
+  Total energy:      -561.98094353531 hartrees
+ ----------------------------------------------------------------------------
+  
+  gradient maximum:        3.3639E-02 .  (  4.5000E-04 )
+  gradient rms:            8.9256E-03 .  (  3.0000E-04 )
+  displacement maximum:    1.9105E-01 .  (  1.8000E-03 )
+  displacement rms:        3.7489E-02 .  (  1.2000E-03 )
+  
+  predicted energy change:  -8.3376E-03
+  step size:     0.27033
+  trust radius:  0.30000
+  
+  molecular structure not yet converged...
+  
+  center of mass moved by:
+     x:    -8.9645E-03     y:    -8.9947E-03     z:    -1.1479E-17
+  
+  new geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0328647089      2.2101678648      0.0000000000 
+  C2           -1.0944564860      0.6752269862      0.0000000000 
+  Si3           0.5386602998     -0.3922859858      0.0000000000 
+  C4            1.5537215716      0.0338318915     -1.5635565564 
+  C5            0.0701067252     -2.2309696336      0.0000000000 
+  C6            1.5537215716      0.0338318915      1.5635565564 
+  O7           -2.1963999771      0.1011038687      0.0000000000 
+  H8           -1.5542508779      2.6017491996     -0.8896053711 
+  H9           -0.0017470242      2.6040556384      0.0000000000 
+  H10          -1.5542508779      2.6017491996      0.8896053711 
+  H11           0.9786274794     -0.1845982236     -2.4777103857 
+  H12           1.8354094825      1.0994853278     -1.5833213927 
+  H13           2.4787718743     -0.5641860953     -1.5893900903 
+  H14          -0.5269148518     -2.4837344821     -0.8900198701 
+  H15          -0.5269148518     -2.4837344821      0.8900198701 
+  H16           0.9789779207     -2.8541252678      0.0000000000 
+  H17           1.8354094825      1.0994853278      1.5833213927 
+  H18           0.9786274794     -0.1845982236      2.4777103857 
+  H19           2.4787718743     -0.5641860953      1.5893900903 
+   
+  nuclear repulsion energy.......     376.482589753 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   1   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2503 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        2.4  user+sys:        2.4  wallclock:        0.6
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    4.704E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        3.3  user+sys:        3.3  wallclock:        0.8
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        3.2  user+sys:        3.2  wallclock:        1.1
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       47       57      280        0       47       78       73
+  grid # 2      159      212      280        0      161      274      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      112        0        0        0        0
+  grid # 2        0      253      446        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      107       64      107      109      107     1253
+  grid # 2      440      261      437      443      442     4100
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        5.8  user+sys:        5.8  wallclock:        0.9
+  
+  start of program rwr
+  
+  Peak memory usage:   2550 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        6.8  user+sys:        6.8  wallclock:        3.8
+  
+  start of program scf
+  
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -561.97793274533           5.2E-04  4.3E-03
+etot    2  Y  Y  6  M    -561.97918966627  1.3E-03  3.1E-04  7.6E-03
+etot    3  Y  Y  6  M    -561.97879307147 -4.0E-04  2.0E-04  1.2E-02
+etot    4  Y  Y  6  M    -561.98015518094  1.4E-03  7.9E-05  2.5E-03
+etot    5  Y  Y  6  M    -561.98023815420  8.3E-05  1.2E-05  2.3E-04
+etot    6  N  Y  2  U    -561.98036626379  1.3E-04  5.1E-06  9.1E-05
+etot    7  N  Y  2  U    -561.98036653159  2.7E-07  2.8E-06  4.2E-05
+etot    8  N  N  2  U    -561.98036655150  2.0E-08  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     376.48258975266
+   (E)  Total one-electron terms.....   -1517.93422325927
+   (I)  Total two-electron terms.....     579.47126695511
+   (J)    Coulomb....................     639.97644701361
+   (K)    Exchange+Correlation.......     -60.50518005850
+   (L)  Electronic energy............    -938.46295630416  (E+I)
+   (N0) D3 correction................      -0.00723008415
+   (N)  Total energy.................    -561.98759663564  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98759663564
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98759663564 hartrees   iterations:   8
+  
+ 
+ HOMO energy:    -0.17136
+ LUMO energy:    -0.06732
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.41188 Ap        -18.76007 Ap         -9.96632 Ap         -9.89851 Ap     
+    -9.88418 Ap         -9.88418 App        -9.87651 Ap         -5.04100 Ap     
+    -3.45263 Ap         -3.45203 App        -3.45183 Ap         -0.92638 Ap     
+    -0.66059 Ap         -0.63894 Ap         -0.61056 App        -0.60590 Ap     
+    -0.49020 Ap         -0.41439 Ap         -0.38248 App        -0.37873 Ap     
+    -0.36744 Ap         -0.35693 Ap         -0.35687 App        -0.35082 Ap     
+    -0.34528 App        -0.34076 Ap         -0.33381 App        -0.30322 App    
+    -0.29934 Ap         -0.26084 App        -0.25874 Ap         -0.17136 Ap     
+    -0.06732 App         0.04548 Ap          0.06052 Ap          0.07023 Ap     
+     0.07714 App         0.09168 Ap          0.10934 Ap          0.11282 Ap     
+     0.11488 App         0.13582 Ap     
+ 
+  Peak memory usage:   3655 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       19.6  user+sys:       19.6  wallclock:        4.5
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        2.7  user+sys:        2.7  wallclock:        0.5
+  
+  start of program rwr
+  
+  Peak memory usage:   2475 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        8.3  user+sys:        8.3  wallclock:        1.3
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1          2.904289E-03  -9.626601E-04   1.548716E-20
+    2 C2         -1.092185E-02  -4.815611E-03   2.951766E-20
+    3 Si3         4.276881E-03  -1.891066E-03   1.314885E-20
+    4 C4         -3.286116E-03   4.023698E-04   3.756317E-03
+    5 C5         -2.806853E-04   4.441756E-03   3.200380E-21
+    6 C6         -3.286116E-03   4.023698E-04  -3.756317E-03
+    7 O7          1.136832E-02   6.327506E-03  -6.261193E-21
+    8 H8         -1.060933E-03  -6.164327E-04   2.138992E-04
+    9 H9         -5.013895E-04  -1.311475E-03   5.675435E-21
+   10 H10        -1.060933E-03  -6.164327E-04  -2.138992E-04
+   11 H11         2.819526E-04  -1.495321E-04  -1.654688E-04
+   12 H12         2.343586E-04  -1.237060E-04  -1.412842E-04
+   13 H13         5.535951E-04  -1.532417E-04  -3.129523E-04
+   14 H14        -1.739488E-04  -1.673334E-04   7.032619E-05
+   15 H15        -1.739488E-04  -1.673334E-04  -7.032619E-05
+   16 H16         1.030737E-05  -4.798287E-04  -8.184512E-21
+   17 H17         2.343586E-04  -1.237060E-04   1.412842E-04
+   18 H18         2.819526E-04  -1.495321E-04   1.654688E-04
+   19 H19         5.535951E-04  -1.532417E-04   3.129523E-04
+ -------------   -------------  -------------  -------------
+     total       -4.631177E-05  -3.071317E-04   5.421011E-20
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:        6.2  user+sys:        6.2  wallclock:        2.2
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   2
+  Total energy:      -561.98759663564 hartrees
+ ----------------------------------------------------------------------------
+  
+  energy change:          -6.6531E-03 .  (  5.0000E-05 )
+  gradient maximum:        1.3021E-02 .  (  4.5000E-04 )
+  gradient rms:            2.3874E-03 .  (  3.0000E-04 )
+  displacement maximum:    2.0059E-02 .  (  1.8000E-03 )
+  displacement rms:        6.5832E-03 .  (  1.2000E-03 )
+  
+  predicted energy change:  -3.1735E-04
+  step size:     0.04747
+  trust radius:  0.30000
+  
+  molecular structure not yet converged...
+  
+  center of mass moved by:
+     x:     8.6595E-03     y:    -2.9066E-03     z:     0.0000E+00
+  
+  new geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0297379439      2.1992304515      0.0000000000 
+  C2           -1.0922780537      0.6692511205      0.0000000000 
+  Si3           0.5438049193     -0.3947450709      0.0000000000 
+  C4            1.5483770520      0.0385752520     -1.5553840643 
+  C5            0.0581140777     -2.2185899611      0.0000000000 
+  C6            1.5483770520      0.0385752520      1.5553840643 
+  O7           -2.1870581863      0.0999309269      0.0000000000 
+  H8           -1.5581019145      2.5857181365     -0.8876434597 
+  H9            0.0006959784      2.5905733074      0.0000000000 
+  H10          -1.5581019145      2.5857181365      0.8876434597 
+  H11           0.9772460590     -0.1845552706     -2.4706336543 
+  H12           1.8236496538      1.1055824118     -1.5766202390 
+  H13           2.4792126817     -0.5513270239     -1.5840293966 
+  H14          -0.5430687891     -2.4654526165     -0.8886933988 
+  H15          -0.5430687891     -2.4654526165      0.8886933988 
+  H16           0.9577705086     -2.8552397288      0.0000000000 
+  H17           1.8236496538      1.1055824118      1.5766202390 
+  H18           0.9772460590     -0.1845552706      2.4706336543 
+  H19           2.4792126817     -0.5513270239      1.5840293966 
+   
+  nuclear repulsion energy.......     377.828522763 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   2   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2503 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        2.3  user+sys:        2.3  wallclock:        0.6
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    4.575E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        3.4  user+sys:        3.4  wallclock:        1.0
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        2.3  user+sys:        2.3  wallclock:        0.7
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       47       57      278        0       47       79       73
+  grid # 2      161      212      278        0      161      269      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      111        0        0        0        0
+  grid # 2        0      253      442        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      107       64      107      109      107     1251
+  grid # 2      439      261      437      443      442     4090
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        5.1  user+sys:        5.1  wallclock:        0.8
+  
+  start of program rwr
+  
+  Peak memory usage:   2550 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        5.8  user+sys:        5.8  wallclock:        1.0
+  
+  start of program scf
+  
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -561.98046090166           1.2E-04  1.1E-03
+etot    2  Y  Y  6  M    -561.98060540300  1.4E-04  5.1E-05  7.8E-04
+etot    3  Y  Y  6  M    -561.98057353123 -3.2E-05  3.8E-05  1.9E-03
+etot    4  N  Y  2  U    -561.98060638374  3.3E-05  1.1E-05  5.6E-04
+etot    5  N  Y  2  U    -561.98061041293  4.0E-06  2.2E-06  4.1E-05
+etot    6  N  N  2  U    -561.98061049979  8.7E-08  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     377.82852276292
+   (E)  Total one-electron terms.....   -1520.63741474768
+   (I)  Total two-electron terms.....     580.82828148497
+   (J)    Coulomb....................     641.35233992394
+   (K)    Exchange+Correlation.......     -60.52405843897
+   (L)  Electronic energy............    -939.80913326270  (E+I)
+   (N0) D3 correction................      -0.00726997762
+   (N)  Total energy.................    -561.98788047741  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98788047741
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98788047741 hartrees   iterations:   6
+  
+ 
+ HOMO energy:    -0.16971
+ LUMO energy:    -0.06443
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.40927 Ap        -18.75864 Ap         -9.96370 Ap         -9.89694 Ap     
+    -9.88349 Ap         -9.88349 App        -9.87578 Ap         -5.03901 Ap     
+    -3.45061 Ap         -3.45001 App        -3.44978 Ap         -0.92978 Ap     
+    -0.66070 Ap         -0.63988 Ap         -0.61100 App        -0.60646 Ap     
+    -0.48860 Ap         -0.41448 Ap         -0.38267 App        -0.37964 Ap     
+    -0.36782 Ap         -0.35729 Ap         -0.35723 App        -0.35113 Ap     
+    -0.34499 App        -0.34092 Ap         -0.33370 App        -0.30351 App    
+    -0.29934 Ap         -0.26163 App        -0.25977 Ap         -0.16971 Ap     
+    -0.06443 App         0.04551 Ap          0.06224 Ap          0.07159 Ap     
+     0.07804 App         0.09201 Ap          0.10909 Ap          0.11354 Ap     
+     0.11457 App         0.13603 Ap     
+ 
+  Peak memory usage:   3655 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       13.8  user+sys:       13.8  wallclock:        3.7
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        2.7  user+sys:        2.7  wallclock:        0.5
+  
+  start of program rwr
+  
+  Peak memory usage:   2475 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:       10.4  user+sys:       10.4  wallclock:        1.9
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1          1.340218E-03   3.800082E-04  -1.055258E-20
+    2 C2         -7.023487E-04  -1.521983E-03   2.460398E-20
+    3 Si3         8.278968E-04   4.605035E-04   7.570446E-20
+    4 C4         -9.869349E-04   1.234547E-04   1.219676E-03
+    5 C5         -8.038547E-05   1.023710E-03  -3.037939E-20
+    6 C6         -9.869349E-04   1.234547E-04  -1.219676E-03
+    7 O7          5.352720E-04   3.856224E-04  -2.512890E-20
+    8 H8         -3.893475E-04  -8.625803E-05  -6.861102E-05
+    9 H9         -1.439067E-04  -2.829132E-04   1.068750E-21
+   10 H10        -3.893475E-04  -8.625803E-05   6.861102E-05
+   11 H11         1.107390E-04  -6.660233E-05  -2.638008E-04
+   12 H12         1.293448E-04   9.106781E-05  -5.664857E-05
+   13 H13         4.056206E-04   2.837507E-06  -3.520508E-04
+   14 H14        -1.670184E-04  -8.230715E-05  -1.398728E-04
+   15 H15        -1.670184E-04  -8.230715E-05   1.398728E-04
+   16 H16        -1.082045E-04  -6.397509E-04  -4.690275E-21
+   17 H17         1.293448E-04   9.106781E-05   5.664857E-05
+   18 H18         1.107390E-04  -6.660233E-05   2.638008E-04
+   19 H19         4.056206E-04   2.837507E-06   3.520508E-04
+ -------------   -------------  -------------  -------------
+     total       -1.266515E-04  -2.304181E-04   0.000000E+00
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:        5.2  user+sys:        5.2  wallclock:        0.8
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   3
+  Total energy:      -561.98788047741 hartrees
+ ----------------------------------------------------------------------------
+  
+  energy change:          -2.8384E-04 .  (  5.0000E-05 )
+  gradient maximum:        3.2875E-03 .  (  4.5000E-04 )
+  gradient rms:            6.5674E-04 .  (  3.0000E-04 )
+  displacement maximum:    1.0461E-02 .  (  1.8000E-03 )
+  displacement rms:        3.2361E-03 .  (  1.2000E-03 )
+  
+  predicted energy change:  -4.4773E-05
+  step size:     0.02334
+  trust radius:  0.30000
+  
+  molecular structure not yet converged...
+  
+  center of mass moved by:
+     x:     4.9638E-03     y:    -4.3189E-03     z:     3.8262E-18
+  
+  new geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0251051964      2.1927428967     -0.0000000000 
+  C2           -1.0899787096      0.6626500690     -0.0000000000 
+  Si3           0.5468821476     -0.3951200089     -0.0000000000 
+  C4            1.5464387214      0.0455424956     -1.5530374551 
+  C5            0.0476694902     -2.2142845938     -0.0000000000 
+  C6            1.5464387214      0.0455424956      1.5530374551 
+  O7           -2.1838199872      0.0939074069     -0.0000000000 
+  H8           -1.5564819592      2.5778043305     -0.8868676869 
+  H9            0.0052001157      2.5826078939     -0.0000000000 
+  H10          -1.5564819592      2.5778043305      0.8868676869 
+  H11           0.9790008900     -0.1815374298     -2.4698813265 
+  H12           1.8135839801      1.1147574764     -1.5747115310 
+  H13           2.4839642976     -0.5347073566     -1.5854242360 
+  H14          -0.5576611227     -2.4549615036     -0.8879679814 
+  H15          -0.5576611227     -2.4549615036      0.8879679814 
+  H16           0.9374954871     -2.8653833014     -0.0000000000 
+  H17           1.8135839801      1.1147574764      1.5747115310 
+  H18           0.9790008900     -0.1815374298      2.4698813265 
+  H19           2.4839642976     -0.5347073566      1.5854242360 
+   
+  nuclear repulsion energy.......     378.241023024 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   3   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2503 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        2.4  user+sys:        2.4  wallclock:        0.7
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    4.531E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        3.2  user+sys:        3.2  wallclock:        1.2
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        3.3  user+sys:        3.3  wallclock:        0.8
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       47       57      275        0       47       79       73
+  grid # 2      161      211      275        0      160      272      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      111        0        0        0        0
+  grid # 2        0      253      442        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      107       65      106      109      108     1249
+  grid # 2      439      261      437      443      442     4088
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        5.4  user+sys:        5.4  wallclock:        1.0
+  
+  start of program rwr
+  
+  Peak memory usage:   2554 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        5.8  user+sys:        5.8  wallclock:        2.1
+  
+  start of program scf
+  
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -561.98061979187           7.4E-05  1.0E-03
+etot    2  Y  Y  6  M    -561.98069264965  7.3E-05  1.8E-05  2.4E-04
+etot    3  N  Y  2  U    -561.98068668904 -6.0E-06  1.4E-05  7.9E-04
+etot    4  N  Y  2  U    -561.98069415934  7.5E-06  2.6E-06  9.4E-05
+etot    5  N  N  2  U    -561.98069432306  1.6E-07  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     378.24102302449
+   (E)  Total one-electron terms.....   -1521.46644925423
+   (I)  Total two-electron terms.....     581.24473190668
+   (J)    Coulomb....................     641.77125594891
+   (K)    Exchange+Correlation.......     -60.52652404223
+   (L)  Electronic energy............    -940.22171734755  (E+I)
+   (N0) D3 correction................      -0.00728564108
+   (N)  Total energy.................    -561.98797996414  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98797996414
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98797996414 hartrees   iterations:   5
+  
+ 
+ HOMO energy:    -0.16941
+ LUMO energy:    -0.06401
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.40878 Ap        -18.75850 Ap         -9.96312 Ap         -9.89667 Ap     
+    -9.88347 Ap         -9.88347 App        -9.87565 Ap         -5.03867 Ap     
+    -3.45027 Ap         -3.44967 App        -3.44943 Ap         -0.93014 Ap     
+    -0.66068 Ap         -0.63990 Ap         -0.61118 App        -0.60651 Ap     
+    -0.48854 Ap         -0.41448 Ap         -0.38244 App        -0.37974 Ap     
+    -0.36786 Ap         -0.35728 Ap         -0.35703 App        -0.35105 Ap     
+    -0.34470 App        -0.34079 Ap         -0.33355 App        -0.30341 App    
+    -0.29934 Ap         -0.26222 App        -0.26031 Ap         -0.16941 Ap     
+    -0.06401 App         0.04524 Ap          0.06254 Ap          0.07214 Ap     
+     0.07814 App         0.09206 Ap          0.10882 Ap          0.11373 Ap     
+     0.11454 App         0.13582 Ap     
+ 
+  Peak memory usage:   3659 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       13.8  user+sys:       13.8  wallclock:        5.6
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        2.7  user+sys:        2.7  wallclock:        1.0
+  
+  start of program rwr
+  
+  Peak memory usage:   2513 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        8.1  user+sys:        8.1  wallclock:        1.8
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1         -8.315993E-05   1.137941E-04  -1.167648E-20
+    2 C2          5.480146E-04  -1.462043E-04   2.885045E-20
+    3 Si3        -1.803608E-05  -5.650653E-06   1.624606E-20
+    4 C4          1.038222E-04  -1.123674E-04   3.859471E-05
+    5 C5          3.254049E-04  -5.491211E-05   1.611664E-21
+    6 C6          1.038222E-04  -1.123674E-04  -3.859471E-05
+    7 O7         -8.468495E-04  -2.217175E-04  -7.686165E-21
+    8 H8         -7.210934E-06   3.794623E-05  -5.034175E-05
+    9 H9          2.772574E-05   1.716121E-06   8.057582E-22
+   10 H10        -7.210934E-06   3.794623E-05   5.034175E-05
+   11 H11        -8.154469E-06  -1.946084E-05  -9.056727E-05
+   12 H12        -2.106505E-05   9.283799E-05   7.672179E-05
+   13 H13         1.211473E-04   4.908911E-05  -1.432071E-04
+   14 H14        -6.005500E-05   1.299763E-04  -9.122461E-05
+   15 H15        -6.005500E-05   1.299763E-04   9.122461E-05
+   16 H16        -2.148382E-04  -2.859188E-04   2.635752E-20
+   17 H17        -2.106505E-05   9.283799E-05  -7.672179E-05
+   18 H18        -8.154469E-06  -1.946084E-05   9.056727E-05
+   19 H19         1.211473E-04   4.908911E-05   1.432071E-04
+ -------------   -------------  -------------  -------------
+     total       -4.770419E-06  -2.428505E-04  -1.897354E-19
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:        5.2  user+sys:        5.2  wallclock:        0.9
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   4
+  Total energy:      -561.98797996414 hartrees
+ ----------------------------------------------------------------------------
+  
+  energy change:          -9.9487E-05 .  (  5.0000E-05 )
+  gradient maximum:        1.1566E-03 .  (  4.5000E-04 )
+  gradient rms:            2.7731E-04 *  (  3.0000E-04 )
+  displacement maximum:    7.6584E-03 .  (  1.8000E-03 )
+  displacement rms:        2.1779E-03 .  (  1.2000E-03 )
+  
+  predicted energy change:  -1.0866E-05
+  step size:     0.01570
+  trust radius:  0.30000
+  
+  molecular structure not yet converged...
+  
+  center of mass moved by:
+     x:     2.5610E-03     y:    -2.9439E-03     z:     0.0000E+00
+  
+  new geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0251583478      2.1901233200      0.0000000000 
+  C2           -1.0897664648      0.6596206244      0.0000000000 
+  Si3           0.5491832422     -0.3958621863      0.0000000000 
+  C4            1.5476798249      0.0485643964     -1.5525080345 
+  C5            0.0421472350     -2.2122237569      0.0000000000 
+  C6            1.5476798249      0.0485643964      1.5525080345 
+  O7           -2.1841162349      0.0914514690      0.0000000000 
+  H8           -1.5572691184      2.5749127892     -0.8867638404 
+  H9            0.0050877661      2.5797894531      0.0000000000 
+  H10          -1.5572691184      2.5749127892      0.8867638404 
+  H11           0.9826008756     -0.1812717152     -2.4703520742 
+  H12           1.8079772661      1.1196899930     -1.5735487498 
+  H13           2.4898462861     -0.5246008078     -1.5863937263 
+  H14          -0.5664329070     -2.4464714005     -0.8877145587 
+  H15          -0.5664329070     -2.4464714005      0.8877145587 
+  H16           0.9241021955     -2.8740300134      0.0000000000 
+  H17           1.8079772661      1.1196899930      1.5735487498 
+  H18           0.9826008756     -0.1812717152      2.4703520742 
+  H19           2.4898462861     -0.5246008078      1.5863937263 
+   
+  nuclear repulsion energy.......     378.259614302 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   4   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2503 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        2.4  user+sys:        2.4  wallclock:        0.5
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    4.528E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        3.3  user+sys:        3.3  wallclock:        3.7
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        2.3  user+sys:        2.3  wallclock:        0.8
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       47       57      275        0       47       79       73
+  grid # 2      161      211      275        0      160      272      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      111        0        0        0        0
+  grid # 2        0      253      442        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      105       66      106      110      109     1250
+  grid # 2      438      261      437      443      442     4087
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        5.2  user+sys:        5.2  wallclock:        0.8
+  
+  start of program rwr
+  
+  Peak memory usage:   2554 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        8.2  user+sys:        8.2  wallclock:        3.8
+  
+  start of program scf
+  
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -561.98066419732           4.8E-05  8.1E-04
+etot    2  N  Y  2  U    -561.98070157345  3.7E-05  1.2E-05  1.8E-04
+etot    3  N  Y  2  U    -561.98069878995 -2.8E-06  8.9E-06  5.5E-04
+etot    4  N  Y  2  U    -561.98070198533  3.2E-06  1.5E-06  4.5E-05
+etot    5  N  N  2  U    -561.98070202921  4.4E-08  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     378.25961430199
+   (E)  Total one-electron terms.....   -1521.50427719342
+   (I)  Total two-electron terms.....     581.26396086222
+   (J)    Coulomb....................     641.78952619181
+   (K)    Exchange+Correlation.......     -60.52556532959
+   (L)  Electronic energy............    -940.24031633120  (E+I)
+   (N0) D3 correction................      -0.00728843053
+   (N)  Total energy.................    -561.98799045974  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98799045974
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98799045974 hartrees   iterations:   5
+  
+ 
+ HOMO energy:    -0.16943
+ LUMO energy:    -0.06404
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.40888 Ap        -18.75849 Ap         -9.96310 Ap         -9.89662 Ap     
+    -9.88367 Ap         -9.88367 App        -9.87555 Ap         -5.03876 Ap     
+    -3.45036 Ap         -3.44976 App        -3.44952 Ap         -0.92999 Ap     
+    -0.66057 Ap         -0.63983 Ap         -0.61122 App        -0.60656 Ap     
+    -0.48848 Ap         -0.41444 Ap         -0.38229 App        -0.37960 Ap     
+    -0.36785 Ap         -0.35725 Ap         -0.35693 App        -0.35104 Ap     
+    -0.34462 App        -0.34081 Ap         -0.33351 App        -0.30327 App    
+    -0.29933 Ap         -0.26241 App        -0.26047 Ap         -0.16943 Ap     
+    -0.06404 App         0.04506 Ap          0.06251 Ap          0.07216 Ap     
+     0.07819 App         0.09203 Ap          0.10867 Ap          0.11376 Ap     
+     0.11453 App         0.13558 Ap     
+ 
+  Peak memory usage:   3655 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       14.2  user+sys:       14.2  wallclock:        3.6
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        3.5  user+sys:        3.5  wallclock:        2.5
+  
+  start of program rwr
+  
+  Peak memory usage:   2513 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        8.3  user+sys:        8.3  wallclock:        1.5
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1         -3.343682E-04  -4.172610E-05   3.405672E-21
+    2 C2          2.726639E-04   1.800265E-04   2.106865E-20
+    3 Si3        -1.023511E-04  -3.354679E-05  -3.890368E-20
+    4 C4          2.981111E-04  -8.616498E-05  -2.431316E-04
+    5 C5          2.348804E-04  -4.517426E-04   1.563890E-20
+    6 C6          2.981111E-04  -8.616498E-05   2.431316E-04
+    7 O7         -3.779937E-04  -2.151036E-04  -1.291149E-20
+    8 H8          1.106842E-04   1.232373E-05  -1.413536E-06
+    9 H9          5.454276E-05   9.983045E-05  -3.805046E-22
+   10 H10         1.106842E-04   1.232373E-05   1.413536E-06
+   11 H11        -2.801642E-05   1.362222E-05   3.701153E-05
+   12 H12        -6.765094E-05   2.412712E-05   7.245846E-05
+   13 H13        -8.830433E-05   5.432540E-05   2.531628E-05
+   14 H14        -2.471278E-05   1.047429E-04  -1.966709E-05
+   15 H15        -2.471278E-05   1.047429E-04   1.966709E-05
+   16 H16        -1.643463E-04  -2.632433E-05   1.625009E-20
+   17 H17        -6.765094E-05   2.412712E-05  -7.245846E-05
+   18 H18        -2.801642E-05   1.362222E-05  -3.701153E-05
+   19 H19        -8.830433E-05   5.432540E-05  -2.531628E-05
+ -------------   -------------  -------------  -------------
+     total       -1.675056E-05  -2.426337E-04   4.065758E-20
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:        5.4  user+sys:        5.4  wallclock:        0.9
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   5
+  Total energy:      -561.98799045974 hartrees
+ ----------------------------------------------------------------------------
+  
+  energy change:          -1.0496E-05 *  (  5.0000E-05 )
+  gradient maximum:        4.2685E-04 *  (  4.5000E-04 )
+  gradient rms:            1.3281E-04 *  (  3.0000E-04 )
+  displacement maximum:    4.3417E-03 .  (  1.8000E-03 )
+  displacement rms:        1.3675E-03 .  (  1.2000E-03 )
+  
+  predicted energy change:  -2.9555E-06
+  step size:     0.00986
+  trust radius:  0.30000
+  
+  molecular structure not yet converged...
+  
+  center of mass moved by:
+     x:     1.2922E-03     y:    -1.8526E-03     z:     0.0000E+00
+  
+  new geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0254361936      2.1894612545      0.0000000000 
+  C2           -1.0896745673      0.6586486128      0.0000000000 
+  Si3           0.5501469959     -0.3965485292      0.0000000000 
+  C4            1.5485163135      0.0503204480     -1.5523053501 
+  C5            0.0396243598     -2.2125920226      0.0000000000 
+  C6            1.5485163135      0.0503204480      1.5523053501 
+  O7           -2.1842170867      0.0903266744      0.0000000000 
+  H8           -1.5570918244      2.5744440427     -0.8868999141 
+  H9            0.0047747319      2.5796058268      0.0000000000 
+  H10          -1.5570918244      2.5744440427      0.8868999141 
+  H11           0.9844801280     -0.1806843036     -2.4704995191 
+  H12           1.8044065208      1.1226191331     -1.5721250060 
+  H13           2.4928873219     -0.5189323697     -1.5862113321 
+  H14          -0.5708117536     -2.4428034298     -0.8875859597 
+  H15          -0.5708117536     -2.4428034298      0.8875859597 
+  H16           0.9172999666     -2.8796872897      0.0000000000 
+  H17           1.8044065208      1.1226191331      1.5721250060 
+  H18           0.9844801280     -0.1806843036      2.4704995191 
+  H19           2.4928873219     -0.5189323697      1.5862113321 
+   
+  nuclear repulsion energy.......     378.213216874 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   5   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2503 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        3.9  user+sys:        3.9  wallclock:        1.4
+  
+  start of program onee
+  
+  smallest eigenvalue of S:    4.531E-03
+  number of canonical orbitals.....          169
+  Peak memory usage:   2600 Mb
+  
+  end of program onee
+   
+ Time(onee)  user:        2.6  user+sys:        2.6  wallclock:        0.4
+  
+  start of program probe
+  
+  Peak memory usage:   2546 Mb
+  
+  end of program probe
+   
+ Time(probe)  user:        2.4  user+sys:        2.4  wallclock:        0.5
+  
+  start of program grid
+  
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       47       57      275        0       47       78       73
+  grid # 2      161      211      275        0      160      271      292
+  grid # 3     2471     2471     2471        0     2471     4390     2471
+  grid # 4      756      756      756        0      756     1192      756
+  grid # 5     3138     3138     4448        0     3138     5488     3138
+  grid # 6     6968     6968    11901        0     6968    12848    12572
+  grid # 7      429      429      399        0      429      694      445
+  grid # 8      229      229      216        0      229      358      245
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1        0       65      111        0        0        0        0
+  grid # 2        0      253      442        0        0        0        0
+  grid # 3        0     2471     4390        0        0        0        0
+  grid # 4        0      756     1192        0        0        0        0
+  grid # 5        0     3138     5488        0        0        0        0
+  grid # 6        0     7588    14036        0        0        0        0
+  grid # 7        0      458      744        0        0        0        0
+  grid # 8        0      250      388        0        0        0        0
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      105       66      106      111      109     1250
+  grid # 2      438      261      437      443      442     4086
+  grid # 3     4390     2471     4390     4390     4390    43637
+  grid # 4     1192      756     1192     1192     1192    12444
+  grid # 5     5488     3138     5488     5488     5488    56204
+  grid # 6    14036     7588    14036    14036    14036   143581
+  grid # 7      744      458      744      744      744     7461
+  grid # 8      388      250      388      388      388     3946
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:        5.1  user+sys:        5.1  wallclock:        0.8
+  
+  start of program rwr
+  
+  Peak memory usage:   2554 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        6.9  user+sys:        6.9  wallclock:        2.1
+  
+  start of program scf
+  
+ Energy computed with NOPS off.
+ Convergence Criterion:
+    Energy (econv):       1.00E-05
+    RMS density (dconv):  5.00E-06
+  
+       i  u  d  i  g                   
+       t  p  i  c  r                                 RMS    maximum
+       e  d  i  u  i                       energy  density   DIIS  
+       r  t  s  t  d       total energy    change  change    error 
+  
+etot    1  N  N  2  U    -561.98067364025           2.7E-05  4.5E-04
+etot    2  N  Y  2  U    -561.98068508745  1.1E-05  4.3E-06  6.1E-05
+etot    3  N  N  2  U    -561.98068472183 -3.7E-07  0.0E+00  0.0E+00
+ 
+  Computing the dispersion energy correction and its gradients...
+  
+  
+ Energy components, in hartrees:
+   (A)  Nuclear repulsion............     378.21321687365
+   (E)  Total one-electron terms.....   -1521.41309095473
+   (I)  Total two-electron terms.....     581.21918935926
+   (J)    Coulomb....................     641.74378361466
+   (K)    Exchange+Correlation.......     -60.52459425539
+   (L)  Electronic energy............    -940.19390159547  (E+I)
+   (N0) D3 correction................      -0.00728923117
+   (N)  Total energy.................    -561.98797395299  (A+L+N0)
+   (O)  Gas phase energy.............    -561.98797395299
+  
+ SCFE: SCF energy: DFT(pbe-d3)      -561.98797395299 hartrees   iterations:   3
+  
+ 
+ HOMO energy:    -0.16956
+ LUMO energy:    -0.06404
+ 
+  Orbital energies (hartrees)/symmetry label: 
+   -65.40894 Ap        -18.75918 Ap         -9.96257 Ap         -9.89644 Ap     
+    -9.88373 Ap         -9.88372 App        -9.87556 Ap         -5.03879 Ap     
+    -3.45038 Ap         -3.44979 App        -3.44954 Ap         -0.92999 Ap     
+    -0.66038 Ap         -0.63972 Ap         -0.61119 App        -0.60658 Ap     
+    -0.48835 Ap         -0.41438 Ap         -0.38220 App        -0.37943 Ap     
+    -0.36785 Ap         -0.35726 Ap         -0.35683 App        -0.35098 Ap     
+    -0.34465 App        -0.34091 Ap         -0.33350 App        -0.30332 App    
+    -0.29930 Ap         -0.26235 App        -0.26041 Ap         -0.16956 Ap     
+    -0.06404 App         0.04502 Ap          0.06257 Ap          0.07217 Ap     
+     0.07825 App         0.09209 Ap          0.10864 Ap          0.11379 Ap     
+     0.11462 App         0.13558 Ap     
+ 
+  Peak memory usage:   3642 Mb
+  
+  end of program scf
+   
+ Time(scf)  user:       13.2  user+sys:       13.2  wallclock:        7.0
+  
+  start of program der1a
+  
+  Peak memory usage:   2606 Mb
+  
+  end of program der1a
+   
+ Time(der1a)  user:        2.7  user+sys:        2.7  wallclock:        0.7
+  
+  start of program rwr
+  
+  Peak memory usage:   2513 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        7.7  user+sys:        7.7  wallclock:        1.1
+  
+  start of program der1b
+  
+   
+  forces (hartrees/bohr) : total     
+   
+ atom  label           x              y              z
+ ---- --------   -------------  -------------  -------------
+    1 C1         -1.455578E-04  -4.388498E-05  -3.387321E-21
+    2 C2          5.171693E-05   1.594602E-04   2.615647E-20
+    3 Si3        -6.186875E-05  -1.395640E-04   3.131495E-21
+    4 C4          1.341904E-04  -2.473869E-05  -1.439980E-04
+    5 C5          5.328937E-05  -1.584020E-04  -2.354831E-20
+    6 C6          1.341904E-04  -2.473869E-05   1.439980E-04
+    7 O7         -5.929141E-05  -8.824933E-05   4.430347E-21
+    8 H8          6.429383E-05  -3.014401E-05   1.945476E-05
+    9 H9         -4.261198E-06   1.134200E-05   1.139614E-21
+   10 H10         6.429383E-05  -3.014401E-05  -1.945476E-05
+   11 H11        -1.090630E-05   7.635181E-06   4.622283E-05
+   12 H12        -4.823239E-05  -1.926770E-05   3.721365E-05
+   13 H13        -8.471604E-05   1.028943E-05   4.852674E-05
+   14 H14         1.384507E-06   4.200150E-05   1.407777E-05
+   15 H15         1.384507E-06   4.200150E-05  -1.407777E-05
+   16 H16        -3.253609E-05   4.351687E-05  -1.724458E-21
+   17 H17        -4.823239E-05  -1.926770E-05  -3.721365E-05
+   18 H18        -1.090630E-05   7.635181E-06  -4.622283E-05
+   19 H19        -8.471604E-05   1.028943E-05  -4.852674E-05
+ -------------   -------------  -------------  -------------
+     total       -8.648090E-05  -2.442298E-04  -2.032879E-19
+   
+  Peak memory usage:   3550 Mb
+  
+  end of program der1b
+   
+ Time(der1b)  user:       11.6  user+sys:       11.6  wallclock:        4.8
+  
+  start of program geopt
+  
+ ----------------------------------------------------------------------------
+  Geometry optimization step   6
+  Total energy:      -561.98797395299 hartrees
+ ----------------------------------------------------------------------------
+  
+  energy change:           1.6507E-05 *  (  5.0000E-05 )
+  gradient maximum:        1.0821E-04 *  (  4.5000E-04 )
+  gradient rms:            5.4491E-05 #  (  3.0000E-04 )
+  displacement maximum:    8.4200E-04 *  (  1.8000E-03 )
+  displacement rms:        3.8097E-04 *  (  1.2000E-03 )
+  
+  predicted energy change:  -3.5919E-07
+  step size:     0.00275
+  trust radius:  0.30000
+  
+  ********************************************************
+  **           Geometry optimization complete           **
+  ********************************************************
+  
+  Checking the geometry optimization convergence pattern ...
+  
+  WARNING:
+  The energy on the last optimization iteration,
+     -561.987973952992
+  is higher than the energy on one of the previous iterations,
+     -561.987990459742
+  The difference between these two energies is 0.010 kcal/mole.
+  This situation is symptomatic of potential problems with the
+  initial and/or the converged structures.
+  
+  best                    worst
+  ==0=====1=====2=====3=====4==
+                      ^        
+  
+  Convergence category 3: convergence to a non-optimal structure.
+  The difference between the final and the minimal
+  energies is less than 0.100 kcal/mole.
+  Geometry optimization was sub-optimal. Use results with caution.
+  Consider reoptimizing the geometry if better convergence is required.
+  
+  center of mass moved by:
+     x:     0.0000E+00     y:     0.0000E+00     z:     0.0000E+00
+  
+  final geometry: 
+                                   angstroms
+  atom               x                 y                 z
+  C1           -1.0254361936      2.1894612545      0.0000000000 
+  C2           -1.0896745673      0.6586486128      0.0000000000 
+  Si3           0.5501469959     -0.3965485292      0.0000000000 
+  C4            1.5485163135      0.0503204480     -1.5523053501 
+  C5            0.0396243598     -2.2125920226      0.0000000000 
+  C6            1.5485163135      0.0503204480      1.5523053501 
+  O7           -2.1842170867      0.0903266744      0.0000000000 
+  H8           -1.5570918244      2.5744440427     -0.8868999141 
+  H9            0.0047747319      2.5796058268      0.0000000000 
+  H10          -1.5570918244      2.5744440427      0.8868999141 
+  H11           0.9844801280     -0.1806843036     -2.4704995191 
+  H12           1.8044065208      1.1226191331     -1.5721250060 
+  H13           2.4928873219     -0.5189323697     -1.5862113321 
+  H14          -0.5708117536     -2.4428034298     -0.8875859597 
+  H15          -0.5708117536     -2.4428034298      0.8875859597 
+  H16           0.9172999666     -2.8796872897      0.0000000000 
+  H17           1.8044065208      1.1226191331      1.5721250060 
+  H18           0.9844801280     -0.1806843036      2.4704995191 
+  H19           2.4928873219     -0.5189323697      1.5862113321 
+   
+  bond lengths (angstroms):
+ C1      -C2      :   1.532160
+ C1      -H8      :   1.103386
+ C1      -H9      :   1.101611
+ C1      -H10     :   1.103386
+ C2      -Si3     :   1.949989
+ C2      -O7      :   1.233294
+ Si3     -C4      :   1.898969
+ Si3     -C5      :   1.886438
+ Si3     -C6      :   1.898969
+ C4      -H11     :   1.102080
+ C4      -H12     :   1.102587
+ C4      -H13     :   1.103193
+ C5      -H14     :   1.101562
+ C5      -H15     :   1.101562
+ C5      -H16     :   1.102420
+ C6      -H17     :   1.102587
+ C6      -H18     :   1.102080
+ C6      -H19     :   1.103193
+  
+  bond angles:
+ H8      -C1      -C2      : 109.171785
+ H9      -C1      -C2      : 113.144783
+ H9      -C1      -H8      : 109.089241
+ H10     -C1      -C2      : 109.171785
+ H10     -C1      -H8      : 106.988725
+ H10     -C1      -H9      : 109.089241
+ Si3     -C2      -C1      : 120.357662
+ O7      -C2      -C1      : 119.842728
+ O7      -C2      -Si3     : 119.799610
+ C4      -Si3     -C2      : 108.347404
+ C5      -Si3     -C2      : 107.058956
+ C5      -Si3     -C4      : 111.642936
+ C6      -Si3     -C2      : 108.347404
+ C6      -Si3     -C4      : 109.659916
+ C6      -Si3     -C5      : 111.642936
+ H11     -C4      -Si3     : 111.263400
+ H12     -C4      -Si3     : 111.442478
+ H12     -C4      -H11     : 107.917751
+ H13     -C4      -Si3     : 110.716871
+ H13     -C4      -H11     : 107.718871
+ H13     -C4      -H12     : 107.614299
+ H14     -C5      -Si3     : 110.558140
+ H15     -C5      -Si3     : 110.558140
+ H15     -C5      -H14     : 107.365946
+ H16     -C5      -Si3     : 111.535759
+ H16     -C5      -H14     : 108.343960
+ H16     -C5      -H15     : 108.343960
+ H17     -C6      -Si3     : 111.442478
+ H18     -C6      -Si3     : 111.263400
+ H18     -C6      -H17     : 107.917751
+ H19     -C6      -Si3     : 110.716871
+ H19     -C6      -H17     : 107.614299
+ H19     -C6      -H18     : 107.718871
+  
+  torsional angles:
+ C1      -C2      -Si3     -C4      : -59.454552
+ C1      -C2      -Si3     -C5      : 180.000000
+ C1      -C2      -Si3     -C6      :  59.454552
+ C2      -Si3     -C4      -H11     : -60.831064
+ C2      -Si3     -C4      -H12     :  59.667211
+ C2      -Si3     -C4      -H13     : 179.411214
+ C2      -Si3     -C5      -H14     :  59.379028
+ C2      -Si3     -C5      -H15     : -59.379028
+ C2      -Si3     -C5      -H16     : 179.999999
+ C2      -Si3     -C6      -H17     : -59.667211
+ C2      -Si3     -C6      -H18     :  60.831064
+ C2      -Si3     -C6      -H19     :-179.411214
+ Si3     -C2      -C1      -H8      : 121.679823
+ Si3     -C2      -C1      -H9      :   0.000000
+ Si3     -C2      -C1      -H10     :-121.679823
+ C4      -Si3     -C2      -O7      : 120.545448
+ C4      -Si3     -C5      -H14     : -59.045261
+ C4      -Si3     -C5      -H15     :-177.803317
+ C4      -Si3     -C5      -H16     :  61.575711
+ C4      -Si3     -C6      -H17     :  58.409088
+ C4      -Si3     -C6      -H18     : 178.907363
+ C4      -Si3     -C6      -H19     : -61.334915
+ C5      -Si3     -C2      -O7      :   0.000000
+ C5      -Si3     -C4      -H11     :  56.820949
+ C5      -Si3     -C4      -H12     : 177.319224
+ C5      -Si3     -C4      -H13     : -62.936774
+ C5      -Si3     -C6      -H17     :-177.319224
+ C5      -Si3     -C6      -H18     : -56.820949
+ C5      -Si3     -C6      -H19     :  62.936774
+ C6      -Si3     -C2      -O7      :-120.545448
+ C6      -Si3     -C4      -H11     :-178.907363
+ C6      -Si3     -C4      -H12     : -58.409088
+ C6      -Si3     -C4      -H13     :  61.334915
+ C6      -Si3     -C5      -H14     : 177.803317
+ C6      -Si3     -C5      -H15     :  59.045261
+ C6      -Si3     -C5      -H16     : -61.575711
+ O7      -C2      -C1      -H8      : -58.320177
+ O7      -C2      -C1      -H9      : 180.000000
+ O7      -C2      -C1      -H10     :  58.320177
+  
+  principal moments of inertia:
+        amu*angstrom^2:      213.95955      319.07587      366.31406
+                g*cm^2: 3.55288143E-38 5.29837889E-38 6.08278724E-38
+   
+  rotational constants:
+               cm^(-1):      0.07878886      0.05283267      0.04601961
+                   GHz:      2.36203064      1.58388348      1.37963313
+   
+  nuclear repulsion energy.......     378.213216874 hartrees
+  -------------------------------------------------
+ /  end of geometry optimization iteration   6   /
+ -------------------------------------------------
+   
+  Peak memory usage:   2703 Mb
+  
+  end of program geopt
+   
+ Time(geopt)  user:        6.0  user+sys:        6.0  wallclock:        2.6
+  
+  start of program cutabab2
+  
+  Peak memory usage:   2608 Mb
+  
+  end of program cutabab2
+   
+ Time(cutabab2)  user:        1.9  user+sys:        1.9  wallclock:        0.6
+  
+  start of program der2a
+  
+  Peak memory usage:   2650 Mb
+  
+  end of program der2a
+   
+ Time(der2a)  user:        4.9  user+sys:        4.9  wallclock:        1.2
+  
+  start of program grid
+  
+  
+   Turning symmetry off because some of the
+   following programs cannot use it.
+   grid     grid set  grid #  grid sym
+  ------    --------  ------  --------
+  coarse        0        0        1
+  medium        2        1        2
+  fine          0        0        1
+  ultrafine     4        2        2
+  charge        0        0        1
+  gradient      4        2        2
+  density       0        0        1
+  DFT-fine    -11        3        2
+  DFT-med.    -10        4        2
+  DFT-grad    -12        5        2
+  DFT-der2     -8        6        2
+  DFT-cphf     -9        7        2
+  LMP2-enrg     4        2        2
+  LMP2-grad     2        1        2
+  DFT-cphf2   -15        8        2
+  PBF-dens      0        0        1
+  plotting      0        0        1
+  Rel-grad    -17        0        1
+  
+  number of gridpoints: 
+     atom        C1       C2      Si3       C4       C5       C6       O7
+  grid # 1       76       97      482       78       76       78      123
+  grid # 2      271      372      482      271      269      271      505
+  grid # 3     4390     4390     4390     4390     4390     4390     4390
+  grid # 4     1192     1192     1192     1192     1192     1192     1192
+  grid # 5     5488     5488     8452     5488     5488     5488     5488
+  grid # 6    12870    12870    22302    12870    12870    12870    23580
+  grid # 7      698      698      646      698      698      698      724
+  grid # 8      358      358      340      358      358      358      382
+   
+  number of gridpoints: 
+     atom        H8       H9      H10      H11      H12      H13      H14
+  grid # 1      111      109      111      111      106      109      105
+  grid # 2      442      430      442      443      437      442      438
+  grid # 3     4390     4390     4390     4390     4390     4390     4390
+  grid # 4     1192     1192     1192     1192     1192     1192     1192
+  grid # 5     5488     5488     5488     5488     5488     5488     5488
+  grid # 6    14126    14126    14126    14126    14126    14126    14126
+  grid # 7      744      744      744      744      744      744      744
+  grid # 8      388      388      388      388      388      388      388
+   
+  number of gridpoints: 
+     atom       H15      H16      H17      H18      H19    total
+  grid # 1      105      111      106      111      109     2314
+  grid # 2      438      442      437      443      442     7717
+  grid # 3     4390     4390     4390     4390     4390    83410
+  grid # 4     1192     1192     1192     1192     1192    22648
+  grid # 5     5488     5488     5488     5488     5488   107236
+  grid # 6    14126    14126    14126    14126    14126   279744
+  grid # 7      744      744      744      744      744    13788
+  grid # 8      388      388      388      388      388     7168
+   
+  Peak memory usage:   2519 Mb
+  
+  end of program grid
+   
+ Time(grid)  user:       11.2  user+sys:       11.2  wallclock:        3.7
+  
+  start of program der2b
+  
+  Peak memory usage:   3423 Mb
+  
+  end of program der2b
+   
+ Time(der2b)  user:       46.0  user+sys:       46.0  wallclock:        6.1
+  
+  start of program der2nda
+  
+  Computing the dispersion energy correction, gradient, hessian...
+ 
+  Peak memory usage:   2556 Mb
+  
+  end of program der2nda
+   
+ Time(der2nda)  user:        2.3  user+sys:        2.3  wallclock:        1.0
+  
+  start of program der2ndb
+  
+  Peak memory usage:   3226 Mb
+  
+  end of program der2ndb
+   
+ Time(der2ndb)  user:      101.0  user+sys:      101.0  wallclock:       14.8
+  
+  start of program rwr
+  
+  Peak memory usage:   2554 Mb
+  
+  end of program rwr
+   
+ Time(rwr)  user:        7.0  user+sys:        7.0  wallclock:        1.6
+  
+  start of program cphfa
+  
+       1  vectors produced in CPHF
+  
+     v    i  j  k  i  g
+     e    t  c  c  c  r
+     c    e  o  o  u  i
+     t    r  r  r  t  d       RMS  
+  
+     1    1  0  0  6  M     1.5E-02
+     1    2  0  0  6  M     1.6E-03
+     1    3  0  0  6  M     3.8E-04
+     1    4  0  0  6  M     9.9E-05
+     1    5  0  0  6  M     2.5E-05
+  
+  
+  Atomic Polar Tensors (au): Total
+  =========================
+  
+  APT for atom C1      
+  --------------------------------------
+        0.0266       0.2522      -0.0000
+        0.0943      -0.5328      -0.0000
+        0.0000       0.0000       0.0665
+  --------------------------------------
+  
+  APT for atom C2      
+  --------------------------------------
+        0.7845      -0.0403       0.0000
+       -0.1274       0.8156       0.0000
+       -0.0000      -0.0000      -0.1924
+  --------------------------------------
+  
+  APT for atom Si3     
+  --------------------------------------
+        1.0338       0.0658       0.0000
+        0.0654       1.2630       0.0000
+       -0.0000      -0.0000       1.2323
+  --------------------------------------
+  
+  APT for atom C4      
+  --------------------------------------
+       -0.3333      -0.0029       0.0935
+        0.0180      -0.3077       0.0287
+        0.0566       0.0454      -0.3847
+  --------------------------------------
+  
+  APT for atom C5      
+  --------------------------------------
+       -0.2657      -0.0579      -0.0000
+       -0.0554      -0.4807       0.0000
+        0.0000      -0.0000      -0.2939
+  --------------------------------------
+  
+  APT for atom C6      
+  --------------------------------------
+       -0.3333      -0.0029      -0.0935
+        0.0180      -0.3077      -0.0287
+       -0.0566      -0.0454      -0.3847
+  --------------------------------------
+  
+  APT for atom O7      
+  --------------------------------------
+       -0.9678      -0.2006      -0.0000
+       -0.0593      -0.6211       0.0000
+        0.0000       0.0000      -0.2058
+  --------------------------------------
+  
+  APT for atom H8      
+  --------------------------------------
+        0.0362       0.0127      -0.0644
+        0.0202       0.0108       0.0114
+       -0.0599       0.0519      -0.0065
+  --------------------------------------
+  
+  APT for atom H9      
+  --------------------------------------
+       -0.1113      -0.0747       0.0000
+       -0.0289       0.0424      -0.0000
+       -0.0000      -0.0000       0.0582
+  --------------------------------------
+  
+  APT for atom H10     
+  --------------------------------------
+        0.0362       0.0127       0.0644
+        0.0202       0.0108      -0.0114
+        0.0599      -0.0519      -0.0065
+  --------------------------------------
+  
+  APT for atom H11     
+  --------------------------------------
+        0.0557      -0.0107      -0.0385
+       -0.0052       0.0720      -0.0149
+       -0.0780      -0.0368      -0.0890
+  --------------------------------------
+  
+  APT for atom H12     
+  --------------------------------------
+        0.0630      -0.0758       0.0035
+       -0.0476      -0.1009       0.0152
+        0.0047       0.0570       0.0673
+  --------------------------------------
+  
+  APT for atom H13     
+  --------------------------------------
+       -0.0946       0.0954       0.0220
+        0.0557       0.0476      -0.0000
+        0.0794      -0.0439       0.0607
+  --------------------------------------
+  
+  APT for atom H14     
+  --------------------------------------
+        0.0288      -0.0291      -0.0772
+       -0.0479       0.0556      -0.0773
+       -0.0621      -0.0296      -0.0184
+  --------------------------------------
+  
+  APT for atom H15     
+  --------------------------------------
+        0.0288      -0.0291       0.0772
+       -0.0479       0.0556       0.0773
+        0.0621       0.0296      -0.0184
+  --------------------------------------
+  
+  APT for atom H16     
+  --------------------------------------
+       -0.0113       0.0759       0.0000
+        0.1245      -0.0405      -0.0000
+        0.0000       0.0000       0.0769
+  --------------------------------------
+  
+  APT for atom H17     
+  --------------------------------------
+        0.0630      -0.0758      -0.0035
+       -0.0476      -0.1009      -0.0152
+       -0.0047      -0.0570       0.0673
+  --------------------------------------
+  
+  APT for atom H18     
+  --------------------------------------
+        0.0557      -0.0107       0.0385
+       -0.0052       0.0720       0.0149
+        0.0780       0.0368      -0.0890
+  --------------------------------------
+  
+  APT for atom H19     
+  --------------------------------------
+       -0.0947       0.0954      -0.0220
+        0.0556       0.0476       0.0000
+       -0.0794       0.0440       0.0607
+  --------------------------------------
+  
+  Peak memory usage:   3308 Mb
+  
+  end of program cphfa
+   
+ Time(cphfa)  user:      104.0  user+sys:      104.0  wallclock:       17.2
+  
+  start of program freq
+  
+   
+  Number of frequencies:  51
+  harmonic frequencies in cm**-1, reduced masses in amu,
+  force constants in mDyne/A, and
+  normal modes in cartesian coordinates:          51
+  IR intensities in km/mol
+  
+  vibration #            1        2        3        4        5        6
+                  -------- -------- -------- -------- -------- --------
+  frequencies      -125.94    25.01   100.26   117.43   118.91   149.71
+  symmetries       App      App      App      App      Ap       App     
+  intensities         2.37     2.48     0.00     0.91     3.01     0.13
+  reduc. mass         0.34     3.07     0.29     1.29     1.32     0.17
+  force const         0.00     0.00     0.00     0.01     0.01     0.00
+    C1       X    -0.00001 -0.00004  0.00000  0.00077  0.11629  0.00001
+    C1       Y     0.00000  0.00000 -0.00000 -0.00009 -0.01401 -0.00000
+    C1       Z     0.01701  0.12975 -0.06080  0.08403 -0.00051 -0.01545
+    C2       X     0.00005  0.00021 -0.00001 -0.00017 -0.00653  0.00002
+    C2       Y     0.00000  0.00000 -0.00000 -0.00008 -0.01259 -0.00000
+    C2       Z    -0.01686 -0.00734 -0.00117 -0.00275  0.00001  0.00026
+    Si3      X     0.00000  0.00004 -0.00000 -0.00019 -0.02366  0.00001
+    Si3      Y    -0.00001 -0.00002  0.00000 -0.00018 -0.03043 -0.00000
+    Si3      Z     0.00888  0.01332  0.01789 -0.05484  0.00037  0.00938
+    C4       X    -0.00139 -0.04501 -0.00827  0.09676 -0.07083 -0.02862
+    C4       Y    -0.00878 -0.03656  0.02803 -0.08084  0.03652  0.03925
+    C4       Z     0.00482 -0.02652  0.02004 -0.01530 -0.01040  0.00246
+    C5       X    -0.00003 -0.00015  0.00001  0.00085  0.11573 -0.00002
+    C5       Y     0.00000  0.00004 -0.00000 -0.00048 -0.07032  0.00000
+    C5       Z     0.01104  0.06617 -0.01392 -0.02705  0.00021  0.00441
+    C6       X     0.00133  0.04477  0.00827 -0.09751 -0.06950  0.02858
+    C6       Y     0.00880  0.03663 -0.02803  0.08125  0.03546 -0.03923
+    C6       Z     0.00484 -0.02637  0.02004 -0.01528  0.01058  0.00248
+    O7       X     0.00005  0.00023 -0.00001 -0.00045 -0.04816  0.00002
+    O7       Y    -0.00001 -0.00008  0.00000  0.00051  0.07005 -0.00001
+    O7       Z    -0.04787 -0.15686  0.00569  0.06447 -0.00049 -0.00953
+    H8       X    -0.48716  0.11157 -0.01697 -0.00046  0.14910 -0.01496
+    H8       Y     0.06655  0.07256 -0.03514  0.05086  0.02935 -0.00614
+    H8       Z     0.34177  0.09414 -0.06578  0.10650 -0.00120 -0.00903
+    H9       X    -0.00003 -0.00012  0.00000  0.00101  0.14751  0.00000
+    H9       Y     0.00005  0.00021 -0.00001 -0.00074 -0.09633  0.00001
+    H9       Z    -0.47338  0.28960 -0.09427  0.09942 -0.00057 -0.03193
+    H10      X     0.48711 -0.11182  0.01698  0.00250  0.14904  0.01496
+    H10      Y    -0.06660 -0.07277  0.03515 -0.05036  0.02995  0.00612
+    H10      Z     0.34177  0.09414 -0.06578  0.10651 -0.00011 -0.00903
+    H11      X    -0.00598 -0.06792  0.00565  0.19756 -0.06198  0.10084
+    H11      Y    -0.00505 -0.07253  0.00205 -0.21429 -0.03007 -0.29917
+    H11      Z     0.00672 -0.00332  0.01796 -0.04336  0.00061  0.00799
+    H12      X     0.00869 -0.06016 -0.05252  0.03570 -0.17727 -0.37556
+    H12      Y    -0.01124 -0.03368  0.03860 -0.06822  0.06149  0.11920
+    H12      Z     0.00184 -0.06632  0.01621 -0.10491 -0.02974 -0.16701
+    H13      X    -0.00658 -0.03866  0.01526  0.13402 -0.01559  0.15902
+    H13      Y    -0.01733 -0.02554  0.06682 -0.02874  0.12908  0.34189
+    H13      Z     0.00283 -0.03376  0.02676  0.13559 -0.01719  0.15750
+    H14      X    -0.00495 -0.11021 -0.43977 -0.09879  0.14320  0.07930
+    H14      Y     0.00278  0.01108  0.15485  0.02010 -0.13253 -0.02444
+    H14      Z     0.01371  0.13931  0.24880  0.03585 -0.00261 -0.04370
+    H15      X     0.00488  0.10983  0.43979  0.10090  0.14194 -0.07934
+    H15      Y    -0.00275 -0.01083 -0.15486 -0.02201 -0.13224  0.02446
+    H15      Z     0.01371  0.13931  0.24880  0.03588  0.00225 -0.04370
+    H16      X    -0.00004 -0.00024  0.00001  0.00135  0.18105 -0.00003
+    H16      Y    -0.00001 -0.00008  0.00000  0.00016  0.01478 -0.00001
+    H16      Z     0.00447 -0.04635 -0.55395 -0.14133  0.00094  0.10058
+    H17      X    -0.00880  0.05971  0.05253 -0.03766 -0.17677  0.37544
+    H17      Y     0.01127  0.03380 -0.03861  0.06892  0.06061 -0.11916
+    H17      Z     0.00187 -0.06617  0.01620 -0.10467  0.03111 -0.16696
+    H18      X     0.00587  0.06743 -0.00564 -0.19800 -0.05927 -0.10091
+    H18      Y     0.00506  0.07257 -0.00205  0.21390 -0.03292  0.29914
+    H18      Z     0.00671 -0.00334  0.01796 -0.04335 -0.00004  0.00799
+    H19      X     0.00654  0.03851 -0.01526 -0.13412 -0.01375 -0.15902
+    H19      Y     0.01739  0.02578 -0.06683  0.03022  0.12872 -0.34180
+    H19      Z     0.00292 -0.03328  0.02675  0.13545  0.01534  0.15756
+  
+  vibration #            7        8        9       10       11       12
+                  -------- -------- -------- -------- -------- --------
+  frequencies       157.28   188.25   192.31   197.60   303.63   372.22
+  symmetries       Ap       Ap       Ap       App      Ap       Ap      
+  intensities         0.05     0.94     0.13     1.13     4.32    11.37
+  reduc. mass         0.16     1.09     1.04     1.61     1.77     5.07
+  force const         0.00     0.02     0.02     0.04     0.10     0.41
+    C1       X    -0.00698  0.05672  0.04827  0.00017 -0.08415  0.06813
+    C1       Y     0.00346 -0.04934 -0.03099 -0.00011  0.09172  0.01452
+    C1       Z    -0.00000  0.00003 -0.00017  0.01536 -0.00006 -0.00002
+    C2       X     0.00279 -0.01174  0.06241  0.00022  0.07408  0.04039
+    C2       Y     0.00313 -0.04438 -0.03013 -0.00011  0.07073  0.01730
+    C2       Z     0.00000 -0.00002  0.00016 -0.03031  0.00004  0.00003
+    Si3      X     0.00266 -0.01711  0.04744  0.00020 -0.01307 -0.09571
+    Si3      Y    -0.00006 -0.04111 -0.01061 -0.00001 -0.07157  0.04605
+    Si3      Z    -0.00001 -0.00001  0.00019 -0.07094 -0.00004 -0.00002
+    C4       X     0.02058  0.04557 -0.07348  0.04447 -0.02072 -0.03515
+    C4       Y    -0.00880  0.08612  0.04486  0.08156  0.01416 -0.00923
+    C4       Z     0.00892  0.07690 -0.06175 -0.02260  0.02766  0.04778
+    C5       X    -0.04588 -0.08310 -0.08756 -0.00031 -0.00165  0.00661
+    C5       Y     0.01377 -0.02418  0.02912  0.00014 -0.09203  0.03204
+    C5       Z    -0.00001  0.00008 -0.00069  0.14420 -0.00004 -0.00002
+    C6       X     0.02055  0.04560 -0.07349 -0.04505 -0.02088 -0.03521
+    C6       Y    -0.00878  0.08604  0.04556 -0.08129  0.01414 -0.00924
+    C6       Z    -0.00892 -0.07693  0.06196 -0.02205 -0.02766 -0.04778
+    O7       X     0.00588 -0.03052  0.07386  0.00028  0.09581  0.10546
+    O7       Y    -0.00273 -0.00828 -0.05375 -0.00021  0.02922 -0.10951
+    O7       Z     0.00002 -0.00005  0.00026  0.01272  0.00013  0.00004
+    H8       X    -0.01005  0.07761  0.04714 -0.00568 -0.14809  0.10036
+    H8       Y    -0.00089 -0.02129 -0.03262  0.03101  0.00631  0.05397
+    H8       Z     0.00002 -0.00031 -0.00022  0.03219  0.00157 -0.00239
+    H9       X    -0.01043  0.07606  0.04625  0.00017 -0.14388  0.09584
+    H9       Y     0.01261 -0.10066 -0.02558 -0.00010  0.24711 -0.05925
+    H9       Z    -0.00001  0.00005 -0.00027  0.02052 -0.00010 -0.00005
+    H10      X    -0.01004  0.07761  0.04713  0.00601 -0.14810  0.10036
+    H10      Y    -0.00088 -0.02135 -0.03216 -0.03123  0.00648  0.05408
+    H10      Z    -0.00003  0.00039 -0.00032  0.03219 -0.00178  0.00229
+    H11      X     0.18425  0.12752 -0.17914  0.08890 -0.00363  0.02910
+    H11      Y    -0.36837  0.19937  0.04379  0.15853  0.06982 -0.02255
+    H11      Z    -0.00090 -0.00045  0.00235 -0.06850  0.00336  0.01225
+    H12      X    -0.30442  0.03245 -0.13736  0.02411 -0.09517  0.01182
+    H12      Y     0.06529  0.09340  0.06019  0.08937  0.03509 -0.02095
+    H12      Z    -0.18531  0.24015 -0.06508  0.08881  0.13013  0.03132
+    H13      X     0.19938  0.06143 -0.04907  0.05840  0.01946 -0.05379
+    H13      Y     0.27484  0.11176  0.09583  0.10615  0.08527 -0.04674
+    H13      Z     0.22419  0.08508 -0.19896 -0.02931 -0.02328  0.14145
+    H14      X    -0.05700 -0.10558 -0.12360 -0.07661  0.01793  0.04288
+    H14      Y     0.04043  0.02592  0.11317 -0.16635 -0.12729 -0.04692
+    H14      Z     0.00059  0.00208  0.00191  0.24195 -0.00349 -0.00320
+    H15      X    -0.05699 -0.10551 -0.12422  0.07572  0.01790  0.04286
+    H15      Y     0.04042  0.02606  0.11186  0.16725 -0.12723 -0.04690
+    H15      Z    -0.00061 -0.00182 -0.00407  0.24192  0.00341  0.00316
+    H16      X    -0.07447 -0.13538 -0.17614 -0.00064  0.04079  0.09405
+    H16      Y    -0.02325 -0.09080 -0.08529 -0.00029 -0.03806  0.14479
+    H16      Z    -0.00002  0.00011 -0.00092  0.20683  0.00000  0.00000
+    H17      X    -0.30448  0.03250 -0.13760 -0.02516 -0.09535  0.01175
+    H17      Y     0.06531  0.09331  0.06096 -0.08900  0.03508 -0.02096
+    H17      Z     0.18532 -0.24008  0.06444  0.08955 -0.13008 -0.03131
+    H18      X     0.18421  0.12756 -0.17904 -0.09037 -0.00392  0.02898
+    H18      Y    -0.36837  0.19922  0.04510 -0.15838  0.06979 -0.02256
+    H18      Z     0.00089  0.00041 -0.00192 -0.06852 -0.00343 -0.01229
+    H19      X     0.19937  0.06145 -0.04895 -0.05881  0.01930 -0.05384
+    H19      Y     0.27489  0.11165  0.09677 -0.10552  0.08526 -0.04673
+    H19      Z    -0.22418 -0.08517  0.19950 -0.02770  0.02342 -0.14139
+  
+  vibration #           13       14       15       16       17       18
+                  -------- -------- -------- -------- -------- --------
+  frequencies       486.08   554.17   616.74   672.96   677.67   685.51
+  symmetries       App      Ap       Ap       App      App      Ap      
+  intensities         0.10     9.97     1.29     0.11     5.56     2.74
+  reduc. mass         4.35     1.38     1.73     0.20     1.96     1.51
+  force const         0.61     0.25     0.39     0.05     0.53     0.42
+    C1       X    -0.00001 -0.01444 -0.00197 -0.00000 -0.00000  0.00133
+    C1       Y    -0.00008 -0.12401  0.07687 -0.00000 -0.00001  0.01230
+    C1       Z    -0.00198 -0.00003  0.00001 -0.00052 -0.00419 -0.00000
+    C2       X     0.00004  0.09872 -0.05270  0.00000  0.00001  0.00370
+    C2       Y    -0.00005 -0.05326  0.01303 -0.00000 -0.00000 -0.00406
+    C2       Z     0.22251 -0.00011  0.00003 -0.00422 -0.00682 -0.00000
+    Si3      X    -0.00000 -0.00284  0.06958  0.00000 -0.00001  0.03845
+    Si3      Y     0.00002  0.00740 -0.03688  0.00000 -0.00000  0.06178
+    Si3      Z    -0.01637 -0.00000  0.00000 -0.01181 -0.08247 -0.00000
+    C4       X     0.01772 -0.04281 -0.04453  0.01451 -0.10138 -0.03244
+    C4       Y     0.00904 -0.01445 -0.04009  0.04433 -0.02716  0.03226
+    C4       Z    -0.02930  0.06246  0.09892  0.04387  0.07240  0.05760
+    C5       X     0.00002  0.02393  0.04657 -0.00000 -0.00000  0.01094
+    C5       Y     0.00004  0.08224  0.08681 -0.00000  0.00001 -0.14384
+    C5       Z    -0.00214 -0.00001  0.00001 -0.06892 -0.03216 -0.00000
+    C6       X    -0.01772 -0.04286 -0.04450 -0.01452  0.10138 -0.03243
+    C6       Y    -0.00905 -0.01445 -0.04009 -0.04433  0.02716  0.03226
+    C6       Z    -0.02933 -0.06243 -0.09893  0.04387  0.07241 -0.05759
+    O7       X    -0.00003  0.02020 -0.02759  0.00000  0.00000  0.00333
+    O7       Y     0.00007  0.10064 -0.04179  0.00000  0.00000 -0.00050
+    O7       Z    -0.06871  0.00009 -0.00003  0.00075  0.00077  0.00000
+    H8       X    -0.03251 -0.12441  0.05900  0.00123 -0.00013 -0.00351
+    H8       Y    -0.28632 -0.25799  0.15138  0.00654  0.02132  0.00500
+    H8       Z    -0.10764  0.00883 -0.00501  0.00157  0.00535 -0.00016
+    H9       X    -0.00005 -0.10640  0.04574 -0.00000 -0.00001 -0.00310
+    H9       Y     0.00003  0.11547 -0.04456  0.00000  0.00001  0.02449
+    H9       Z    -0.17215  0.00006 -0.00001  0.00120  0.01114  0.00000
+    H10      X     0.03240 -0.12446  0.05901 -0.00124  0.00012 -0.00351
+    H10      Y     0.28603 -0.25825  0.15145 -0.00655 -0.02135  0.00499
+    H10      Z    -0.10765 -0.00880  0.00501  0.00157  0.00535  0.00016
+    H11      X     0.10024 -0.02988 -0.11550 -0.20043  0.11132 -0.06711
+    H11      Y    -0.01210 -0.03051 -0.01394 -0.17567  0.00491 -0.11746
+    H11      Z    -0.07290  0.05968  0.13671  0.22448 -0.05889  0.11672
+    H12      X     0.07595 -0.01701 -0.11976  0.11511 -0.01713  0.11106
+    H12      Y    -0.00609 -0.02238 -0.02182  0.00657 -0.04701 -0.01132
+    H12      Z    -0.03849  0.04553  0.13641 -0.31944  0.19563 -0.15520
+    H13      X    -0.00241 -0.05712 -0.01625 -0.08673 -0.11495 -0.12330
+    H13      Y    -0.03545 -0.04047  0.01703 -0.12018 -0.06704 -0.12819
+    H13      Z     0.09057  0.09936 -0.00760 -0.02669  0.32353  0.15873
+    H14      X    -0.01154  0.01900  0.01248 -0.13039 -0.04729 -0.08986
+    H14      Y    -0.05036  0.09402  0.15868 -0.33922 -0.13080  0.01046
+    H14      Z     0.01995  0.00092  0.00523  0.11776  0.03651  0.02272
+    H15      X     0.01156  0.01896  0.01249  0.13039  0.04730 -0.08986
+    H15      Y     0.05045  0.09397  0.15870  0.33922  0.13080  0.01048
+    H15      Z     0.01994 -0.00099 -0.00520  0.11776  0.03651 -0.02271
+    H16      X     0.00001  0.01528 -0.02276 -0.00000  0.00001 -0.18929
+    H16      Y     0.00003  0.07276 -0.00064 -0.00000  0.00003 -0.40220
+    H16      Z     0.03213 -0.00002  0.00001  0.15190  0.05144  0.00000
+    H17      X    -0.07587 -0.01699 -0.11976 -0.11511  0.01712  0.11106
+    H17      Y     0.00606 -0.02240 -0.02181 -0.00657  0.04701 -0.01131
+    H17      Z    -0.03847 -0.04547 -0.13643 -0.31944  0.19561  0.15523
+    H18      X    -0.10021 -0.02987 -0.11550  0.20043 -0.11131 -0.06713
+    H18      Y     0.01206 -0.03054 -0.01393  0.17567 -0.00490 -0.11747
+    H18      Z    -0.07292 -0.05962 -0.13673  0.22448 -0.05887 -0.11674
+    H19      X     0.00237 -0.05719 -0.01621  0.08673  0.11496 -0.12329
+    H19      Y     0.03536 -0.04052  0.01705  0.12018  0.06706 -0.12819
+    H19      Z     0.09045 -0.09944  0.00763 -0.02669  0.32355 -0.15867
+  
+  vibration #           19       20       21       22       23       24
+                  -------- -------- -------- -------- -------- --------
+  frequencies       736.32   750.55   848.69   854.14   858.53   919.93
+  symmetries       App      Ap       App      Ap       Ap       App     
+  intensities        20.71    23.40    75.07    91.79   157.03     4.62
+  reduc. mass         0.64     0.97     0.89     1.22     0.84     1.02
+  force const         0.20     0.32     0.38     0.52     0.37     0.51
+    C1       X     0.00000  0.00341 -0.00000 -0.00483 -0.00474  0.00000
+    C1       Y    -0.00000  0.04034 -0.00001 -0.02607 -0.04338  0.00001
+    C1       Z    -0.02538 -0.00000  0.01859  0.00000 -0.00000 -0.12035
+    C2       X     0.00000  0.00824 -0.00000 -0.00564 -0.00839  0.00000
+    C2       Y     0.00000 -0.00916  0.00001  0.01456  0.04703 -0.00001
+    C2       Z    -0.02697 -0.00000 -0.00905  0.00000  0.00000  0.13206
+    Si3      X    -0.00000 -0.03815 -0.00001  0.03045 -0.06875 -0.00000
+    Si3      Y     0.00000 -0.06072  0.00000  0.07445  0.02302  0.00000
+    Si3      Z     0.06193 -0.00000 -0.07067 -0.00000  0.00001 -0.02866
+    C4       X    -0.02435 -0.02152 -0.00399 -0.04529  0.06455  0.01417
+    C4       Y     0.06459  0.02234  0.04373 -0.07110 -0.03043 -0.00640
+    C4       Z    -0.06088 -0.05012  0.04371 -0.03061  0.02146  0.01169
+    C5       X    -0.00000  0.10431  0.00001  0.01667  0.07446  0.00000
+    C5       Y     0.00000  0.04583 -0.00000 -0.04711 -0.02196 -0.00000
+    C5       Z     0.01077 -0.00000  0.10616  0.00000 -0.00001  0.01474
+    C6       X     0.02435 -0.02153  0.00400 -0.04528  0.06455 -0.01417
+    C6       Y    -0.06460  0.02233 -0.04374 -0.07110 -0.03042  0.00640
+    C6       Z    -0.06088  0.05012  0.04370  0.03061 -0.02147  0.01169
+    O7       X     0.00000  0.00479  0.00000  0.00522  0.02021 -0.00001
+    O7       Y     0.00000 -0.00763  0.00000  0.00505  0.00733 -0.00000
+    O7       Z     0.01060  0.00000 -0.00042 -0.00000 -0.00000 -0.01700
+    H8       X     0.00745 -0.01366  0.00127  0.01495 -0.00125 -0.03406
+    H8       Y     0.16299  0.01772 -0.08808 -0.00625 -0.04471  0.46741
+    H8       Z     0.04362  0.00047 -0.02266 -0.00280 -0.00181  0.11565
+    H9       X    -0.00000 -0.01128 -0.00000  0.00787  0.00563 -0.00000
+    H9       Y    -0.00000  0.07756 -0.00000 -0.05640 -0.07805  0.00003
+    H9       Z     0.08562  0.00000 -0.04908 -0.00000  0.00000  0.28148
+    H10      X    -0.00745 -0.01367 -0.00128  0.01495 -0.00124  0.03405
+    H10      Y    -0.16299  0.01771  0.08806 -0.00624 -0.04472 -0.46741
+    H10      Z     0.04362 -0.00047 -0.02266  0.00280  0.00182  0.11565
+    H11      X     0.21595  0.16979 -0.10887  0.16875 -0.17497 -0.05687
+    H11      Y    -0.04834  0.00913 -0.11385  0.16348  0.02781 -0.00787
+    H11      Z    -0.17638 -0.16220  0.14420 -0.21026  0.14531  0.05478
+    H12      X     0.24670  0.11158  0.08224 -0.14200 -0.13941 -0.03841
+    H12      Y    -0.00494 -0.01041  0.01116 -0.03196  0.02173  0.00440
+    H12      Z    -0.17990 -0.03138 -0.18336  0.35215 -0.00264  0.00535
+    H13      X    -0.11854 -0.05717 -0.09300  0.06494  0.11750  0.01449
+    H13      Y    -0.13143 -0.06075 -0.10372  0.10949  0.09240  0.00257
+    H13      Z     0.30644  0.17290  0.06108  0.07882 -0.30455 -0.05033
+    H14      X     0.01216 -0.05526  0.15351 -0.03070 -0.06740  0.02219
+    H14      Y     0.03635  0.34048  0.37557  0.00515  0.18832  0.04705
+    H14      Z    -0.00632  0.02944 -0.11048  0.01451  0.03643 -0.01522
+    H15      X    -0.01215 -0.05526 -0.15352 -0.03071 -0.06737 -0.02219
+    H15      Y    -0.03636  0.34047 -0.37553  0.00514  0.18839 -0.04705
+    H15      Z    -0.00632 -0.02944 -0.11048 -0.01452 -0.03641 -0.01522
+    H16      X     0.00001 -0.18426 -0.00001 -0.08334 -0.15425 -0.00000
+    H16      Y     0.00001 -0.31237 -0.00003 -0.17916 -0.30576 -0.00000
+    H16      Z    -0.00285  0.00000 -0.17839 -0.00000  0.00002 -0.02969
+    H17      X    -0.24670  0.11156 -0.08226 -0.14200 -0.13940  0.03840
+    H17      Y     0.00494 -0.01041 -0.01115 -0.03196  0.02173 -0.00440
+    H17      Z    -0.17991  0.03138 -0.18334 -0.35216  0.00267  0.00535
+    H18      X    -0.21595  0.16978  0.10883  0.16875 -0.17499  0.05686
+    H18      Y     0.04834  0.00914  0.11385  0.16349  0.02779  0.00787
+    H18      Z    -0.17638  0.16220  0.14416  0.21026 -0.14534  0.05477
+    H19      X     0.11854 -0.05716  0.09301  0.06495  0.11748 -0.01448
+    H19      Y     0.13143 -0.06075  0.10373  0.10950  0.09238 -0.00256
+    H19      Z     0.30644 -0.17289  0.06114 -0.07881  0.30454 -0.05032
+  
+  vibration #           25       26       27       28       29       30
+                  -------- -------- -------- -------- -------- --------
+  frequencies       933.39  1091.07  1249.19  1252.44  1262.13  1318.93
+  symmetries       Ap       Ap       App      Ap       Ap       Ap      
+  intensities         0.36    46.12    23.26    28.05     7.00    20.67
+  reduc. mass         1.39     3.31     0.35     0.27     0.25     0.66
+  force const         0.71     2.32     0.32     0.25     0.24     0.68
+    C1       X     0.10117  0.09966  0.00000 -0.00113 -0.00152  0.01804
+    C1       Y     0.10465 -0.05838 -0.00000  0.00524  0.00678 -0.12447
+    C1       Z     0.00001  0.00000  0.00189 -0.00000  0.00000  0.00000
+    C2       X     0.01809 -0.09498  0.00000  0.00428 -0.00148 -0.00087
+    C2       Y    -0.12070  0.17959  0.00000 -0.00960 -0.00535  0.01315
+    C2       Z    -0.00001  0.00001 -0.00579 -0.00000  0.00000  0.00000
+    Si3      X    -0.01504  0.02206 -0.00000  0.00391  0.00089 -0.00038
+    Si3      Y     0.02888 -0.01844 -0.00000  0.00911 -0.00317 -0.00156
+    Si3      Z     0.00000  0.00000  0.00831  0.00000  0.00000  0.00000
+    C4       X     0.01618 -0.01274  0.04829 -0.03574 -0.03312 -0.00102
+    C4       Y    -0.01778  0.00631  0.02040 -0.01810 -0.01221  0.00071
+    C4       Z    -0.00005  0.00245 -0.07557  0.05186  0.04885  0.00307
+    C5       X    -0.00038 -0.00322  0.00000 -0.02517  0.02278  0.00213
+    C5       Y    -0.00470  0.00119  0.00000 -0.08918  0.08855  0.00110
+    C5       Z    -0.00000  0.00000 -0.00336 -0.00000  0.00000 -0.00000
+    C6       X     0.01618 -0.01273 -0.04828 -0.03574 -0.03312 -0.00102
+    C6       Y    -0.01778  0.00631 -0.02040 -0.01810 -0.01221  0.00071
+    C6       Z     0.00005 -0.00246 -0.07556 -0.05187 -0.04885 -0.00307
+    O7       X    -0.05600 -0.00518  0.00000 -0.00222  0.00230  0.00231
+    O7       Y    -0.03526 -0.04556 -0.00000  0.00141  0.00170  0.00072
+    O7       Z     0.00001 -0.00002  0.00141  0.00000 -0.00000 -0.00000
+    H8       X    -0.13986 -0.17272 -0.00263 -0.00070 -0.00212 -0.04057
+    H8       Y    -0.11972 -0.28173 -0.01012 -0.00101 -0.01368  0.48311
+    H8       Z     0.04314  0.06297 -0.00133 -0.00285 -0.00771  0.27735
+    H9       X    -0.08088 -0.01920  0.00000  0.00345  0.00670 -0.16660
+    H9       Y     0.58343  0.21394 -0.00000 -0.00849 -0.01755  0.38437
+    H9       Z    -0.00002  0.00001  0.00064 -0.00000  0.00000 -0.00000
+    H10      X    -0.13987 -0.17271  0.00263 -0.00070 -0.00212 -0.04057
+    H10      Y    -0.11966 -0.28174  0.01012 -0.00101 -0.01368  0.48311
+    H10      Z    -0.04316 -0.06295 -0.00133  0.00285  0.00771 -0.27735
+    H11      X    -0.03486  0.02606 -0.28902  0.20599  0.20513  0.01645
+    H11      Y     0.02806 -0.01262 -0.11988  0.09551  0.07877  0.00142
+    H11      Z     0.01940 -0.01622  0.18221 -0.13610 -0.13053 -0.00884
+    H12      X    -0.05728  0.03471 -0.17002  0.12325  0.12733  0.00083
+    H12      Y     0.00222 -0.00524  0.06608 -0.05105 -0.04659 -0.00031
+    H12      Z     0.04194 -0.01306  0.31577 -0.22003 -0.21964 -0.01512
+    H13      X     0.04027 -0.01613 -0.06741  0.05602  0.04751 -0.00346
+    H13      Y     0.03304 -0.00609 -0.16757  0.13178  0.11965 -0.00343
+    H13      Z    -0.07017  0.02780  0.31180 -0.21823 -0.21710 -0.01572
+    H14      X    -0.00785  0.00860 -0.00649  0.01851 -0.01400 -0.00261
+    H14      Y    -0.00976  0.00134 -0.00224  0.33006 -0.34903 -0.00431
+    H14      Z     0.00478 -0.00670  0.00178 -0.12477  0.12487  0.00438
+    H15      X    -0.00785  0.00861  0.00649  0.01851 -0.01400 -0.00261
+    H15      Y    -0.00975  0.00134  0.00222  0.33006 -0.34903 -0.00431
+    H15      Z    -0.00478  0.00671  0.00177  0.12477 -0.12487 -0.00438
+    H16      X    -0.01449  0.01401 -0.00001  0.23043 -0.24252 -0.00616
+    H16      Y    -0.02296  0.02206 -0.00001  0.26734 -0.28041 -0.00975
+    H16      Z     0.00000  0.00000  0.01193  0.00000 -0.00000  0.00000
+    H17      X    -0.05729  0.03472  0.17001  0.12326  0.12733  0.00083
+    H17      Y     0.00222 -0.00524 -0.06608 -0.05105 -0.04660 -0.00031
+    H17      Z    -0.04194  0.01305  0.31576  0.22005  0.21964  0.01512
+    H18      X    -0.03487  0.02608  0.28901  0.20601  0.20514  0.01645
+    H18      Y     0.02806 -0.01262  0.11987  0.09552  0.07877  0.00142
+    H18      Z    -0.01940  0.01622  0.18220  0.13611  0.13053  0.00884
+    H19      X     0.04027 -0.01612  0.06741  0.05603  0.04751 -0.00346
+    H19      Y     0.03304 -0.00609  0.16756  0.13179  0.11965 -0.00343
+    H19      Z     0.07018 -0.02782  0.31178  0.21825  0.21710  0.01572
+  
+  vibration #           31       32       33       34       35       36
+                  -------- -------- -------- -------- -------- --------
+  frequencies      1414.40  1415.38  1419.96  1424.69  1426.22  1432.29
+  symmetries       App      Ap       App      Ap       App      Ap      
+  intensities         0.40     0.14     0.11     4.41     0.33     9.16
+  reduc. mass         0.14     0.22     0.19     0.22     0.12     0.12
+  force const         0.17     0.26     0.23     0.26     0.14     0.14
+    C1       X     0.00000 -0.00212 -0.00000 -0.03972  0.00000 -0.01573
+    C1       Y     0.00000 -0.00170 -0.00000 -0.03675  0.00000 -0.01572
+    C1       Z    -0.00934 -0.00000  0.00109  0.00000  0.02223 -0.00000
+    C2       X    -0.00000  0.00340 -0.00000 -0.00636  0.00000 -0.00143
+    C2       Y    -0.00000  0.00067  0.00000  0.02887 -0.00000  0.01007
+    C2       Z    -0.00407 -0.00000 -0.00195  0.00000  0.01151 -0.00000
+    Si3      X    -0.00000  0.00097  0.00000  0.00170 -0.00000 -0.00591
+    Si3      Y    -0.00000  0.00015  0.00000  0.00155 -0.00000 -0.00387
+    Si3      Z    -0.00114 -0.00000  0.00041 -0.00000 -0.00699  0.00000
+    C4       X     0.02046 -0.01904  0.02192  0.00226 -0.01668 -0.02065
+    C4       Y     0.01286  0.00634 -0.03783  0.01674 -0.01257 -0.01929
+    C4       Z     0.01794 -0.01067  0.00436  0.00783 -0.01337 -0.02023
+    C5       X    -0.00000  0.04978  0.00000 -0.00177 -0.00000 -0.01886
+    C5       Y     0.00000 -0.01450 -0.00000 -0.00016  0.00000  0.00672
+    C5       Z    -0.04413 -0.00000  0.00299 -0.00000 -0.03769  0.00000
+    C6       X    -0.02046 -0.01904 -0.02192  0.00226  0.01668 -0.02065
+    C6       Y    -0.01286  0.00633  0.03783  0.01674  0.01257 -0.01929
+    C6       Z     0.01794  0.01067  0.00436 -0.00783 -0.01336  0.02023
+    O7       X     0.00000 -0.00367 -0.00000 -0.01043  0.00000 -0.00287
+    O7       Y     0.00000 -0.00099 -0.00000 -0.01102  0.00000 -0.00363
+    O7       Z     0.00109  0.00000  0.00037 -0.00000 -0.00180 -0.00000
+    H8       X    -0.06403  0.02363  0.00229  0.43119  0.15265  0.16242
+    H8       Y    -0.05414  0.00002 -0.00064 -0.05898  0.12891 -0.00863
+    H8       Z     0.00886 -0.01430 -0.00113 -0.28316 -0.02172 -0.10097
+    H9       X     0.00000 -0.01130 -0.00001 -0.18893  0.00001 -0.07738
+    H9       Y    -0.00000  0.02428  0.00001  0.41321 -0.00002  0.16481
+    H9       Z     0.12562  0.00000 -0.00481 -0.00003 -0.30131  0.00002
+    H10      X     0.06402  0.02363 -0.00227  0.43116 -0.15269  0.16244
+    H10      Y     0.05414  0.00003  0.00064 -0.05900 -0.12891 -0.00861
+    H10      Z     0.00885  0.01430 -0.00111  0.28316 -0.02174  0.10097
+    H11      X     0.15290 -0.02880 -0.15869  0.12994 -0.14861 -0.22699
+    H11      Y     0.02059 -0.17298  0.47250 -0.13616  0.00720  0.03388
+    H11      Z    -0.07597  0.04775 -0.01518 -0.03712  0.07144  0.10542
+    H12      X    -0.27285  0.21626 -0.18459 -0.07518  0.24006  0.33031
+    H12      Y     0.07578 -0.04713  0.01637  0.03067 -0.06729 -0.09405
+    H12      Z    -0.05329  0.13611 -0.32349  0.07394  0.02045  0.01462
+    H13      X    -0.15222  0.06836  0.04738 -0.08829  0.13971  0.20161
+    H13      Y    -0.25942  0.14029  0.01324 -0.12848  0.23643  0.33316
+    H13      Z    -0.10249 -0.04170  0.28644 -0.14477  0.10203  0.16531
+    H14      X    -0.20154 -0.43946  0.01311  0.01679 -0.18531  0.18261
+    H14      Y     0.26427 -0.01915 -0.01536  0.00431  0.25613  0.00823
+    H14      Z     0.03873  0.32690 -0.00217 -0.01340  0.03428 -0.13515
+    H15      X     0.20159 -0.43942 -0.01315  0.01682  0.18535  0.18259
+    H15      Y    -0.26427 -0.01920  0.01535  0.00427 -0.25614  0.00825
+    H15      Z     0.03877 -0.32689 -0.00219  0.01340  0.03431  0.13515
+    H16      X    -0.00001  0.20781  0.00001 -0.00579 -0.00001 -0.09222
+    H16      Y    -0.00001  0.21927  0.00001 -0.00687 -0.00001 -0.09836
+    H16      Z     0.51491  0.00005 -0.03072  0.00003  0.47617 -0.00002
+    H17      X     0.27283  0.21626  0.18459 -0.07520 -0.24004  0.33033
+    H17      Y    -0.07578 -0.04714 -0.01637  0.03068  0.06728 -0.09405
+    H17      Z    -0.05327 -0.13609 -0.32350 -0.07392  0.02047 -0.01463
+    H18      X    -0.15290 -0.02882  0.15870  0.12994  0.14858 -0.22700
+    H18      Y    -0.02057 -0.17296 -0.47252 -0.13613 -0.00717  0.03387
+    H18      Z    -0.07596 -0.04775 -0.01517  0.03713  0.07143 -0.10543
+    H19      X     0.15221  0.06837 -0.04738 -0.08829 -0.13969  0.20161
+    H19      Y     0.25941  0.14031 -0.01325 -0.12849 -0.23640  0.33317
+    H19      Z    -0.10250  0.04168  0.28645  0.14476  0.10200 -0.16531
+  
+  vibration #           37       38       39       40       41       42
+                  -------- -------- -------- -------- -------- --------
+  frequencies      1433.66  1439.01  1686.67  2975.46  2980.96  2981.25
+  symmetries       App      Ap       Ap       Ap       App      Ap      
+  intensities         9.23     5.07    95.22     3.03     5.37     6.44
+  reduc. mass         0.24     0.12     6.70     0.32     0.17     0.16
+  force const         0.30     0.15    11.23     1.69     0.87     0.85
+    C1       X     0.00000 -0.01231 -0.01079  0.00420 -0.00000  0.00077
+    C1       Y     0.00000 -0.01293 -0.00196 -0.04772  0.00000 -0.00329
+    C1       Z     0.04924 -0.00000 -0.00001  0.00000  0.00032  0.00000
+    C2       X     0.00000 -0.00050  0.20049 -0.00015 -0.00000  0.00030
+    C2       Y     0.00000  0.01446  0.09663  0.00094  0.00000 -0.00026
+    C2       Z     0.01813 -0.00000 -0.00001 -0.00000 -0.00023 -0.00000
+    Si3      X     0.00000  0.00692 -0.00162 -0.00017 -0.00000  0.00037
+    Si3      Y    -0.00000 -0.00702  0.00152 -0.00013 -0.00000  0.00031
+    Si3      Z     0.00126 -0.00000 -0.00000 -0.00000  0.00081  0.00000
+    C4       X     0.01320  0.01817  0.00001  0.00134  0.02132 -0.02094
+    C4       Y     0.00793 -0.02917 -0.00036  0.00107  0.00705 -0.00664
+    C4       Z     0.00994  0.00508  0.00044 -0.00177 -0.02619  0.02627
+    C5       X     0.00000  0.01924  0.00060  0.00007  0.00000 -0.00021
+    C5       Y    -0.00000 -0.00374 -0.00041 -0.00014  0.00000 -0.00277
+    C5       Z     0.00984 -0.00000 -0.00000 -0.00000  0.00020  0.00000
+    C6       X    -0.01320  0.01817 -0.00000  0.00134 -0.02129 -0.02097
+    C6       Y    -0.00794 -0.02917 -0.00036  0.00107 -0.00704 -0.00665
+    C6       Z     0.00994 -0.00508 -0.00044  0.00177 -0.02616 -0.02630
+    O7       X    -0.00000 -0.00512 -0.14095  0.00030  0.00000 -0.00018
+    O7       Y    -0.00000 -0.00497 -0.06831  0.00018 -0.00000  0.00003
+    O7       Z    -0.00368  0.00000  0.00001 -0.00000  0.00005  0.00000
+    H8       X     0.32005  0.13627 -0.01253 -0.27961 -0.00066 -0.02046
+    H8       Y     0.26165 -0.01880  0.02319  0.18833  0.00047  0.01414
+    H8       Z    -0.04699 -0.08927  0.01331 -0.47014 -0.00137 -0.03460
+    H9       X     0.00000 -0.06093  0.02478  0.50827 -0.00002  0.03182
+    H9       Y    -0.00001  0.13197 -0.09090  0.17948 -0.00001  0.01133
+    H9       Z    -0.63442  0.00001  0.00000 -0.00000 -0.00025 -0.00000
+    H10      X    -0.32006  0.13629 -0.01253 -0.27961  0.00068 -0.02046
+    H10      Y    -0.26165 -0.01879  0.02319  0.18833 -0.00048  0.01414
+    H10      Z    -0.04700  0.08927 -0.01333  0.47014 -0.00141  0.03460
+    H11      X     0.09754 -0.12121  0.00450  0.01367  0.20067 -0.20138
+    H11      Y    -0.00302  0.41463 -0.00155  0.00561  0.08162 -0.08189
+    H11      Z    -0.04515 -0.02327 -0.00165  0.02090  0.30304 -0.30615
+    H12      X    -0.17322 -0.17383 -0.00085 -0.00665 -0.08583  0.08452
+    H12      Y     0.04861  0.01882  0.00007 -0.03179 -0.39080  0.38448
+    H12      Z    -0.01330 -0.29677  0.00126 -0.00035 -0.00300  0.00284
+    H13      X    -0.09625  0.02475  0.00057 -0.02233 -0.36342  0.36140
+    H13      Y    -0.16480 -0.01362  0.00218  0.01460  0.22726 -0.22558
+    H13      Z    -0.07171  0.25078 -0.00757  0.00002  0.00220 -0.00270
+    H14      X     0.04904 -0.19162  0.00959  0.00069 -0.00169  0.01576
+    H14      Y    -0.06789 -0.02037 -0.00511  0.00044 -0.00114  0.00444
+    H14      Z    -0.00911  0.14533 -0.00316  0.00108 -0.00217  0.02341
+    H15      X    -0.04905 -0.19161  0.00958  0.00069  0.00167  0.01576
+    H15      Y     0.06788 -0.02037 -0.00511  0.00044  0.00114  0.00444
+    H15      Z    -0.00912 -0.14533  0.00315 -0.00108 -0.00213 -0.02341
+    H16      X     0.00000  0.09215 -0.01141 -0.00093  0.00003 -0.03048
+    H16      Y     0.00000  0.10126 -0.01822  0.00003 -0.00002  0.02164
+    H16      Z    -0.12559  0.00000 -0.00000 -0.00000  0.00006  0.00000
+    H17      X     0.17323 -0.17384 -0.00086 -0.00665  0.08571  0.08464
+    H17      Y    -0.04862  0.01882  0.00007 -0.03179  0.39028  0.38501
+    H17      Z    -0.01329  0.29677 -0.00126  0.00035 -0.00300 -0.00284
+    H18      X    -0.09756 -0.12120  0.00448  0.01367 -0.20040 -0.20165
+    H18      Y     0.00304  0.41464 -0.00155  0.00561 -0.08151 -0.08200
+    H18      Z    -0.04515  0.02327  0.00165 -0.02090  0.30263  0.30656
+    H19      X     0.09626  0.02474  0.00056 -0.02233  0.36293  0.36189
+    H19      Y     0.16482 -0.01363  0.00218  0.01461 -0.22696 -0.22589
+    H19      Z    -0.07173 -0.25078  0.00758 -0.00002  0.00219  0.00271
+  
+  vibration #           43       44       45       46       47       48
+                  -------- -------- -------- -------- -------- --------
+  frequencies      2989.86  3060.59  3066.07  3066.95  3073.15  3075.00
+  symmetries       Ap       App      App      Ap       Ap       App     
+  intensities         3.52     3.53     0.44    20.90     5.32     5.12
+  reduc. mass         0.33     0.51     0.25     0.24     0.37     0.27
+  force const         1.74     2.83     1.36     1.31     2.07     1.51
+    C1       X    -0.00004 -0.00000 -0.00000  0.01219  0.08015  0.00001
+    C1       Y    -0.00028 -0.00000  0.00000 -0.00000  0.00228  0.00000
+    C1       Z    -0.00000 -0.08722  0.00527  0.00000 -0.00000 -0.00083
+    C2       X     0.00033  0.00000 -0.00000 -0.00004  0.00134  0.00000
+    C2       Y     0.00013 -0.00000  0.00000 -0.00017 -0.00119 -0.00000
+    C2       Z    -0.00000 -0.00100  0.00025  0.00000 -0.00000  0.00003
+    Si3      X    -0.00027 -0.00000 -0.00000  0.00049 -0.00024  0.00000
+    Si3      Y    -0.00067 -0.00000  0.00000 -0.00060  0.00008  0.00000
+    Si3      Z    -0.00000 -0.00006  0.00000 -0.00000  0.00000 -0.00040
+    C4       X    -0.00110  0.00246  0.03321  0.03459 -0.01981 -0.03908
+    C4       Y    -0.00062 -0.00286 -0.05129 -0.04921 -0.00796 -0.03177
+    C4       Z     0.00142  0.00082  0.00898  0.01060 -0.01620 -0.03600
+    C5       X     0.00791  0.00000  0.00000 -0.00420  0.00155 -0.00000
+    C5       Y     0.04806 -0.00000 -0.00000  0.00101 -0.00036  0.00000
+    C5       Z     0.00000  0.00006 -0.00187 -0.00000 -0.00000  0.00412
+    C6       X    -0.00110 -0.00246 -0.03322  0.03458 -0.01981  0.03909
+    C6       Y    -0.00062  0.00286  0.05130 -0.04920 -0.00796  0.03178
+    C6       Z    -0.00142  0.00082  0.00898 -0.01060  0.01620 -0.03601
+    O7       X    -0.00009  0.00000  0.00000 -0.00004 -0.00040 -0.00000
+    O7       Y    -0.00012  0.00000 -0.00000  0.00010  0.00024  0.00000
+    O7       Z     0.00000  0.00024 -0.00005 -0.00000  0.00000  0.00000
+    H8       X    -0.00172  0.33213 -0.02072 -0.02430 -0.14606  0.00266
+    H8       Y     0.00128 -0.23424  0.01431  0.01923  0.11497 -0.00213
+    H8       Z    -0.00275  0.53252 -0.03267 -0.04514 -0.27417  0.00460
+    H9       X     0.00309  0.00000  0.00001 -0.09802 -0.66943 -0.00009
+    H9       Y     0.00095  0.00000  0.00000 -0.03647 -0.24954 -0.00003
+    H9       Z    -0.00000 -0.01780  0.00174  0.00000 -0.00000  0.00027
+    H10      X    -0.00172 -0.33213  0.02073 -0.02430 -0.14606 -0.00270
+    H10      Y     0.00128  0.23424 -0.01432  0.01922  0.11497  0.00216
+    H10      Z     0.00275  0.53252 -0.03269  0.04513  0.27417  0.00467
+    H11      X    -0.01059 -0.00627 -0.06716 -0.07989  0.12529  0.28020
+    H11      Y    -0.00436 -0.00328 -0.04275 -0.04669  0.05106  0.11098
+    H11      Z    -0.01630 -0.01047 -0.11875 -0.13904  0.20509  0.45823
+    H12      X     0.00601  0.00527  0.10471  0.10035  0.02011  0.07593
+    H12      Y     0.02470  0.02066  0.40040  0.38046  0.10497  0.35108
+    H12      Z    -0.00059 -0.00017 -0.00364 -0.00397 -0.00474 -0.01268
+    H13      X     0.01848 -0.02879 -0.43632 -0.43772  0.09250  0.11235
+    H13      Y    -0.01141  0.01702  0.25719  0.25820 -0.06116 -0.08066
+    H13      Z    -0.00029  0.00121  0.01515  0.01743 -0.00692 -0.01156
+    H14      X    -0.29641 -0.00013  0.00831  0.01192 -0.00353 -0.01736
+    H14      Y    -0.09643  0.00007  0.00290  0.00487 -0.00167 -0.00582
+    H14      Z    -0.43659 -0.00024  0.01131  0.01929 -0.00650 -0.02470
+    H15      X    -0.29641  0.00013 -0.00831  0.01192 -0.00353  0.01737
+    H15      Y    -0.09643 -0.00007 -0.00290  0.00487 -0.00167  0.00583
+    H15      Z     0.43659 -0.00024  0.01132 -0.01929  0.00650 -0.02472
+    H16      X     0.50298 -0.00000 -0.00000  0.02612 -0.01106  0.00002
+    H16      Y    -0.36374  0.00000  0.00000 -0.01855  0.00819 -0.00001
+    H16      Z     0.00000  0.00001 -0.00089 -0.00000 -0.00000  0.00082
+    H17      X     0.00601 -0.00527 -0.10473  0.10032  0.02011 -0.07596
+    H17      Y     0.02470 -0.02066 -0.40048  0.38036  0.10501 -0.35121
+    H17      Z     0.00059 -0.00017 -0.00364  0.00397  0.00475 -0.01268
+    H18      X    -0.01059  0.00627  0.06718 -0.07987  0.12531 -0.28028
+    H18      Y    -0.00436  0.00328  0.04277 -0.04668  0.05107 -0.11101
+    H18      Z     0.01629 -0.01047 -0.11880  0.13901 -0.20513  0.45836
+    H19      X     0.01847  0.02879  0.43643 -0.43761  0.09251 -0.11236
+    H19      Y    -0.01141 -0.01702 -0.25726  0.25813 -0.06116  0.08067
+    H19      Z     0.00029  0.00121  0.01516 -0.01742  0.00692 -0.01156
+  
+  vibration #           49       50       51
+                  -------- -------- --------
+  frequencies      3075.40  3078.95  3084.21
+  symmetries       Ap       Ap       App     
+  intensities        19.28    11.07     6.42
+  reduc. mass         0.19     0.43     0.51
+  force const         1.04     2.42     2.88
+    C1       X    -0.03610  0.00549 -0.00000
+    C1       Y    -0.00126  0.00016 -0.00000
+    C1       Z     0.00000  0.00000  0.00020
+    C2       X    -0.00054  0.00038 -0.00000
+    C2       Y     0.00051  0.00035 -0.00000
+    C2       Z     0.00000 -0.00000 -0.00009
+    Si3      X    -0.00033  0.00066  0.00000
+    Si3      Y    -0.00057 -0.00005  0.00000
+    Si3      Z    -0.00000  0.00000  0.00062
+    C4       X    -0.03145  0.00762  0.00244
+    C4       Y    -0.03371  0.00377  0.00036
+    C4       Z    -0.03103  0.00629  0.00181
+    C5       X     0.01499  0.08360 -0.00000
+    C5       Y    -0.00374 -0.02094  0.00000
+    C5       Z     0.00000  0.00000  0.08733
+    C6       X    -0.03143  0.00762 -0.00244
+    C6       Y    -0.03370  0.00377 -0.00036
+    C6       Z     0.03101 -0.00629  0.00181
+    O7       X     0.00026 -0.00025  0.00000
+    O7       Y    -0.00007 -0.00022  0.00000
+    O7       Z    -0.00000  0.00000 -0.00005
+    H8       X     0.06469 -0.01011 -0.00069
+    H8       Y    -0.05065  0.00788  0.00048
+    H8       Z     0.12108 -0.01880 -0.00111
+    H9       X     0.30338 -0.04626  0.00000
+    H9       Y     0.11356 -0.01748  0.00000
+    H9       Z     0.00000  0.00000  0.00007
+    H10      X     0.06469 -0.01011  0.00069
+    H10      Y    -0.05065  0.00788 -0.00048
+    H10      Z    -0.12108  0.01880 -0.00111
+    H11      X     0.24089 -0.04814 -0.01462
+    H11      Y     0.09410 -0.01946 -0.00573
+    H11      Z     0.39315 -0.07994 -0.02550
+    H12      X     0.07993 -0.01055 -0.00109
+    H12      Y     0.35913 -0.04867 -0.00587
+    H12      Z    -0.01316  0.00209  0.00020
+    H13      X     0.05775 -0.03528 -0.01293
+    H13      Y    -0.04692  0.02222  0.00833
+    H13      Z    -0.00918  0.00332  0.00084
+    H14      X    -0.03743 -0.21904 -0.37953
+    H14      Y    -0.01571 -0.09382 -0.14242
+    H14      Z    -0.06064 -0.34672 -0.53377
+    H15      X    -0.03742 -0.21901  0.37955
+    H15      Y    -0.01570 -0.09381  0.14243
+    H15      Z     0.06062  0.34668 -0.53380
+    H16      X    -0.10332 -0.56869  0.00002
+    H16      Y     0.07969  0.43964 -0.00001
+    H16      Z     0.00000  0.00000  0.01782
+    H17      X     0.07991 -0.01055  0.00109
+    H17      Y     0.35901 -0.04867  0.00587
+    H17      Z     0.01315 -0.00209  0.00020
+    H18      X     0.24079 -0.04814  0.01463
+    H18      Y     0.09406 -0.01946  0.00573
+    H18      Z    -0.39297  0.07994 -0.02550
+    H19      X     0.05770 -0.03528  0.01293
+    H19      Y    -0.04688  0.02222 -0.00833
+    H19      Z     0.00918 -0.00332  0.00084
+  
+  Number of imaginary frequencies:   1
+   
+  Writing vibrational animation data to J1_4571_2111.vib
+  Writing IR vibrational spectrum data to J1_4571_2111_vib.spm
+  rotational symmetry number:  1
+
+  rotational temperatures (K):      0.113359      0.076014      0.066212
+   
+  The Quasi-Harmonic approximation will be applied to compute
+  vibrational constributions to thermodynamic properties.
+  Frequencies will be adjusted to a minimum value of  100.00 cm^-1.
+
+    1 vibrational frequencies below   0.0 cm-1 not included in zero-point
+  energy or thermochemical analysis.  Set freqcut to change the frequency
+  cutoff value.
+
+  vibrational temperatures:
+       mode:      2        3        4        5        6        7
+  temp. (K):   143.88   144.25   168.95   171.09   215.40   226.29
+   
+       mode:      8        9       10       11       12       13
+  temp. (K):   270.85   276.69   284.30   436.85   535.54   699.36
+   
+       mode:     14       15       16       17       18       19
+  temp. (K):   797.33   887.36   968.24   975.01   986.29  1059.39
+   
+       mode:     20       21       22       23       24       25
+  temp. (K):  1079.88  1221.07  1228.91  1235.24  1323.57  1342.93
+   
+       mode:     26       27       28       29       30       31
+  temp. (K):  1569.81  1797.30  1801.98  1815.92  1897.65  2035.00
+   
+       mode:     32       33       34       35       36       37
+  temp. (K):  2036.42  2043.00  2049.81  2052.01  2060.74  2062.72
+   
+       mode:     38       39       40       41       42       43
+  temp. (K):  2070.41  2426.73  4281.02  4288.93  4289.35  4301.74
+   
+       mode:     44       45       46       47       48       49
+  temp. (K):  4403.51  4411.38  4412.65  4421.57  4424.24  4424.81
+   
+       mode:     50       51
+  temp. (K):  4429.92  4437.49
+   
+   
+  Thermodynamic properties calculated assuming an ideal gas
+
+  In the table below, the units for temperature
+  are kelvins, the units for U, H, and G are
+  kcal/mol and the units for Cv and S are cal/(mol K)
+
+  The zero point energy (ZPE):     96.305 kcal/mol
+  is not included in U, H, or G in the table below
+  
+ 
+  =============================================================================
+  Thermodynamic properties for P = 1.00E+00 atm, calculated at   1 temperatures
+
+
+  T =   298.15 K, P = 1.00E+00 atm
+   
+                  U         Cv          S          H          G        ln(Q)
+              =========  =========  =========  =========  =========  =========
+  trans.          0.889      2.981     40.162      1.481    -10.493   17.71036
+  rot.            0.889      2.981     28.523      0.889     -7.615   12.85322
+  vib.            5.125     32.213     31.739      5.125     -4.338    7.32209
+  elec.           0.000      0.000      0.000      0.000      0.000    0.00000
+  ----------------------------------------------------------------------------
+  total           6.902     38.174    100.424      7.495    -22.447   37.88567
+   
+   Total internal energy, Utot(SCFE + ZPE + U):    -561.823503 hartrees
+              Total enthalpy, Htot (Utot + pV):    -561.822559 hartrees
+    Total Gibbs free energy, Gtot (Htot - T*S):    -561.870274 hartrees
+   
+  Peak memory usage:   2701 Mb
+  
+  end of program freq
+   
+ Time(freq)  user:        4.9  user+sys:        4.9  wallclock:        2.5
+
+ Total cpu seconds     user:     513.037   user+sys:     513.037
+  
+ Total elapsed time:    171 seconds
+
+Job J1_4571_2111 completed on hpc-89-18.cm.cluster at Wed May 29 02:23:22 2024
