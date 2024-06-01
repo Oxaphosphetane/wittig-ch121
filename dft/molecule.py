@@ -49,7 +49,8 @@ class Molecule:
             type: MoleculeType = MoleculeType.UNCATEGORIZED,
             coordinates_path: str = None
     ):
-        self.molecule = Chem.MolFromSmiles(smiles)
+        self.canonical_smiles = Chem.CanonSmiles(smiles)
+        self.molecule = Chem.MolFromSmiles(self.canonical_smiles)
         if self.molecule is None:
             raise ValueError("Invalid SMILES string provided")
         self.molecule_with_hydrogens = Chem.AddHs(self.molecule)
@@ -85,6 +86,9 @@ class Molecule:
 
     @staticmethod
     def infer_bonds_from_coordinates(atom_symbols, coordinates):
+        """
+        NOT FINISHED
+        """
         mol = Chem.RWMol()
         atom_indices = []
 
@@ -143,11 +147,10 @@ class Molecule:
             j += 1
 
         conformer = Chem.Conformer(self.molecule_with_hydrogens.GetNumAtoms())
-        atom_symbols = []
         for idx, coord_str in enumerate(coord_lines):
-            atom_symbol, x, y, z = coord_str.split()
-            atom_symbols.append(re.sub(r'\d+', '', atom_symbol))
-            conformer.SetAtomPosition(idx, Point3D(int(x), int(y), int(z)))
+            x, y, z = map(float, coord_str.split()[1:])
+            # atom_symbols.append(re.sub(r'\d+', '', atom_symbol))
+            conformer.SetAtomPosition(idx, Point3D(x, y, z))
 
         # Add the conformer to the molecule
         self.molecule_with_hydrogens.AddConformer(conformer, assignId=True)
@@ -393,7 +396,7 @@ class OxaphosEmbedParams:
 
             if chain_atoms is not None:
                 prelim_template_mol = OxaphosEmbedParams.update_chain_atoms(prelim_template_mol, chain_atoms)
-                print(Chem.MolToSmiles(prelim_template_mol))
+                # print(Chem.MolToSmiles(prelim_template_mol))  # for testing
             if ligand_atoms is not None:
                 prelim_template_mol = OxaphosEmbedParams.update_ligand_atoms(prelim_template_mol, ligand_atoms)
 
@@ -411,9 +414,10 @@ class Oxaphosphetane(Molecule):
             self,
             smiles: str,
             source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'wittig_molecules.csv'),
-            type: MoleculeType = MoleculeType.OXAPHOSPHETANE
+            type: MoleculeType = MoleculeType.OXAPHOSPHETANE,
+            coordinates_path: str = None
     ):
-        super().__init__(smiles, source=source, type=type)
+        super().__init__(smiles, source=source, type=type, coordinates_path=coordinates_path)
         self.ring_indices = OxaphosEmbedParams.get_ring_indices(self.molecule_with_hydrogens)
         self.cis_templates = self.make_cis_templates()
         self.constraint_core_mol = OxaphosEmbedParams(

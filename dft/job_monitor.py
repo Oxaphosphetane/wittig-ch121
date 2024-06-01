@@ -47,6 +47,7 @@ class JobMonitor:
         except FileNotFoundError:
             return
 
+        start_time = None
         for line in log_lines:
             if f"Job {job_id} started on" in line:
                 start_date_string = line.split(' at ')[-1].strip()
@@ -54,10 +55,10 @@ class JobMonitor:
                     start_time = dt.datetime.strptime(start_date_string, JobMonitor.log_date_format)
                 except Exception as e:
                     print(e)
-                    print(job_id)
-                    print(str(start_date_string), repr(start_date_string))
-                    print()
                 break
+
+        if start_time is None:
+            return
 
         if job_status == JobStatus.FINISHED or job_status == JobStatus.ERROR:
             for line in log_lines:
@@ -95,6 +96,8 @@ class JobMonitor:
         # Read the current job log
         old_jobs = pd.read_csv(self.job_log)
 
+        new_entries = []
+
         # Loop through each subdirectory in the job output directory
         for file in os.listdir(self.job_out_dir):
             job_dir = os.path.join(self.job_out_dir, file)
@@ -102,14 +105,28 @@ class JobMonitor:
                 job_status = self.scrape_log_for_status(job_id=file)
                 runtime = self.scrape_log_for_runtime(job_id=file, job_status=job_status)
 
-                # Update the job status in the DataFrame
-                old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.JOB_STATUS.value] = job_status.value
-                old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.RUNTIME.value] = runtime
+                if old_jobs[old_jobs[JobInfo.JOB_ID.value] == file].empty:
+                    # Add new job entry if it doesn't exist
+                    new_entry = {
+                        JobInfo.JOB_ID.value: file,
+                        JobInfo.JOB_STATUS.value: job_status,
+                        JobInfo.RUNTIME.value: runtime
+                    }
+                    new_entries.append(new_entry)
+                else:
+                    # Update the job status in the DataFrame
+                    old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.JOB_STATUS.value] = job_status.value
+                    old_jobs.loc[old_jobs[JobInfo.JOB_ID.value] == file, JobInfo.RUNTIME.value] = runtime
 
-        # Save the updated DataFrame back to the CSV file
-        old_jobs.to_csv(self.job_log, index=False)
+        # Convert the new entries to a DataFrame and concatenate with old_jobs
+        if new_entries:
+            new_jobs_df = pd.DataFrame(new_entries)
+            updated_jobs = pd.concat([old_jobs, new_jobs_df], ignore_index=True)
+        else:
+            updated_jobs = old_jobs
 
-        print("Job statuses updated successfully.")
+        # Save the updated job log
+        updated_jobs.to_csv(self.job_log, index=False)
 
         pd.set_option('display.max_rows', None)
         pd.set_option('display.max_columns', None)
@@ -122,7 +139,6 @@ class JobMonitor:
         for status in JobStatus:
             count = old_jobs[JobInfo.JOB_STATUS.value].value_counts().get(status.value, 0)
             print(f"Number of {status.value} jobs: {count}")
-
 
 def main():
     job_monitor = JobMonitor()

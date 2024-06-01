@@ -90,8 +90,8 @@ class JobManager:
             estimator = DFTMethods.PBE_D3.value.runtime_estimator
 
         n_atoms = 0
-        for mol in job.molecules:
-            n_atoms += mol.molecule_with_hydrogens.GetNumAtoms()
+        for m in job.molecules:
+            n_atoms += m.molecule_with_hydrogens.GetNumAtoms()
 
         return estimator(n_atoms)
 
@@ -170,7 +170,7 @@ def main():
     finished_jobs = batched_jobs[batched_jobs[JobInfo.JOB_STATUS.value] == JobStatus.FINISHED.value]
 
     def mol_id_extractor(s):
-        return s.split('_')[1]
+        return int(s.split('_')[1])
 
     failed_mol_ids = failed_jobs[JobInfo.JOB_ID.value].map(mol_id_extractor).tolist()
     finished_mol_ids = finished_jobs[JobInfo.JOB_ID.value].map(mol_id_extractor).tolist()
@@ -180,16 +180,18 @@ def main():
     finished_mols = []
     not_run_mols = []
     for m in molecules:
+        mol_id = m.id
         try:
-            coordinates_path = os.path.join(config.get_file(ConfigKeys.OUT_DIR), f"J1_{m.id}_2111",
-                                            f"J1_{m.id}_2111.01.in")
+            coordinates_path = os.path.join(config.get_file(ConfigKeys.OUT_DIR), f"J1_{mol_id}_2111",
+                                            f"J1_{mol_id}_2111.01.in")
             try:
                 m.add_coordinates_from_file(coordinates_path)
             except FileNotFoundError:
                 not_run_mols.append(m)
-            if m.id in failed_mol_ids:
+                continue
+            if mol_id in failed_mol_ids:
                 failed_mols.append(m)
-            elif m.id in finished_mol_ids:
+            elif mol_id in finished_mol_ids:
                 finished_mols.append(m)
             else:
                 not_run_mols.append(m)
@@ -197,55 +199,63 @@ def main():
             print(e)
             print()
 
-    potentially_not_run_previously_new_jobs = job_manager.create_jobs(
+    first_run_jobs = job_manager.create_jobs(
         molecules=not_run_mols, job_type=job_type, dft_basis=dft_basis, dft_method=DFTMethods.PBE_D3.value,
         calculate_vibrational_energies=True)
+
+    print('first_run_jobs created')
 
     new_jobs = job_manager.create_jobs(
         molecules=failed_mols, job_type=job_type, dft_basis=dft_basis, dft_method=DFTMethods.PBE_D3.value,
         calculate_vibrational_energies=True)
+    print('failed jobs resume created')
     new_jobs.extend(job_manager.create_jobs(
         molecules=finished_mols, job_type=job_type, dft_basis=dft_basis, dft_method=DFTMethods.B3LYP_D3.value,
         calculate_vibrational_energies=True
     ))
+    print('finished mols new jobs created')
 
     job_manager.setup_job_dirs(new_jobs, overwrite=True)
-    job_manager.setup_job_dirs(potentially_not_run_previously_new_jobs, overwrite=False)
+    job_manager.setup_job_dirs(first_run_jobs, overwrite=False)
 
-    new_jobs.extend(potentially_not_run_previously_new_jobs)
+    print('job directories setup')
+
+    new_jobs.extend(first_run_jobs)
 
     job_manager.sbatch_jobs(new_jobs, batch_size=config.get_job_spec(ConfigKeys.BATCH_SIZE))
 
 
 if __name__ == "__main__":
-    # main()
+    main()
 
-    smi = "O=C[C@H](OC(=O)c1ccccc1)[C@H](OC(=O)c1ccccc1)[C@@H](COC(=O)c1ccccc1)OC(=O)c1ccccc1"
-    m = mol.Molecule(
-        smi,
-        source=config.get_file(ConfigKeys.MOLECULES),
-        type=mol.MoleculeType.CARBONYL,
-        coordinates_path=os.path.join(config.get_file(ConfigKeys.OUT_DIR), 'J1_701_2111', 'J1_701_2111.01.in')
-    )
-
-    print(m.id)
-    print(m.scrape_coordinates(os.path.join(config.get_file(ConfigKeys.OUT_DIR), 'J1_701_2111', 'J1_701_2111.01.in')))
-    m.visualize_3d(label='J1_701_2111.01.in')
-
-    # Retrieve the first conformer (ID is 0 by default for the first conformer)
-    conf = m.molecule_with_hydrogens.GetConformer(0)
-
-    # Print positions of atoms in the conformer
-    for i in range(m.molecule_with_hydrogens.GetNumAtoms()):
-        pos = conf.GetAtomPosition(i)
-        print(f"Atom {i}: x={pos.x}, y={pos.y}, z={pos.z}")
-
-    for atom in m.molecule_with_hydrogens.GetAtoms():
-        # Get the atomic number of the atom
-        atomic_num = atom.GetAtomicNum()
-        # Get the symbol of the atom
-        symbol = atom.GetSymbol()
-        # Get the index of the atom
-        index = atom.GetIdx()
-        # Print atom information
-        print(f"Atom index: {index}, Atomic number: {atomic_num}, Symbol: {symbol}")
+    # smi = "CC/C=C/C=P(c1ccccc1)(c1ccccc1)c1ccccc1"
+    # mol_id = 414
+    # job_id = f"J1_{mol_id}_2111"
+    # m = mol.Molecule(
+    #     smi,
+    #     source=config.get_file(ConfigKeys.MOLECULES),
+    #     type=mol.MoleculeType.CARBONYL,
+    #     coordinates_path=os.path.join(config.get_file(ConfigKeys.OUT_DIR), job_id, f'{job_id}.01.in')
+    # )
+    #
+    # print(m.id)
+    # print(m.scrape_coordinates(os.path.join(config.get_file(ConfigKeys.OUT_DIR), job_id, f'{job_id}.in')))
+    # m.visualize_3d(label=f'{job_id}.in')
+    #
+    # # Retrieve the first conformer (ID is 0 by default for the first conformer)
+    # conf = m.molecule_with_hydrogens.GetConformer(0)
+    #
+    # # Print positions of atoms in the conformer
+    # for i in range(m.molecule_with_hydrogens.GetNumAtoms()):
+    #     pos = conf.GetAtomPosition(i)
+    #     print(f"Atom {i}: x={pos.x}, y={pos.y}, z={pos.z}")
+    #
+    # for atom in m.molecule_with_hydrogens.GetAtoms():
+    #     # Get the atomic number of the atom
+    #     atomic_num = atom.GetAtomicNum()
+    #     # Get the symbol of the atom
+    #     symbol = atom.GetSymbol()
+    #     # Get the index of the atom
+    #     index = atom.GetIdx()
+    #     # Print atom information
+    #     print(f"Atom index: {index}, Atomic number: {atomic_num}, Symbol: {symbol}")

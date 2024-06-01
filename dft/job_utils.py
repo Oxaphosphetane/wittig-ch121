@@ -2,6 +2,7 @@ import json
 import enum
 from typing import List, Dict
 from collections import defaultdict
+from rdkit import Chem
 
 
 class JobSoftware(enum.Enum):
@@ -24,6 +25,13 @@ class JobStatus(enum.Enum):
     FINISHED = "FINISHED"
 
 
+class DataJsonColumns(enum.Enum):
+    ALD_SMILES = 'ald_smiles'
+    YLIDE_SMILES = 'ylide_smiles'
+    CIS_PDT = 'cis_pdt'
+    TRANS_PDT = 'trans_pdt'
+
+
 class JsonParser:
     def __init__(self, json_file: str):
         self.json_file = json_file
@@ -36,14 +44,15 @@ class JsonParser:
     def get_unique_molecules(self) -> Dict[str, List[str]]:
         unique_molecules = defaultdict(set)
         for entry in self.data:
-            unique_molecules['ald_smiles'].add(entry['ald_smiles'])
-            unique_molecules['ylide_smiles'].add(entry['ylide_smiles'])
-            unique_molecules['cis_pdt'].add(entry['cis_pdt'])
-            unique_molecules['trans_pdt'].add(entry['trans_pdt'])
+            for col in DataJsonColumns:
+                col_name = col.value
+                try:
+                    unique_molecules[col_name].add(Chem.CanonSmiles(entry[col_name]))
+                except Exception as e:
+                    continue
 
         # Convert sets to lists
         for key in unique_molecules:
             unique_molecules[key] = list(unique_molecules[key])
 
         return unique_molecules
-

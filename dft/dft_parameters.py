@@ -31,9 +31,13 @@ dft methods
 
 
 class _DFTMethod(_DFTParam):
-    def __init__(self, code: int, name: str, jaguar_name: str, runtime_estimator: list[float] = None):
+    def __init__(self, code: int, name: str, jaguar_name: str, runtime_estimator_coeffs: list[float] = None):
         super().__init__(code, name, jaguar_name)
-        self.runtime_estimator = np.poly1d(runtime_estimator)
+        if runtime_estimator_coeffs is not None:
+            runtime_poly = np.poly1d(runtime_estimator_coeffs)
+            self.runtime_estimator = lambda x: max(60.0, runtime_poly(x))  # min of 60s for job runtime
+        else:
+            self.runtime_estimator = None
 
     def __repr__(self):
         return f"_DFTMethod(code={self.code}, jaguar_name='{self.jaguar_name}')"
