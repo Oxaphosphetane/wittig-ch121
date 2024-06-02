@@ -2,13 +2,13 @@
 For dealing with smiles vs canonical smiles
 """
 
-from jaguar_job import *
-import molecule as mol
-from job_utils import JsonParser
+from dft.jaguar_job import *
+import dft.molecule as mol
+from dft.job_utils import JsonParser
 import shutil
 import re
 
-from job_manager import JobManager
+from dft.job_manager import JobManager
 
 from config import Config, ConfigKeys
 

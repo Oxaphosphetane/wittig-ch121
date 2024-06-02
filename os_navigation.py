@@ -17,7 +17,7 @@ def search_path(start_path=os.path.dirname(__file__), end_marker=''):
 
 
 def find_project_root(start_path=os.path.dirname(__file__)):
-    return search_path(start_path=start_path, end_marker='README.md')
+    return search_path(start_path=start_path, end_marker='.PROJECTROOT')
 
 
 def find_hpc_root(start_path=os.path.dirname(__file__)):

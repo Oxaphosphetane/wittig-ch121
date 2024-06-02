@@ -3,11 +3,11 @@ import pandas as pd
 import json
 from pprint import pprint
 
-import molecule as mol
+import dft.molecule as mol
 
 # Define the path to the JSON file
 PATH = '/Users/lucasabounader/PycharmProjects/active_learner/saved_files/vis_df_v2.json'
-output_csv_path = '/Users/lucasabounader/PycharmProjects/wittig-ch121/data/mols/vis_df_v2.csv'
+output_csv_path = '/data/mols/vis_df_v2.csv'
 
 with open(PATH, 'r') as file:
     data = json.load(file)
