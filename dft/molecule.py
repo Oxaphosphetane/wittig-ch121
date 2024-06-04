@@ -13,7 +13,7 @@ parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 sys.path.append(parent_dir)
 import os_navigation as os_nav
 
-from html_templates import Visualize3DHtml
+from dft.html_templates import Visualize3DHtml
 
 # Disable all RDKit warnings
 from rdkit import RDLogger
@@ -29,6 +29,11 @@ logger.setLevel(RDLogger.ERROR)  # Show only errors, no warnings
 class _ForceFieldMethod:
     UFF = 'uff'
     MMFF = 'mmff'
+
+class MoleculeInfo(enum.Enum):
+    INDEX = 'index'
+    TYPE = 'type'
+    SMILES = 'smiles'
 
 
 class MoleculeType(enum.Enum):
@@ -47,16 +52,22 @@ class Molecule:
             smiles: str,
             source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv'),
             type: MoleculeType = MoleculeType.UNCATEGORIZED,
-            coordinates_path: str = None
+            coordinates_path: str = None,
+            _store_only: bool = False
     ):
         self.canonical_smiles = Chem.CanonSmiles(smiles)
+        self.source = source
+        self.type = type
+
+        if _store_only:
+            self._generate_id()
+            return
+
         self.molecule = Chem.MolFromSmiles(self.canonical_smiles)
         if self.molecule is None:
             raise ValueError("Invalid SMILES string provided")
         self.molecule_with_hydrogens = Chem.AddHs(self.molecule)
         self.canonical_smiles = Chem.MolToSmiles(self.molecule, isomericSmiles=True)
-        self.source = source
-        self.type = type
         if coordinates_path is not None:
             self.coordinates = self.scrape_coordinates(coordinates_path)
         else:
@@ -65,6 +76,24 @@ class Molecule:
 
     def add_coordinates_from_file(self, coordinates_path):
         self.coordinates = self.scrape_coordinates(coordinates_path)
+
+    @classmethod
+    def store_mol_info(cls, smiles: str,
+            source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv'),
+            type: MoleculeType = MoleculeType.UNCATEGORIZED):
+        return cls(smiles=smiles, source=source, type=type, _store_only=True)
+
+    @classmethod
+    def from_id(cls, id, source: str):
+        df = pd.read_csv(source)
+
+        matching_row = df[df[MoleculeInfo.INDEX] == id].iloc[0]
+
+        return cls(
+            smiles=matching_row[MoleculeInfo.SMILES.value],
+            type=MoleculeType(matching_row[MoleculeInfo.TYPE.value]),
+            source=source)
+
 
     @classmethod
     def from_rdkit_mol(cls, mol, source: str = os.path.join(os_nav.find_project_root(), 'data', 'mols', 'uncategorized.csv')):
@@ -232,8 +261,8 @@ class Molecule:
 
     def _generate_id(self):
         df = pd.read_csv(self.source)
-        if self.canonical_smiles in df['smiles'].values:
-            matching_row = df[df['smiles'] == self.canonical_smiles]
+        if self.canonical_smiles in df[MoleculeInfo.SMILES.value].values:
+            matching_row = df[df[MoleculeInfo.SMILES.value] == self.canonical_smiles]
             return matching_row.index[0]
 
         # Generate a new ID
@@ -241,9 +270,9 @@ class Molecule:
 
         # Create new row to append
         new_row = {
-            'index': new_id,
-            'type': self.type.value,
-            'smiles': self.canonical_smiles,
+            MoleculeInfo.INDEX.value: new_id,
+            MoleculeInfo.TYPE.value: self.type.value,
+            MoleculeInfo.SMILES.value: self.canonical_smiles,
         }
 
         # Set other columns to None or a specific marker

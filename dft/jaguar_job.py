@@ -16,7 +16,7 @@ import molecule as mol
 
 from collections import Counter
 
-from job_utils import JobInfo, JobStatus
+from job_utils import JobInfo, JobStatus, JobTypes
 
 job_storage_path = os.path.join(os_nav.find_project_root(), 'data', 'jobs')
 mol_storage_path = os.path.join(os_nav.find_project_root(), 'data', 'mols')

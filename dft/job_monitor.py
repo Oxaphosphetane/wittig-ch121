@@ -9,7 +9,7 @@ sys.path.append(parent_dir)
 
 import os_navigation as os_nav
 
-from job_utils import JobStatus, JobInfo
+from dft.job_utils import JobStatus, JobInfo
 
 
 class JobMonitor:
@@ -22,6 +22,22 @@ class JobMonitor:
     ):
         self.job_log = job_log
         self.job_out_dir = job_out_dir
+
+    @staticmethod
+    def time_string_to_seconds(time_str):
+        # Split the time string into components
+        time_components = time_str.split(':')
+
+        # Extract hours, minutes, and seconds
+        hours = int(time_components[0])
+        minutes = int(time_components[1])
+        seconds = float(time_components[2])
+
+        # Convert hours and minutes to seconds
+        total_seconds = hours * 3600 + minutes * 60 + seconds
+
+        return total_seconds
+
 
     @staticmethod
     def format_timedelta(delta):
@@ -139,6 +155,10 @@ class JobMonitor:
         for status in JobStatus:
             count = old_jobs[JobInfo.JOB_STATUS.value].value_counts().get(status.value, 0)
             print(f"Number of {status.value} jobs: {count}")
+
+    def read_log(self) -> pd.DataFrame:
+        return pd.read_csv(self.job_log)
+
 
 def main():
     job_monitor = JobMonitor()
