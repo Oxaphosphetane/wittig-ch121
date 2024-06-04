@@ -30,6 +30,7 @@ class _ForceFieldMethod:
     UFF = 'uff'
     MMFF = 'mmff'
 
+
 class MoleculeInfo(enum.Enum):
     INDEX = 'index'
     TYPE = 'type'
