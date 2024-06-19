@@ -35,6 +35,7 @@ class MoleculeInfo(enum.Enum):
     INDEX = 'index'
     TYPE = 'type'
     SMILES = 'smiles'
+    SHADOW = 'shadow'
 
 
 class MoleculeType(enum.Enum):
@@ -45,6 +46,22 @@ class MoleculeType(enum.Enum):
     SOLVENT = 'SOLVENT'
     ADDITIVE = 'ADDITIVE'
     PHOSPHINE = 'PHOSPHINE'
+
+
+class MoleculeSubtype(enum.Enum):
+    # CARBONYL subtypes
+    ALDEHYDE = 'ALDEHYDE'
+    KETONE = 'KETONE'
+    PRIMARY = 'PRIMARY'
+    SECONDARY = 'SECONDARY'
+
+    # OXAPHOSPHETANE + ALKENE subtypes
+    UNSUB = 'UNSUB'
+    MONOSUB = 'MONOSUB'
+    CIS = 'CIS'  # cis-disubstituted
+    TRANS = 'TRANS'  # trans-disubstituted
+    TRISUB = 'TRISUB'
+    TETRASUB = 'TETRASUB'
 
 
 class Molecule:

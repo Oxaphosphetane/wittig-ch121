@@ -5,7 +5,7 @@ from ipywidgets import interact, fixed
 from rdkit import Chem
 import py3Dmol
 
-
+   
 def _graph_conf(m, confId=0, energies=[]):
     mb = Chem.MolToMolBlock(m, confId=confId)
     p = py3Dmol.view(width=400, height=400)
